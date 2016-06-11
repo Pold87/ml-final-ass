@@ -1,13 +1,17 @@
 age : continuous
 work class : categorical
 education : categorical
+
 number of years of education : continuous
 marital status : categorical
 occupation : categorical
+
 relationship : categorical
 race : categorical
 sex : categorical
+
 income from investment sources : continuous
 losses from investment sources : continuous
 working hours per week : continuous
+
 native country : categorical

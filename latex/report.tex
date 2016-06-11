@@ -1,28 +1,84 @@
-\documentclass{article}
+#\documentclass{article}
+
+\usepackage{booktabs}
+
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows,positioning}
 
 \title{Machine Learning -- Final Report}
 \author{Volker Strobel}
 \date{\today}
 
-\begin{document}
 
 % THE REPORT
 
-% In addition to participating in the competition, we expect you to provide us with a report on your work that at least contains the following :
+% In addition to participating in the competition, we expect you to
+% provide us with a report on your work that at least contains the
+% following :
 
-% - A clear description of the complete and, possibly, best-performing method you implemented;
+% - A clear description of the complete and, possibly, best-performing
+% method you implemented;
 
-% - Clear arguments for the different choices you made in compiling your classifier;
+% - Clear arguments for the different choices you made in compiling
+% your classifier;
 
-% - Sufficient experimental results, learning curves, error bars, or whatever else you need to convince the reader that little improvement will be possible beyond the system that you present;
+% - Sufficient experimental results, learning curves, error bars, or
+% whatever else you need to convince the reader that little
+% improvement will be possible beyond the system that your method is
+% currently performing. Your final score is of course also there to
+% see whom of your colleagues you have beaten and, for us, to use in
+% the final decision on your grade.
+
+% Please refer to the submission.csv file for an example of the suesent;
 
 % - Any references that have been used.
 
 
-\section{Introduction}
+\begin{document}
+\maketitle
+
+\begin{abstract}
+  This reports presents the techniques and results of a classification
+  problem involving missing data, a mixture of categorical and 
+\end{abstract}
+
+\section{Introduction \& Statement of Problem}
+
+Predicting the challenge is to predict, whether a person earns over
+EUR 40k a year.
+
+In the following section, Section~2, we analyze and visualize the
+structure of the data. In Section~33
+
+\section{Analysis}
+
+In order to motivate later classifier and technique choices, we start
+with an in-depth analysis of the given data sets.
+
+The used loss is the 1/0 loss.
+
+
+\begin{table}[h]
+  \centering
+  \begin{tabular}{cc}
+    \toprule
+  Categorical & Continuous\\
+    \midrule
+    work class & age\\
+    education & number of years of education\\
+marital status & income from investment sources\\
+occupation & losses from investment sources\\
+relationship & working hours per week \\
+race & \\
+sex & \\
+native country & \\
+      \bottomrule
+  \end{tabular}
+  \caption{Overview of the used features}
+  \label{tab:features}
+\end{table}
 
 \section{Methods}
-
 
 Therefore, this competition involves three main challenges:
 \begin{itemize}
@@ -36,9 +92,35 @@ We will address each of them in turn.
 \section{Missing data values}
 
 Missing data values are a common problem in machine learning
-problems. The failure of sensors, or the conscious loss  due to
-anonymity impede the machine learning accuracy. While the \emph{imputation}
-of these missing data is still a open problem, several method have
-been put forth. 
+problems. The failure of sensors, or the conscious loss due to
+anonymity impede the machine learning accuracy. While the
+\emph{imputation} of these missing data is still a open problem,
+several method have been put forth. For the competition, a
+maximum-likelihood (expectation-maximization) method has been used.
+
+\begin{figure}[h]
+  \centering
+% Define block styles
+\tikzstyle{decision} = [diamond, draw, fill=blue!20, 
+    text width=4.5em, text badly centered, node distance=3cm, inner sep=0pt]
+\tikzstyle{block} = [rectangle, draw, 
+    text width=5em, text centered, rounded corners, minimum
+    height=4em, node distance=3cm]
+\tikzstyle{line} = [draw, -latex']
+\tikzstyle{cloud} = [draw, ellipse,fill=red!20, node distance=3cm,
+    minimum height=2em]
+  \begin{tikzpicture}[node distance = 2cm, auto]
+    % Place nodes
+    \node [block] (train) {NaN Training set};
+    \node [block, below of=train] (test) {NaN Test set};
+    \node [block, right of=train] (stacked) {NaN Combined set};
+    \node [block, right of=stacked] (full) {Full Combined set};
+    % Draw edges
+    \path [line] (train) -- (stacked);
+    \path [line] (test) -- (stacked);
+\end{tikzpicture}
+  \caption{The pipeline}
+  \label{fig:pipeline}
+\end{figure}
 
 \end{document}
