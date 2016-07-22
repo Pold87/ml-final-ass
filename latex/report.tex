@@ -1,28 +1,61 @@
-\documentclass{article}
+\documentclass{scrartcl}
+
+\usepackage[style=authoryear,backend=biber]{biblatex}
+% Set library for biblatex
+\bibliography{library}
+
+
+\usepackage{booktabs}
+
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows,positioning}
 
 \title{Machine Learning -- Final Report}
 \author{Volker Strobel}
 \date{\today}
 
-\begin{document}
 
 % THE REPORT
 
-% In addition to participating in the competition, we expect you to provide us with a report on your work that at least contains the following :
+% In addition to participating in the competition, we expect you to
+% provide us with a report on your work that at least contains the
+% following :
 
-% - A clear description of the complete and, possibly, best-performing method you implemented;
+% - A clear description of the complete and, possibly, best-performing
+% method you implemented;
 
-% - Clear arguments for the different choices you made in compiling your classifier;
+% - Clear arguments for the different choices you made in compiling
+% your classifier;
 
-% - Sufficient experimental results, learning curves, error bars, or whatever else you need to convince the reader that little improvement will be possible beyond the system that you present;
+% - Sufficient experimental results, learning curves, error bars, or
+% whatever else you need to convince the reader that little
+% improvement will be possible beyond the system that your method is
+% currently performing. Your final score is of course also there to
+% see whom of your colleagues you have beaten and, for us, to use in
+% the final decision on your grade.
 
 % - Any references that have been used.
 
 
-\section{Introduction}
+\begin{document}
+\maketitle
 
-\section{Methods}
+\begin{abstract}
+  This reports presents the techniques and results of a classification
+  problem involving missing data as well as a mixture of categorical
+  and continuous data. The problem of missing data points is being
+  addressed by Multiple Imputation Chained Equations. The
+  classification is conducted using the AdaBoost classifier. The
+  method has been locally evaluated using cross-validation and
+  remotely on a hold-out test-set using the Kaggle platform.
+\end{abstract}
 
+\section{The Challenge}
+\label{sec:introduction}
+
+The challenge at hand is to predict, whether a person earns over EUR
+40k a year based on a mixture of both qualitative and quantiative
+variables (Table~\ref{tab:features}).
 
 Therefore, this competition involves three main challenges:
 \begin{itemize}
@@ -33,12 +66,127 @@ Therefore, this competition involves three main challenges:
 
 We will address each of them in turn.
 
-\section{Missing data values}
+Section~\ref{sec:background} briefly compares different methods for
+missing data. In Section~\ref{sec:analysis}, we analyze and visualize
+the structure of the data, to set the stage for
+feature-extraction-to-classification pipeline. In Section~3, the used
+method---Adaboost classification---is described in detail. Section~4
+describes the results obtained during cross-validation and on
+Kaggle. In Section~5,
 
-Missing data values are a common problem in machine learning
-problems. The failure of sensors, or the conscious loss  due to
-anonymity impede the machine learning accuracy. While the \emph{imputation}
-of these missing data is still a open problem, several method have
-been put forth. 
+\section{Background}
+\label{sec:background}
+
+Missing data values are a common problem in statistics. The failure of
+sensors, or the conscious loss due to anonymity impede the machine
+learning accuracy. While the \emph{imputation} of these missing data
+is still a open problem, several method have been put forth. For the
+competition, a maximum-likelihood (expectation-maximization) method
+has been used.
+
+\section{Analysis}
+\label{sec:analysis}
+
+In order to motivate classifier, design and technique choices, we
+start with an in-depth analysis and visualization of the given data
+sets.\\
+
+Table~\ref{tab:features} shows the discrete and continuous
+features. The percentage of missing values is given in the next table.
+
+The used loss function is the 1/0 loss.
+
+
+\begin{table}[h]
+  \centering
+  \begin{tabular}{cc}
+    \toprule
+  Categorical & Continuous\\
+    \midrule
+    work class & age\\
+    education & number of years of education\\
+marital status & income from investment sources\\
+occupation & losses from investment sources\\
+relationship & working hours per week \\
+race & \\
+sex & \\
+native country & \\
+      \bottomrule
+  \end{tabular}
+  \caption{Overview of the used features}
+  \label{tab:features}
+\end{table}
+
+\section{Methods}
+\label{sec:methods}
+
+\subsection{Missing Data Values}
+
+A first analysis shows that on average ca. $19.6\,\%$ of the data
+values are missing, with ca. $18.8\,\%$ some variables and $23.1\,\%$
+for workclass and occupation.\\
+For the possibly best performance, we would like to show that the data
+is missing completely at random (MCAR). Therefore, we conduct Little's
+MCAR test \cite{little1988test} to analyze the interaction structure
+of the variables.
+
+
+\subsection{Dummy Variables}
+
+Seven of the twelve measured variables are qualitative (workclass,
+education, marital status, occupation, relationship, sex, native
+country)---that is, they are measured only at the nominal level. Since
+measurements on the nominal level do not allow for a particular
+ordering, a proxy method has to be used. Therefore, we define dummy
+variables which take the value 0 or 1 depending on if a certain
+category is present. Defining $N$ dummy variables for the $N$
+different possible values of a categorical feature allows us to
+capture the full information in the orginal unmodified dataset and use
+qualitative data in a straight-forward manner in regression models
+that are usually based on decision boundaries or linear relationships.
+
+After transforming the dataset, xx features are obtained, which
+largely increases the size of the dataset.
+
+
+\section{Feature-extraction-to-classification Pipeline}
+
+\begin{figure}[h]
+  \centering
+% Define block styles
+\tikzstyle{decision} = [diamond, draw, fill=blue!20, 
+    text width=4.5em, text badly centered, node distance=3cm, inner sep=0pt]
+\tikzstyle{block} = [rectangle, draw, 
+    text width=5em, text centered, rounded corners, minimum
+    height=4em, node distance=3cm]
+\tikzstyle{line} = [draw, -latex']
+\tikzstyle{cloud} = [draw, ellipse,fill=red!20, node distance=3cm,
+    minimum height=2em]
+  \begin{tikzpicture}[node distance = 2cm, auto]
+    % Place nodes
+    \node [block] (train) {NaN Training set};
+    \node [block, below of=train] (test) {NaN Test set};
+    \node [block, right of=train] (stacked) {NaN Combined set};
+    \node [block, right of=stacked] (full) {Full Combined set};
+    % Draw edges
+    \path [line] (train) -- (stacked);
+    \path [line] (test) -- (stacked);
+\end{tikzpicture}
+  \caption{The pipeline}
+  \label{fig:pipeline}
+\end{figure}
+
+\section{Results}
+\label{sec:results}
+
+\section{Discussion}
+\label{sec:discussion}
+
+\section{Conclusion}
+\label{sec:conclusion}
+
+
+\printbibliography
+\appendix
 
 \end{document}

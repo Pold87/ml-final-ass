@@ -27,26 +27,37 @@ X.test <- read.csv("../data/test.csv", header = T,
 X.all <- rbind(X.train, X.test)
 
 # Do the IMPUTATION
-X.imp.mice <- mice(X.all, maxit = 1, MaxNWts = 20000, m = 1)
+X.imp.mice <- mice(X.all, maxit = 5, MaxNWts = 20000, m = 5)
 
 
+for (i in 1:5) {
 
-## Extract imputed data set and write to CSV
-X.out <- complete(X.imp.mice, 1)
-write.csv(X.out, "../data/all_mice.csv", row.names = F, quote = F)
+    ## Extract imputed data set and write to CSV
+    X.out <- complete(X.imp.mice, i)
+    fn.all <- sprintf("../data/five_imps/all_mice_%d.csv", i)
+    write.csv(X.out, fn.all, row.names = F, quote = F)
 
-## Extract train set
-X.train.imp <- X.out[1:nrow(X.train), ]
+    ## Extract train set
+    X.train.imp <- X.out[1:nrow(X.train), ]
 
-## Add target labels
-X.train.imp <- cbind(X.train.imp, y)
+    ## Add target labels
+    X.train.imp <- cbind(X.train.imp, y)
 
-## Write to CSV
-write.csv(X.train.imp, "../data/train_mice.csv", row.names = F, quote = F)
+    ## Write to CSV
+    fn.train <- sprintf("../data/five_imps/train_mice_%d.csv", i)
+    write.csv(X.train.imp, fn.train, row.names = F, quote = F)
 
-# Extract test set
-X.test.imp <- X.out[(nrow(X.train)+1):nrow(X.out), ]
+    ## Extract test set
+    X.test.imp <- X.out[(nrow(X.train)+1):nrow(X.out), ]
 
-## Write to CSV
-write.csv(X.test.imp, "../data/test_mice.csv", row.names = F, quote = F)
+    ## Write to CSV
+    fn.test <-  sprintf("../data/five_imps/test_mice_%d.csv", i)
+    write.csv(X.test.imp, fn.test, row.names = F, quote = F)
+
+}
+
+attach(y)
+
+modelFit1 <- with.mids(X.train.imp,
+                  glm(y ~ yearsedu, family = "binomial"))
 
