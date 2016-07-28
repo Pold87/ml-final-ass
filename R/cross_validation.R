@@ -77,7 +77,7 @@ for (i in 1:k) {
             X.train2.cv$y <- NULL
             ##
             X.test2.cv$y <- NULL
-            test.y <- rep(0, nrow(X.test2.cv))
+            test.y <- rep(0, nrow(X.test[[1]]))
             ##
             X.trans.cv <- rbind(X.train2.cv, X.test[[1]])
             trans.y <- as.factor(c(train.y, test.y))
@@ -87,9 +87,9 @@ for (i in 1:k) {
             ## Normal SVM:
             ##mdl <- svm(y ~ ., data = X.train2.cv, probability=TRUE)
             ## Tranductive:
-            mdl <-  svm.transduction <- SVM(x=X.trans.cv, y=trans.y,
+            mdl <- SVM(x=X.trans.cv, y=trans.y,
                         transductive.learning=TRUE,
-                        core="svmlight")
+                       core="svmlight")
             ##svm.transduction.pred <- predict(svm.transduction, test$x)
             ##mdl <- randomForest(y ~ ., data = X.train2.cv)
         ## preds[[j]] <- predict(mdl, X.test.cv, type = 'response')
