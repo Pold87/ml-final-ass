@@ -1,92 +1,26 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.9.10)  23 JUL 2016 00:15
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.9.10)  27 JUL 2016 21:26
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
 **\input report.tex
-(./report.tex (/usr/share/texlive/texmf-dist/tex/latex/koma-script/scrartcl.cls
-Document Class: scrartcl 2013/12/19 v3.12 KOMA-Script document class (article)
-(/usr/share/texlive/texmf-dist/tex/latex/koma-script/scrkbase.sty
-Package: scrkbase 2013/12/19 v3.12 KOMA-Script package (KOMA-Script-dependent b
-asics and keyval usage)
-
-(/usr/share/texlive/texmf-dist/tex/latex/koma-script/scrbase.sty
-Package: scrbase 2013/12/19 v3.12 KOMA-Script package (KOMA-Script-independent 
-basics and keyval usage)
-
-(/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty
-Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
-\KV@toks@=\toks14
+(./report.tex (/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2007/10/19 v1.4h Standard LaTeX document class
+(/usr/share/texlive/texmf-dist/tex/latex/base/size10.clo
+File: size10.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
 )
-(/usr/share/texlive/texmf-dist/tex/latex/koma-script/scrlfile.sty
-Package: scrlfile 2013/12/19 v3.12 KOMA-Script package (loading files)
-
-Package scrlfile, 2013/12/19 v3.12 KOMA-Script package (loading files)
-                  Copyright (C) Markus Kohm
-
-))) (/usr/share/texlive/texmf-dist/tex/latex/koma-script/tocbasic.sty
-Package: tocbasic 2013/12/19 v3.12 KOMA-Script package (handling toc-files)
-)
-Package tocbasic Info: omitting babel extension for `toc'
-(tocbasic)             because of feature `nobabel' available
-(tocbasic)             for `toc' on input line 115.
-Package tocbasic Info: omitting babel extension for `lof'
-(tocbasic)             because of feature `nobabel' available
-(tocbasic)             for `lof' on input line 116.
-Package tocbasic Info: omitting babel extension for `lot'
-(tocbasic)             because of feature `nobabel' available
-(tocbasic)             for `lot' on input line 117.
-Class scrartcl Info: File `scrsize11pt.clo' used instead of
-(scrartcl)           file `scrsize11.clo' to setup font sizes on input line 153
-1.
-
-(/usr/share/texlive/texmf-dist/tex/latex/koma-script/scrsize11pt.clo
-File: scrsize11pt.clo 2013/12/19 v3.12 KOMA-Script font size class option (11pt
-)
-)
-(/usr/share/texlive/texmf-dist/tex/latex/koma-script/typearea.sty
-Package: typearea 2013/12/19 v3.12 KOMA-Script package (type area)
-
-Package typearea, 2013/12/19 v3.12 KOMA-Script package (type area)
-                  Copyright (C) Frank Neukam, 1992-1994
-                  Copyright (C) Markus Kohm, 1994-
-
-\ta@bcor=\skip41
-\ta@div=\count79
-\ta@hblk=\skip42
-\ta@vblk=\skip43
-\ta@temp=\skip44
-\footheight=\skip45
-Package typearea Info: These are the values describing the layout:
-(typearea)             DIV  = 10
-(typearea)             BCOR = 0.0pt
-(typearea)             \paperwidth      = 597.50793pt
-(typearea)              \textwidth      = 418.25555pt
-(typearea)              DIV departure   = -6%
-(typearea)              \evensidemargin = 17.3562pt
-(typearea)              \oddsidemargin  = 17.3562pt
-(typearea)             \paperheight     = 845.04694pt
-(typearea)              \textheight     = 595.80026pt
-(typearea)              \topmargin      = -25.16531pt
-(typearea)              \headheight     = 17.0pt
-(typearea)              \headsep        = 20.40001pt
-(typearea)              \topskip        = 11.0pt
-(typearea)              \footskip       = 47.6pt
-(typearea)              \baselineskip   = 13.6pt
-(typearea)              on input line 1330.
-)
-\c@part=\count80
-\c@section=\count81
-\c@subsection=\count82
-\c@subsubsection=\count83
-\c@paragraph=\count84
-\c@subparagraph=\count85
-\abovecaptionskip=\skip46
-\belowcaptionskip=\skip47
-\c@pti@nb@sid@b@x=\box26
-\c@figure=\count86
-\c@table=\count87
+\c@part=\count79
+\c@section=\count80
+\c@subsection=\count81
+\c@subsubsection=\count82
+\c@paragraph=\count83
+\c@subparagraph=\count84
+\c@figure=\count85
+\c@table=\count86
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
 \bibindent=\dimen102
-) (/usr/share/texlive/texmf-dist/tex/latex/biblatex/biblatex.sty
+)
+(/usr/share/texlive/texmf-dist/tex/latex/biblatex/biblatex.sty
 Package: biblatex 2013/11/25 v2.8a programmable bibliographies (PK/JW/AB)
 
 (/usr/share/texlive/texmf-dist/tex/latex/biblatex/biblatex2.sty
@@ -98,9 +32,13 @@ Package: etoolbox 2011/01/03 v2.1 e-TeX tools for LaTeX
 
 (/usr/share/texlive/texmf-dist/tex/latex/etex-pkg/etex.sty
 Package: etex 1998/03/26 v2.0 eTeX basic definition package (PEB)
-\et@xins=\count88
+\et@xins=\count87
 )
-\etb@tempcnta=\count89
+\etb@tempcnta=\count88
+)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
+\KV@toks@=\toks14
 )
 (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/kvoptions.sty
 Package: kvoptions 2011/06/30 v3.11 Key value format for package options (HO)
@@ -128,7 +66,7 @@ Package etexcmds Info: Could not find \expanded.
 )))
 (/usr/share/texlive/texmf-dist/tex/latex/logreq/logreq.sty
 Package: logreq 2010/08/04 v1.0 xml request logger
-\lrq@indent=\count90
+\lrq@indent=\count89
 
 (/usr/share/texlive/texmf-dist/tex/latex/logreq/logreq.def
 File: logreq.def 2010/08/04 v1.0 logreq spec v1.0
@@ -140,58 +78,58 @@ Package: ifthen 2001/05/26 v1.1c Standard LaTeX ifthen package (DPC)
 \Urlmuskip=\muskip10
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 )
-\c@tabx@nest=\count91
-\c@listtotal=\count92
-\c@listcount=\count93
-\c@liststart=\count94
-\c@liststop=\count95
-\c@citecount=\count96
-\c@citetotal=\count97
-\c@multicitecount=\count98
-\c@multicitetotal=\count99
-\c@instcount=\count100
-\c@maxnames=\count101
-\c@minnames=\count102
-\c@maxitems=\count103
-\c@minitems=\count104
-\c@citecounter=\count105
-\c@savedcitecounter=\count106
-\c@uniquelist=\count107
-\c@uniquename=\count108
-\c@refsection=\count109
-\c@refsegment=\count110
-\c@maxextratitle=\count111
-\c@maxextratitleyear=\count112
-\c@maxextrayear=\count113
-\c@maxextraalpha=\count114
-\c@abbrvpenalty=\count115
-\c@highnamepenalty=\count116
-\c@lownamepenalty=\count117
-\c@maxparens=\count118
-\c@parenlevel=\count119
-\blx@tempcnta=\count120
-\blx@tempcntb=\count121
-\blx@tempcntc=\count122
-\blx@maxsection=\count123
-\blx@maxsegment@0=\count124
-\blx@notetype=\count125
-\blx@parenlevel@text=\count126
-\blx@parenlevel@foot=\count127
-\blx@sectionciteorder@0=\count128
-\labelnumberwidth=\skip48
-\labelalphawidth=\skip49
-\shorthandwidth=\skip50
-\biblabelsep=\skip51
-\bibitemsep=\skip52
-\bibnamesep=\skip53
-\bibinitsep=\skip54
-\bibparsep=\skip55
-\bibhang=\skip56
+\c@tabx@nest=\count90
+\c@listtotal=\count91
+\c@listcount=\count92
+\c@liststart=\count93
+\c@liststop=\count94
+\c@citecount=\count95
+\c@citetotal=\count96
+\c@multicitecount=\count97
+\c@multicitetotal=\count98
+\c@instcount=\count99
+\c@maxnames=\count100
+\c@minnames=\count101
+\c@maxitems=\count102
+\c@minitems=\count103
+\c@citecounter=\count104
+\c@savedcitecounter=\count105
+\c@uniquelist=\count106
+\c@uniquename=\count107
+\c@refsection=\count108
+\c@refsegment=\count109
+\c@maxextratitle=\count110
+\c@maxextratitleyear=\count111
+\c@maxextrayear=\count112
+\c@maxextraalpha=\count113
+\c@abbrvpenalty=\count114
+\c@highnamepenalty=\count115
+\c@lownamepenalty=\count116
+\c@maxparens=\count117
+\c@parenlevel=\count118
+\blx@tempcnta=\count119
+\blx@tempcntb=\count120
+\blx@tempcntc=\count121
+\blx@maxsection=\count122
+\blx@maxsegment@0=\count123
+\blx@notetype=\count124
+\blx@parenlevel@text=\count125
+\blx@parenlevel@foot=\count126
+\blx@sectionciteorder@0=\count127
+\labelnumberwidth=\skip43
+\labelalphawidth=\skip44
+\shorthandwidth=\skip45
+\biblabelsep=\skip46
+\bibitemsep=\skip47
+\bibnamesep=\skip48
+\bibinitsep=\skip49
+\bibparsep=\skip50
+\bibhang=\skip51
 \blx@bcfin=\read1
 \blx@bcfout=\write3
-\c@mincomprange=\count129
-\c@maxcomprange=\count130
-\c@mincompwidth=\count131
+\c@mincomprange=\count128
+\c@maxcomprange=\count129
+\c@mincompwidth=\count130
 Package biblatex Info: Trying to load biblatex default data model...
 Package biblatex Info: ... file 'blx-dm.def' found.
 
@@ -200,72 +138,72 @@ Package biblatex Info: Trying to load biblatex style data model...
 Package biblatex Info: ... file 'authoryear.dbx' not found.
 Package biblatex Info: Trying to load biblatex custom data model...
 Package biblatex Info: ... file 'biblatex-dm.cfg' not found.
-\c@afterword=\count132
-\c@savedafterword=\count133
-\c@annotator=\count134
-\c@savedannotator=\count135
-\c@author=\count136
-\c@savedauthor=\count137
-\c@bookauthor=\count138
-\c@savedbookauthor=\count139
-\c@commentator=\count140
-\c@savedcommentator=\count141
-\c@editor=\count142
-\c@savededitor=\count143
-\c@editora=\count144
-\c@savededitora=\count145
-\c@editorb=\count146
-\c@savededitorb=\count147
-\c@editorc=\count148
-\c@savededitorc=\count149
-\c@foreword=\count150
-\c@savedforeword=\count151
-\c@holder=\count152
-\c@savedholder=\count153
-\c@introduction=\count154
-\c@savedintroduction=\count155
-\c@namea=\count156
-\c@savednamea=\count157
-\c@nameb=\count158
-\c@savednameb=\count159
-\c@namec=\count160
-\c@savednamec=\count161
-\c@shortauthor=\count162
-\c@savedshortauthor=\count163
-\c@shorteditor=\count164
-\c@savedshorteditor=\count165
-\c@translator=\count166
-\c@savedtranslator=\count167
-\c@labelname=\count168
-\c@savedlabelname=\count169
-\c@institution=\count170
-\c@savedinstitution=\count171
-\c@lista=\count172
-\c@savedlista=\count173
-\c@listb=\count174
-\c@savedlistb=\count175
-\c@listc=\count176
-\c@savedlistc=\count177
-\c@listd=\count178
-\c@savedlistd=\count179
-\c@liste=\count180
-\c@savedliste=\count181
-\c@listf=\count182
-\c@savedlistf=\count183
-\c@location=\count184
-\c@savedlocation=\count185
-\c@organization=\count186
-\c@savedorganization=\count187
-\c@origlocation=\count188
-\c@savedoriglocation=\count189
-\c@origpublisher=\count190
-\c@savedorigpublisher=\count191
-\c@publisher=\count192
-\c@savedpublisher=\count193
-\c@language=\count194
-\c@savedlanguage=\count195
-\c@pageref=\count196
-\c@savedpageref=\count197
+\c@afterword=\count131
+\c@savedafterword=\count132
+\c@annotator=\count133
+\c@savedannotator=\count134
+\c@author=\count135
+\c@savedauthor=\count136
+\c@bookauthor=\count137
+\c@savedbookauthor=\count138
+\c@commentator=\count139
+\c@savedcommentator=\count140
+\c@editor=\count141
+\c@savededitor=\count142
+\c@editora=\count143
+\c@savededitora=\count144
+\c@editorb=\count145
+\c@savededitorb=\count146
+\c@editorc=\count147
+\c@savededitorc=\count148
+\c@foreword=\count149
+\c@savedforeword=\count150
+\c@holder=\count151
+\c@savedholder=\count152
+\c@introduction=\count153
+\c@savedintroduction=\count154
+\c@namea=\count155
+\c@savednamea=\count156
+\c@nameb=\count157
+\c@savednameb=\count158
+\c@namec=\count159
+\c@savednamec=\count160
+\c@shortauthor=\count161
+\c@savedshortauthor=\count162
+\c@shorteditor=\count163
+\c@savedshorteditor=\count164
+\c@translator=\count165
+\c@savedtranslator=\count166
+\c@labelname=\count167
+\c@savedlabelname=\count168
+\c@institution=\count169
+\c@savedinstitution=\count170
+\c@lista=\count171
+\c@savedlista=\count172
+\c@listb=\count173
+\c@savedlistb=\count174
+\c@listc=\count175
+\c@savedlistc=\count176
+\c@listd=\count177
+\c@savedlistd=\count178
+\c@liste=\count179
+\c@savedliste=\count180
+\c@listf=\count181
+\c@savedlistf=\count182
+\c@location=\count183
+\c@savedlocation=\count184
+\c@organization=\count185
+\c@savedorganization=\count186
+\c@origlocation=\count187
+\c@savedoriglocation=\count188
+\c@origpublisher=\count189
+\c@savedorigpublisher=\count190
+\c@publisher=\count191
+\c@savedpublisher=\count192
+\c@language=\count193
+\c@savedlanguage=\count194
+\c@pageref=\count195
+\c@savedpageref=\count196
 Package biblatex Info: Trying to load compatibility code...
 Package biblatex Info: ... file 'blx-compat.def' found.
 
@@ -277,13 +215,13 @@ Package biblatex Info: ... file 'biblatex.def' found.
 
 (/usr/share/texlive/texmf-dist/tex/latex/biblatex/biblatex.def
 File: biblatex.def 
-\c@textcitecount=\count198
-\c@textcitetotal=\count199
-\c@textcitemaxnames=\count200
-\c@biburlnumpenalty=\count201
-\c@biburlucpenalty=\count202
-\c@biburllcpenalty=\count203
-\c@smartand=\count204
+\c@textcitecount=\count197
+\c@textcitetotal=\count198
+\c@textcitemaxnames=\count199
+\c@biburlnumpenalty=\count200
+\c@biburlucpenalty=\count201
+\c@biburllcpenalty=\count202
+\c@smartand=\count203
 )
 Package biblatex Info: Trying to load bibliography style 'authoryear'...
 Package biblatex Info: ... file 'authoryear.bbx' found.
@@ -295,8 +233,8 @@ Package biblatex Info: ... file 'standard.bbx' found.
 
 (/usr/share/texlive/texmf-dist/tex/latex/biblatex/bbx/standard.bbx
 File: standard.bbx 2013/11/25 v2.8a biblatex bibliography style (PK/JW/AB)
-\c@bbx:relatedcount=\count205
-\c@bbx:relatedtotal=\count206
+\c@bbx:relatedcount=\count204
+\c@bbx:relatedtotal=\count205
 ))
 Package biblatex Info: Trying to load citation style 'authoryear'...
 Package biblatex Info: ... file 'authoryear.cbx' found.
@@ -329,12 +267,12 @@ Package: booktabs 2005/04/14 v1.61803 publication quality tables
 \cmidrulesep=\dimen110
 \cmidrulekern=\dimen111
 \defaultaddspace=\dimen112
-\@cmidla=\count207
-\@cmidlb=\count208
+\@cmidla=\count206
+\@cmidlb=\count207
 \@aboverulesep=\dimen113
 \@belowrulesep=\dimen114
-\@thisruleclass=\count209
-\@lastruleclass=\count210
+\@thisruleclass=\count208
+\@lastruleclass=\count209
 \@thisrulewidth=\dimen115
 )
 (/usr/share/texmf/tex/latex/pgf/frontendlayer/tikz.sty
@@ -344,7 +282,7 @@ Package: booktabs 2005/04/14 v1.61803 publication quality tables
 \pgfutil@everybye=\toks15
 )
 (/usr/share/texmf/tex/generic/pgf/utilities/pgfutil-latex.def
-\pgfutil@abb=\box27
+\pgfutil@abb=\box26
 
 (/usr/share/texlive/texmf-dist/tex/latex/ms/everyshi.sty
 Package: everyshi 2001/05/15 v3.00 EveryShipout Package (MS)
@@ -371,7 +309,7 @@ Package graphics Info: Driver file: pdftex.def on input line 91.
 
 (/usr/share/texlive/texmf-dist/tex/latex/pdftex-def/pdftex.def
 File: pdftex.def 2011/05/27 v0.06d Graphics/color for pdfTeX
-\Gread@gobject=\count211
+\Gread@gobject=\count210
 ))
 \Gin@req@height=\dimen116
 \Gin@req@width=\dimen117
@@ -397,10 +335,10 @@ Package: pgfsys 2010/06/30 v2.10 (rcs-revision 1.37)
 \pgf@yc=\dimen125
 \w@pgf@writea=\write4
 \r@pgf@reada=\read2
-\c@pgf@counta=\count212
-\c@pgf@countb=\count213
-\c@pgf@countc=\count214
-\c@pgf@countd=\count215
+\c@pgf@counta=\count211
+\c@pgf@countb=\count212
+\c@pgf@countc=\count213
+\c@pgf@countd=\count214
 
 (/usr/share/texmf/tex/generic/pgf/systemlayer/pgf.cfg
 File: pgf.cfg 2008/05/14  (rcs-revision 1.7)
@@ -415,8 +353,8 @@ File: pgfsys-common-pdf.def 2008/05/19  (rcs-revision 1.10)
 )))
 (/usr/share/texmf/tex/generic/pgf/systemlayer/pgfsyssoftpath.code.tex
 File: pgfsyssoftpath.code.tex 2008/07/18  (rcs-revision 1.7)
-\pgfsyssoftpath@smallbuffer@items=\count216
-\pgfsyssoftpath@bigbuffer@items=\count217
+\pgfsyssoftpath@smallbuffer@items=\count215
+\pgfsyssoftpath@bigbuffer@items=\count216
 )
 (/usr/share/texmf/tex/generic/pgf/systemlayer/pgfsysprotocol.code.tex
 File: pgfsysprotocol.code.tex 2006/10/16  (rcs-revision 1.4)
@@ -446,8 +384,8 @@ Package: pgfcore 2010/04/11 v2.10 (rcs-revision 1.7)
 (/usr/share/texmf/tex/generic/pgf/math/pgfmathutil.code.tex)
 (/usr/share/texmf/tex/generic/pgf/math/pgfmathparser.code.tex
 \pgfmath@dimen=\dimen126
-\pgfmath@count=\count218
-\pgfmath@box=\box28
+\pgfmath@count=\count217
+\pgfmath@box=\box27
 \pgfmath@toks=\toks19
 \pgfmath@stack@operand=\toks20
 \pgfmath@stack@operation=\toks21
@@ -461,7 +399,7 @@ Package: pgfcore 2010/04/11 v2.10 (rcs-revision 1.7)
 (/usr/share/texmf/tex/generic/pgf/math/pgfmathfunctions.round.code.tex)
 (/usr/share/texmf/tex/generic/pgf/math/pgfmathfunctions.misc.code.tex)))
 (/usr/share/texmf/tex/generic/pgf/math/pgfmathfloat.code.tex
-\c@pgfmathroundto@lastzeros=\count219
+\c@pgfmathroundto@lastzeros=\count218
 ))
 (/usr/share/texmf/tex/generic/pgf/basiclayer/pgfcorepoints.code.tex
 File: pgfcorepoints.code.tex 2010/04/09  (rcs-revision 1.20)
@@ -492,10 +430,10 @@ File: pgfcorepathusage.code.tex 2008/04/22  (rcs-revision 1.12)
 )
 (/usr/share/texmf/tex/generic/pgf/basiclayer/pgfcorescopes.code.tex
 File: pgfcorescopes.code.tex 2010/09/08  (rcs-revision 1.34)
-\pgfpic=\box29
-\pgf@hbox=\box30
-\pgf@layerbox@main=\box31
-\pgf@picture@serial@count=\count220
+\pgfpic=\box28
+\pgf@hbox=\box29
+\pgf@layerbox@main=\box30
+\pgf@picture@serial@count=\count219
 )
 (/usr/share/texmf/tex/generic/pgf/basiclayer/pgfcoregraphicstate.code.tex
 File: pgfcoregraphicstate.code.tex 2008/04/22  (rcs-revision 1.9)
@@ -522,14 +460,14 @@ File: pgfcorearrows.code.tex 2008/04/23  (rcs-revision 1.11)
 (/usr/share/texmf/tex/generic/pgf/basiclayer/pgfcoreshade.code.tex
 File: pgfcoreshade.code.tex 2008/11/23  (rcs-revision 1.13)
 \pgf@max=\dimen149
-\pgf@sys@shading@range@num=\count221
+\pgf@sys@shading@range@num=\count220
 )
 (/usr/share/texmf/tex/generic/pgf/basiclayer/pgfcoreimage.code.tex
 File: pgfcoreimage.code.tex 2010/03/25  (rcs-revision 1.16)
 
 (/usr/share/texmf/tex/generic/pgf/basiclayer/pgfcoreexternal.code.tex
 File: pgfcoreexternal.code.tex 2010/09/01  (rcs-revision 1.17)
-\pgfexternal@startupbox=\box32
+\pgfexternal@startupbox=\box31
 ))
 (/usr/share/texmf/tex/generic/pgf/basiclayer/pgfcorelayers.code.tex
 File: pgfcorelayers.code.tex 2010/08/27  (rcs-revision 1.2)
@@ -542,7 +480,7 @@ File: pgfcorepatterns.code.tex 2009/07/02  (rcs-revision 1.3)
 )))
 (/usr/share/texmf/tex/generic/pgf/modules/pgfmoduleshapes.code.tex
 File: pgfmoduleshapes.code.tex 2010/09/09  (rcs-revision 1.13)
-\pgfnodeparttextbox=\box33
+\pgfnodeparttextbox=\box32
 )
 (/usr/share/texmf/tex/generic/pgf/modules/pgfmoduleplot.code.tex
 File: pgfmoduleplot.code.tex 2010/10/22  (rcs-revision 1.8)
@@ -570,7 +508,7 @@ Package: tikz 2010/10/13 v2.10 (rcs-revision 1.76)
 
 (/usr/share/texmf/tex/generic/pgf/libraries/pgflibraryplothandlers.code.tex
 File: pgflibraryplothandlers.code.tex 2010/05/31 v2.10 (rcs-revision 1.15)
-\pgf@plot@mark@count=\count222
+\pgf@plot@mark@count=\count221
 \pgfplotmarksize=\dimen154
 )
 \tikz@lastx=\dimen155
@@ -579,20 +517,20 @@ File: pgflibraryplothandlers.code.tex 2010/05/31 v2.10 (rcs-revision 1.15)
 \tikz@lastysaved=\dimen158
 \tikzleveldistance=\dimen159
 \tikzsiblingdistance=\dimen160
-\tikz@figbox=\box34
-\tikz@tempbox=\box35
-\tikztreelevel=\count223
-\tikznumberofchildren=\count224
-\tikznumberofcurrentchild=\count225
-\tikz@fig@count=\count226
+\tikz@figbox=\box33
+\tikz@tempbox=\box34
+\tikztreelevel=\count222
+\tikznumberofchildren=\count223
+\tikznumberofcurrentchild=\count224
+\tikz@fig@count=\count225
 
 (/usr/share/texmf/tex/generic/pgf/modules/pgfmodulematrix.code.tex
 File: pgfmodulematrix.code.tex 2010/08/24  (rcs-revision 1.4)
-\pgfmatrixcurrentrow=\count227
-\pgfmatrixcurrentcolumn=\count228
-\pgf@matrix@numberofcolumns=\count229
+\pgfmatrixcurrentrow=\count226
+\pgfmatrixcurrentcolumn=\count227
+\pgf@matrix@numberofcolumns=\count228
 )
-\tikz@expandcount=\count230
+\tikz@expandcount=\count229
 
 (/usr/share/texmf/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarytopat
 hs.code.tex
@@ -645,26 +583,26 @@ File: tikzlibraryshapes.multipart.code.tex 2008/01/09 v2.10 (rcs-revision 1.1)
 (/usr/share/texmf/tex/generic/pgf/libraries/shapes/pgflibraryshapes.multipart.c
 ode.tex
 File: pgflibraryshapes.multipart.code.tex 2010/01/07 v2.10 (rcs-revision 1.2)
-\pgfnodepartlowerbox=\box36
-\pgfnodeparttwobox=\box37
-\pgfnodepartthreebox=\box38
-\pgfnodepartfourbox=\box39
-\pgfnodeparttwentybox=\box40
-\pgfnodepartnineteenbox=\box41
-\pgfnodeparteighteenbox=\box42
-\pgfnodepartseventeenbox=\box43
-\pgfnodepartsixteenbox=\box44
-\pgfnodepartfifteenbox=\box45
-\pgfnodepartfourteenbox=\box46
-\pgfnodepartthirteenbox=\box47
-\pgfnodeparttwelvebox=\box48
-\pgfnodepartelevenbox=\box49
-\pgfnodeparttenbox=\box50
-\pgfnodepartninebox=\box51
-\pgfnodeparteightbox=\box52
-\pgfnodepartsevenbox=\box53
-\pgfnodepartsixbox=\box54
-\pgfnodepartfivebox=\box55
+\pgfnodepartlowerbox=\box35
+\pgfnodeparttwobox=\box36
+\pgfnodepartthreebox=\box37
+\pgfnodepartfourbox=\box38
+\pgfnodeparttwentybox=\box39
+\pgfnodepartnineteenbox=\box40
+\pgfnodeparteighteenbox=\box41
+\pgfnodepartseventeenbox=\box42
+\pgfnodepartsixteenbox=\box43
+\pgfnodepartfifteenbox=\box44
+\pgfnodepartfourteenbox=\box45
+\pgfnodepartthirteenbox=\box46
+\pgfnodeparttwelvebox=\box47
+\pgfnodepartelevenbox=\box48
+\pgfnodeparttenbox=\box49
+\pgfnodepartninebox=\box50
+\pgfnodeparteightbox=\box51
+\pgfnodepartsevenbox=\box52
+\pgfnodepartsixbox=\box53
+\pgfnodepartfivebox=\box54
 )))
 (/usr/share/texmf/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryarrow
 s.code.tex
@@ -684,8 +622,8 @@ Package biblatex Info: ... file 'english.lbx' found.
 (/usr/share/texlive/texmf-dist/tex/latex/biblatex/lbx/english.lbx
 File: english.lbx 2013/11/25 v2.8a biblatex localization (PK/JW/AB)
 )
-\@quotelevel=\count231
-\@quotereset=\count232
+\@quotelevel=\count230
+\@quotereset=\count231
 
 (./report.aux)
 \openout1 = `report.aux'.
@@ -709,25 +647,24 @@ Package biblatex Info: Automatic encoding selection.
 \openout3 = `report.bcf'.
 
 Package biblatex Info: Trying to load bibliographic data...
-Package biblatex Info: ... file 'report.bbl' not found.
-
-No file report.bbl.
+Package biblatex Info: ... file 'report.bbl' found.
+ (./report.bbl)
 Package biblatex Info: Reference section=0 on input line 40.
 Package biblatex Info: Reference segment=0 on input line 40.
-ABD: EveryShipout initializing macros
+ ABD: EveryShipout initializing macros
 (/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count233
+\scratchcounter=\count232
 \scratchdimen=\dimen162
-\scratchbox=\box56
+\scratchbox=\box55
+\nofMPsegments=\count233
 Normal \count register pool exhausted, switching to extended pool.
-\nofMPsegments=\count277
-\nofMParguments=\count278
+\nofMParguments=\count277
 \everyMPshowfont=\toks24
-\MPscratchCnt=\count279
+\MPscratchCnt=\count278
 \MPscratchDim=\dimen163
-\MPnumerator=\count280
-\makeMPintoPDFobject=\count281
+\MPnumerator=\count279
+\makeMPintoPDFobject=\count280
 \everyMPtoPDFconversion=\toks25
 ) (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
 Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO
@@ -761,73 +698,65 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <14.4> on input line 42.
+(Font)              <12> on input line 41.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 42.
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 62.
+(Font)              <8> on input line 41.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 41.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 60.
 
 (/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 62.
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 60.
 
-Underfull \hbox (badness 10000) in paragraph at lines 90--93
 
- []
+LaTeX Warning: Reference `schafer2002missing' on page 1 undefined on input line
+ 81.
 
 [1
 
-
-
-
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <10.95> on input line 102.
+(Font)              <7> on input line 98.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 102.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 102.
+(Font)              <5> on input line 98.
+ [2] [3]
 
+LaTeX Warning: `h' float specifier changed to `ht'.
 
-LaTeX Warning: Citation 'little1988test' on page 2 undefined on input line 130.
-
-
-[2]
-
-LaTeX Warning: Empty bibliography on input line 189.
-
-[3] (./report.aux)
+[4] [5] [6] (./report.aux)
 
 LaTeX Warning: There were undefined references.
-
-
-Package biblatex Warning: Please (re)run Biber on the file:
-(biblatex)                report
-(biblatex)                and rerun LaTeX afterwards.
 
 Package logreq Info: Writing requests to 'report.run.xml'.
 \openout1 = `report.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 18416 strings out of 493308
- 359931 string characters out of 6140092
- 801447 words of memory out of 5000000
- 21557 multiletter control sequences out of 15000+600000
- 9427 words of font info for 33 fonts, out of 8000000 for 9000
+ 17097 strings out of 493308
+ 336256 string characters out of 6140092
+ 737784 words of memory out of 5000000
+ 20250 multiletter control sequences out of 15000+600000
+ 9016 words of font info for 32 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
- 65i,8n,71p,825b,678s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 56i,8n,56p,825b,914s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
-r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/shar
-e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texli
-ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texm
-f-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></usr/share/texlive/texmf-di
-st/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fon
-ts/type1/public/amsfonts/cm/cmti10.pfb>
-Output written on report.pdf (3 pages, 91065 bytes).
+r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/shar
+e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/share/texli
+ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist
+/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/
+type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/p
+ublic/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/a
+msfonts/cm/cmr9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/
+cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmt
+i10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pf
+b>
+Output written on report.pdf (6 pages, 166050 bytes).
 PDF statistics:
- 43 PDF objects out of 1000 (max. 8388607)
+ 72 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  13 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -20,4 +20,4 @@ s_sub_again = np.array(s_all > 2.5)
 s_sub_again = s_sub_again.astype(int)
 
 submission = pd.DataFrame({'Id': s1.Id, 'Prediction': s_sub_again})
-submission.to_csv('submissions/sub_multi.csv', index=False)
+submission.to_csv('submissions/sub_multi_svm.csv', index=False)

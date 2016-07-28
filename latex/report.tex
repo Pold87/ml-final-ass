@@ -1,4 +1,4 @@
-\documentclass{scrartcl}
+\documentclass{article}
 
 \usepackage[style=authoryear,backend=biber]{biblatex}
 % Set library for biblatex
@@ -53,83 +53,135 @@
 \section{The Challenge}
 \label{sec:introduction}
 
-The challenge at hand is to predict, whether a person earns over EUR
-40k a year based on a mixture of both qualitative and quantiative
-variables (Table~\ref{tab:features}).
-
-Therefore, this competition involves three main challenges:
+The given problem is to predict, whether a person earns over EUR 40k a
+year (Table~\ref{tab:features}). The competition involves three main
+challenges:
 \begin{itemize}
-\item Number of missing data points
-\item Mixture of categorical and continuous variables
+\item Handling missing data points
+\item Mixture of categorical and continuous independent variables
 \item Classification of the output variable
 \end{itemize}
 
-We will address each of them in turn.
-
 Section~\ref{sec:background} briefly compares different methods for
 missing data. In Section~\ref{sec:analysis}, we analyze and visualize
-the structure of the data, to set the stage for
-feature-extraction-to-classification pipeline. In Section~3, the used
-method---Adaboost classification---is described in detail. Section~4
+the structure of the data, to set the stage for the
+feature-extraction-to-classification pipeline. In
+Section~\ref{sec:methods}, the used method---Adaboost
+classification---is described in detail. Section~\ref{sec:results}
 describes the results obtained during cross-validation and on
-Kaggle. In Section~5,
+Kaggle. In Section~\ref{sec:discussion}, the results are discussed.
 
 \section{Background}
 \label{sec:background}
 
 Missing data values are a common problem in statistics. The failure of
-sensors, or the conscious loss due to anonymity impede the machine
-learning accuracy. While the \emph{imputation} of these missing data
-is still a open problem, several method have been put forth. For the
-competition, a maximum-likelihood (expectation-maximization) method
-has been used.
+sensors, or the concealment of data impede machine learning
+accuracy. However, methods have been put forth for the imputation of
+missing data points, such as case deletion or single mean
+imputation~\ref{schafer2002missing}. However, such simple methods
+often discard useful information and are not favorable if a large part
+of the data is missing.
+
 
 \section{Analysis}
 \label{sec:analysis}
 
-In order to motivate classifier, design and technique choices, we
-start with an in-depth analysis and visualization of the given data
-sets.\\
+In order to motivate the used classifier, design and technique
+choices, we start with an in-depth analysis and visualization of the
+given dataset.
 
 Table~\ref{tab:features} shows the discrete and continuous
-features. The percentage of missing values is given in the next table.
-
-The used loss function is the 1/0 loss.
-
+features. 
 
 \begin{table}[h]
   \centering
   \begin{tabular}{cc}
     \toprule
-  Categorical & Continuous\\
+  Categorical  & Continuous                     \\
     \midrule
-    work class & age\\
-    education & number of years of education\\
-marital status & income from investment sources\\
-occupation & losses from investment sources\\
-relationship & working hours per week \\
-race & \\
-sex & \\
-native country & \\
+    work class & age                            \\
+    education  & number of years of education   \\
+marital status & income from investment sources \\
+occupation     & losses from investment sources \\
+relationship   & working hours per week         \\
+race           &                                \\
+sex            &                                \\
+native country &                                \\
       \bottomrule
   \end{tabular}
   \caption{Overview of the used features}
   \label{tab:features}
 \end{table}
 
+\begin{figure}[H]
+  \centering
+  
+  \caption{Scattermatrix of the given dataset.}
+  \label{fig:scatter}
+\end{figure}
+
 \section{Methods}
 \label{sec:methods}
 
 \subsection{Missing Data Values}
 
-A first analysis shows that on average ca. $19.6\,\%$ of the data
-values are missing, with ca. $18.8\,\%$ some variables and $23.1\,\%$
-for workclass and occupation.\\
+A first analysis shows that in total $19.6\,\%$ of the data values are
+missing, with $23.1\,\%$ for the variables workclass and occupation,
+and $18.8\,\%$ for the remaining variables. 
+
 For the possibly best performance, we would like to show that the data
 is missing completely at random (MCAR). Therefore, we conduct Little's
 MCAR test \cite{little1988test} to analyze the interaction structure
 of the variables.
 
+Since the relative frequency of missing data points is rather large,
+simple methods, like mean imputation are likely to give a suboptimal
+result. Therefore, data points were imputed busing a technique called
+Multivariate Imputation by Chained Equations
+(MICE)~\cite{buuren2011mice} using the \texttt{R} package
+\texttt{mice} (Version~2.25). The algorithm uses multiple imputations,
+which allows for incorporating the statistical uncertainty in the
+imputed values. It is a flexible approch that can aldo handle
+continuous and categorical variables. The general idea is to model the
+conditional probability of each missing variable given the remaining
+variables.
+
+The algorithm works as follows~\cite{azur2011multiple}:
+\begin{enumerate}
+\item In the beginning, a first simple imputation is performed. To
+  this end, all missing data points are replaced by random sampling
+  with replacement from the observed datapoints.
+\item One variable is selected at random, for example
+  ``occupation''. An ``intermediate'' regression model is build, using
+  the remaining variables as predictors and occupation as target
+  value. The chosen model is dependent on the target value. I used a
+  logistic regression for binary data, a polytomous regression model
+  for categorical data, and predictive mean matching for numerical
+  data. The missing values in occupation are replaced by the
+  predictions of the model
+\item The previous step is performed for each variable with missing
+  data. The models that are build use the imputed and existing values
+  for the training of the model. If all variables were predicted, one
+  cycle is completed.
+\item Several cycles are performed to stabilize the imputation
+  results. I used $c = 5$ cycles.
+\item The entire procedure is performed multiple times to yield
+  multiple imputed datasets. Due to the random factors, the imputated
+  values will be different, while the non-missing data entries will be
+  the same. I used $m = 5$ imputations.
+\end{enumerate}
+
+The MICE algorithm was used on a combined dataset, by combining the
+training and the testset to one large dataset. This should increase
+the quality of the impuated values since more training examples can be
+used for building the intermediate models (Step 2 in the algorithm
+outline).
+
+\subsection{Pooling}
+
+Since the multiple imputation methods yields multiple datasets ($m =
+5$), the predictions have to be aggregated. For this, majority voting
+was used based on the predictions (0 or 1) of the single dataset.
 
 \subsection{Dummy Variables}
 
@@ -138,16 +190,71 @@ education, marital status, occupation, relationship, sex, native
 country)---that is, they are measured only at the nominal level. Since
 measurements on the nominal level do not allow for a particular
 ordering, a proxy method has to be used. Therefore, we define dummy
-variables which take the value 0 or 1 depending on if a certain
+variables which take the value 0 or 1 that indicate if a certain
 category is present. Defining $N$ dummy variables for the $N$
-different possible values of a categorical feature allows us to
-capture the full information in the orginal unmodified dataset and use
-qualitative data in a straight-forward manner in regression models
+different possible values of a categorical feature allows for
+capturing the full information in the orginal unmodified dataset and
+use qualitative data in a straight-forward manner in regression models
 that are usually based on decision boundaries or linear relationships.
 
-After transforming the dataset, xx features are obtained, which
+After transforming the dataset, 104 variables were obtained, which
 largely increases the size of the dataset.
 
+\subsection{Cross-Validation}
+\label{sec:cross}
+
+To evaluate submissions and determine the rank of participants, the
+Kaggle challenge used the 1/0 loss. While the score in the challenge
+is the best validation of the methods employed, only one submission
+could be submitted per participant and day. In order to evaluate the
+used methods more frequently, local 5-fold cross-validation was
+implemented. The cross validation was performed per dataset of the
+imputation result, that is, no cross-dataset cross-validation was
+performed. Therefore, in the case of five imputations, 25
+cross-validation results were obtained. 
+
+The cross-validation achieved similar results to the public
+Kaggle evaluation (Table~\ref{tab:localpublic}). 
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}{lll}
+    \toprule
+    Method & Local Score & Global Score\\
+    \midrule
+    AdaBoost with 1 imputation & 0.83886 & 0.84205\\
+    Random Forest with five imputations & 0.82726 & 0.85056\\
+    SVM with five imputations & 0.84413 & 0.85494\\
+    \bottomrule
+  \end{tabular}
+  \caption{Comparing local and public scores}
+  \label{tab:localpublic}
+\end{table}
+
+\subsection{The Classifier}
+
+As can be seen in Section~\ref{sec:cross}, different classifiers were
+tested for the given problem. The best performing one was a support
+vector machine (SVM). For running the algorithm \texttt{Python~2.7.11}
+was used with the package \texttt{scikit-learn} in Version~0.17.0.
+
+Support vector machines build a $D-1$-dimensional hyperplane that
+tries to maximize the margin between the two classes. The support
+vectors are the samples on the margin for the positive class and the
+negative class. The maximum-margin hyperplane is the hyperplane
+``right in the middle'' between the support vectors.
+
+The classification function is $h(x) = g(w^Tx + b)$, with $w$ being
+the coefficient vector and $b$ the intercept term. The function $g(z)$
+is defined as $g(z) = 1$, if $z \geq 0$ and $g(z) = -1$ otherwise. The
+goal is to find $w, b$ such that the resulting decision boundary
+maximizes the margin.
+
+\subsubsection{The kernel}
+\label{sec:kernel}
+
+To extend SVMs to non-linear classification, the \emph{kernel trick}
+can be used.
 
 \section{Feature-extraction-to-classification Pipeline}
 
@@ -179,11 +286,23 @@ largely increases the size of the dataset.
 \section{Results}
 \label{sec:results}
 
+In total, I made XX submissions during the competition. The best
+submission resulted in an accuracy of XX, which corresponds to
+position XX out of XX participants. 
+
+Using a support vector machine, random forest regression, and AdaBoost
+classifier resulted in very similar results. 
+
 \section{Discussion}
 \label{sec:discussion}
 
-\section{Conclusion}
-\label{sec:conclusion}
+In summary, the main challenge lay in handling the missing data
+values. Afterward, any standard regression technique could be
+used. The use of different regression techniques had no substantial
+influence on the achieved accuracy.
+
+My code for this competition can be found at:\\
+\url{https://github.com/Pold87/ml-final-ass}
 
 
 \printbibliography

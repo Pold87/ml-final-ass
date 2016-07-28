@@ -9,6 +9,15 @@ X.test <- read.csv('../data/test_mice_hot.csv', header=T)
 X.train <- X.train[, c(features, "y")]
 X.test <- X.test[, features]
 
+X.train$win<- X.train$income - X.train$loss
+X.test$win <- X.test$income - X.test$loss
+
+X.test$income <- NULL
+X.test$loss <- NULL
+X.train$income <- NULL
+X.train$loss <- NULL
+
+
 ## Rank data and divide by N + 1
 X.train.pseudo <- pobs(as.matrix(X.train))
 X.test.pseudo <- pobs(as.matrix(X.test))

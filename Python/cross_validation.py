@@ -9,8 +9,7 @@ from sklearn import linear_model, svm
 from xgboost.sklearn import XGBClassifier
 #from sklearn.ensemble import VotingClassifier
 
-do_cross_validation = 0
-
+do_cross_validation = 1
 
 for i in range(1, 6):
     
@@ -22,24 +21,23 @@ for i in range(1, 6):
 
     #cfr = linear_model.Ridge(fit_intercept=True, normalize=False, alpha=3000)
     #cfr = linear_model.LogisticRegression(penalty= 'l2', max_iter=10000)
-    clf1 = svm.SVC(probability=True) 
+    # cfr = svm.SVC(probability=True) 
     #cfr     =       GradientBoostingClassifier(max_depth=7, subsample=0.8, n_estimators=    500,
     #                                          learning_rate =       0.05 )
     # Create and fit an AdaBoosted decision tree
-    #clf2 = AdaBoostClassifier(DecisionTreeClassifier(max_depth=1),
+    #cfr = AdaBoostClassifier(DecisionTreeClassifier(max_depth=3),
+
     #                         algorithm="SAMME",
     #                         n_estimators=500)
 
-    cfr = RandomForestClassifier(n_estimators=1000,  min_samples_leaf=2)
+    #cfr = RandomForestClassifier(n_estimators=1000)
 
     #cfr = VotingClassifier(estimators=[('clf1', clf1),
     #                                    ('clf2', clf2),
     #                                    ('clf3', clf3)],
     #                                    voting='hard',
     #                                    weights=[1,1,1])
-    #cfr = XGBClassifier(
-    #n_estimators=2000,
-    #seed=27)
+    cfr = XGBClassifier(seed=27)
 
     if do_cross_validation:
         cv = cross_validation.KFold(len(X), n_folds=5, shuffle=True)
