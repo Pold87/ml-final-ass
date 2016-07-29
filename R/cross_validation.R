@@ -89,7 +89,7 @@ for (i in 1:k) {
             ## Tranductive:
             mdl <- SVM(x=X.trans.cv, y=trans.y,
                         transductive.learning=TRUE,
-                       core="svmlight")
+                       kernel="rbf", core="svmlight")
             ##svm.transduction.pred <- predict(svm.transduction, test$x)
             ##mdl <- randomForest(y ~ ., data = X.train2.cv)
         ## preds[[j]] <- predict(mdl, X.test.cv, type = 'response')
