@@ -13,7 +13,7 @@ from frameworks.SelfLearning import *
 from frameworks.CPLELearning import CPLELearningModel
 #from sklearn.ensemble import VotingClassifier
 
-do_cross_validation = 1
+do_cross_validation = 0
 
 for i in range(1, 6):
     
@@ -31,7 +31,7 @@ for i in range(1, 6):
 
     #cfr = linear_model.Ridge(fit_intercept=True, normalize=False, alpha=3000)
     #cfr = linear_model.LogisticRegression(penalty= 'l2', max_iter=10000)
-    # cfr = svm.SVC(probability=True) 
+    cfr = svm.SVC(probability=True) 
     #cfr     =       GradientBoostingClassifier(max_depth=7, subsample=0.8, n_estimators=    500,
     #                                          learning_rate =       0.05 )
     # Create and fit an AdaBoosted decision tree
@@ -40,7 +40,7 @@ for i in range(1, 6):
     #                         algorithm="SAMME",
     #                         n_estimators=500)
 
-    #cfr = RandomForestClassifier(n_estimators=1000)
+    #cfr = RandomForestClassifier(n_estimators=100)
 
     #cfr = VotingClassifier(estimators=[('clf1', clf1),
     #                                    ('clf2', clf2),
@@ -48,7 +48,7 @@ for i in range(1, 6):
     #                                    voting='hard',
     #                                    weights=[1,1,1])
     #cfr = XGBClassifier(seed=27)
-    cfr = KNeighborsClassifier(n_neighbors=30, weights='distance')
+    #cfr = KNeighborsClassifier(n_neighbors=30, weights='distance')
 
     #cfr = SelfLearningModel(cfr)
     cfr = CPLELearningModel(cfr)
@@ -74,7 +74,10 @@ for i in range(1, 6):
     
         X_train_np = X.values
         X_test_np = X_test.values
-        cl = cfr.fit(X_train_np, y)
+        X_all = np.concatenate((X_train_np, X_test_np), axis = 0)
+        y_unl = -1 * np.ones(len(X_test_np))
+        y_all = np.concatenate((y, y_unl), axis=0)
+        cl = cfr.fit(X_all, y_all)
         preds = cl.predict(X_test_np)
 
         # Make submission
@@ -83,5 +86,5 @@ for i in range(1, 6):
 
         submission = pd.DataFrame({'Id': ids, 'Prediction': preds})
 
-        submission.to_csv('submissions/sub_mult_%d.csv' % i, index=False)
+        submission.to_csv('submissions/sub_mult_semi_%d.csv' % i, index=False)
     
