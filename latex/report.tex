@@ -6,6 +6,7 @@
 
 
 \usepackage{booktabs}
+\usepackage{float}
 
 \usepackage{tikz}
 \usetikzlibrary{shapes,arrows,positioning}
@@ -274,10 +275,12 @@ can be used.
     \node [block] (train) {NaN Training set};
     \node [block, below of=train] (test) {NaN Test set};
     \node [block, right of=train] (stacked) {NaN Combined set};
-    \node [block, right of=stacked] (full) {Full Combined set};
+    \node [block, right of=stacked] (full) {Full Combined set 1};
+    \node [block, right below of=stacked] (full) {Full Combined set 2};
     % Draw edges
     \path [line] (train) -- (stacked);
     \path [line] (test) -- (stacked);
+    \path [line] (stacked) -- (full) node [midway] {mice};
 \end{tikzpicture}
   \caption{The pipeline}
   \label{fig:pipeline}

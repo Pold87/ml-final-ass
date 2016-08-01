@@ -17,9 +17,9 @@ from sklearn.linear_model.stochastic_gradient import SGDClassifier
 from methods.scikitWQDA import WQDA
 from methods import scikitTSVM
 
-do_cross_validation = 0
+do_cross_validation = 1
 
-use_transductive = 1
+use_transductive = 0
 
 for i in range(1, 6):
     
@@ -43,12 +43,12 @@ for i in range(1, 6):
 
     #cfr = linear_model.Ridge(fit_intercept=True, normalize=False, alpha=3000)
     #cfr = linear_model.LogisticRegression(penalty= 'l2', max_iter=10000)
-    #cfr = svm.SVC(probability=True) 
+    cfr = svm.SVC(probability=True) 
     #cfr     =       GradientBoostingClassifier(max_depth=7, subsample=0.8, n_estimators=    500,
     #                                          learning_rate =       0.05 )
     # Create and fit an AdaBoosted decision tree
 
-    cfr = AdaBoostClassifier(DecisionTreeClassifier(max_depth=1), n_estimators=50)
+    #cfr = AdaBoostClassifier(DecisionTreeClassifier(max_depth=1), n_estimators=200)
     
     #cfr = RandomForestClassifier(n_estimators=100)
 
@@ -82,7 +82,9 @@ for i in range(1, 6):
                 cl = cfr.fit(X_all, y_all)
             else:
                 cl = cfr.fit(X_np[train_idx, :], y[train_idx])
-            pred =  cl.predict(X_np[test_idx, :])
+            preds_raw =  cl.predict_proba(X_np[test_idx, :])
+            print preds_raw
+            pred = preds_raw[:, 1] > 0.55
             loss = np.sum(np.fabs (y[test_idx] - pred))      
             print(1 - (loss / len(test_idx)))      
 

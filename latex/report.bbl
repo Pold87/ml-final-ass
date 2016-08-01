@@ -1,5 +1,5 @@
 % $ biblatex auxiliary file $
-% $ biblatex bbl format version 2.3 $
+% $ biblatex bbl format version 2.5 $
 % Do not modify the above lines!
 %
 % This is an auxiliary file used by the 'biblatex' package.
@@ -18,14 +18,8 @@
 
 
 \refsection{0}
-  \sortlist{entry}{nyt}
+  \sortlist{nyt}{nyt}
     \entry{azur2011multiple}{article}{}
-      \name{labelname}{4}{}{%
-        {{uniquename=0,hash=14520444843e451fbc3bf8490cfa758b}{Azur}{A\bibinitperiod}{Melissa\bibnamedelima J}{M\bibinitperiod\bibinitdelim J\bibinitperiod}{}{}{}{}}%
-        {{uniquename=0,hash=90c7d8eb677332bbcccb1952b07719c4}{Stuart}{S\bibinitperiod}{Elizabeth\bibnamedelima A}{E\bibinitperiod\bibinitdelim A\bibinitperiod}{}{}{}{}}%
-        {{uniquename=0,hash=b72f6a6eb6a0bd2f224babb0d082f85a}{Frangakis}{F\bibinitperiod}{Constantine}{C\bibinitperiod}{}{}{}{}}%
-        {{uniquename=0,hash=d8b4072f3a6962c09e6ab694647a2454}{Leaf}{L\bibinitperiod}{Philip\bibnamedelima J}{P\bibinitperiod\bibinitdelim J\bibinitperiod}{}{}{}{}}%
-      }
       \name{author}{4}{}{%
         {{uniquename=0,hash=14520444843e451fbc3bf8490cfa758b}{Azur}{A\bibinitperiod}{Melissa\bibnamedelima J}{M\bibinitperiod\bibinitdelim J\bibinitperiod}{}{}{}{}}%
         {{uniquename=0,hash=90c7d8eb677332bbcccb1952b07719c4}{Stuart}{S\bibinitperiod}{Elizabeth\bibnamedelima A}{E\bibinitperiod\bibinitdelim A\bibinitperiod}{}{}{}{}}%
@@ -38,21 +32,20 @@
       \strng{namehash}{a093265b6e2952281dc8ea516cf792d0}
       \strng{fullhash}{2001dd932580b7b06943ecd5eac884d8}
       \field{sortinit}{A}
+      \field{sortinithash}{b685c7856330eaee22789815b49de9bb}
       \field{labelyear}{2011}
       \field{datelabelsource}{}
-      \field{labeltitle}{Multiple imputation by chained equations: what is it and how does it work?}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
       \field{journaltitle}{International journal of methods in psychiatric research}
       \field{number}{1}
       \field{title}{Multiple imputation by chained equations: what is it and how does it work?}
       \field{volume}{20}
       \field{year}{2011}
       \field{pages}{40\bibrangedash 49}
+      \range{pages}{10}
     \endentry
     \entry{buuren2011mice}{article}{}
-      \name{labelname}{2}{}{%
-        {{uniquename=0,hash=bf2e46bc7131f45ded746c29d0922a6e}{Buuren}{B\bibinitperiod}{Stef}{S\bibinitperiod}{}{}{}{}}%
-        {{uniquename=0,hash=608d0e9a1fa5297e662ddcf0f605c2ab}{Groothuis-Oudshoorn}{G\bibinithyphendelim O\bibinitperiod}{Karin}{K\bibinitperiod}{}{}{}{}}%
-      }
       \name{author}{2}{}{%
         {{uniquename=0,hash=bf2e46bc7131f45ded746c29d0922a6e}{Buuren}{B\bibinitperiod}{Stef}{S\bibinitperiod}{}{}{}{}}%
         {{uniquename=0,hash=608d0e9a1fa5297e662ddcf0f605c2ab}{Groothuis-Oudshoorn}{G\bibinithyphendelim O\bibinitperiod}{Karin}{K\bibinitperiod}{}{}{}{}}%
@@ -63,9 +56,11 @@
       \strng{namehash}{152b5cbd5ece9efb64a26555eb09a74f}
       \strng{fullhash}{152b5cbd5ece9efb64a26555eb09a74f}
       \field{sortinit}{B}
+      \field{sortinithash}{4ecbea03efd0532989d3836d1a048c32}
       \field{labelyear}{2011}
       \field{datelabelsource}{}
-      \field{labeltitle}{mice: Multivariate imputation by chained equations in {R}}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
       \field{journaltitle}{Journal of statistical software}
       \field{number}{3}
       \field{title}{mice: Multivariate imputation by chained equations in {R}}
@@ -73,9 +68,6 @@
       \field{year}{2011}
     \endentry
     \entry{little1988test}{article}{}
-      \name{labelname}{1}{}{%
-        {{uniquename=0,hash=abe261e681654bef55a5d88129d4453e}{Little}{L\bibinitperiod}{Roderick\bibnamedelima JA}{R\bibinitperiod\bibinitdelim J\bibinitperiod}{}{}{}{}}%
-      }
       \name{author}{1}{}{%
         {{uniquename=0,hash=abe261e681654bef55a5d88129d4453e}{Little}{L\bibinitperiod}{Roderick\bibnamedelima JA}{R\bibinitperiod\bibinitdelim J\bibinitperiod}{}{}{}{}}%
       }
@@ -85,15 +77,18 @@
       \strng{namehash}{abe261e681654bef55a5d88129d4453e}
       \strng{fullhash}{abe261e681654bef55a5d88129d4453e}
       \field{sortinit}{L}
+      \field{sortinithash}{872351f18d0f736066eda0bf18bfa4f7}
       \field{labelyear}{1988}
       \field{datelabelsource}{}
-      \field{labeltitle}{A test of missing completely at random for multivariate data with missing values}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
       \field{journaltitle}{Journal of the American Statistical Association}
       \field{number}{404}
       \field{title}{A test of missing completely at random for multivariate data with missing values}
       \field{volume}{83}
       \field{year}{1988}
       \field{pages}{1198\bibrangedash 1202}
+      \range{pages}{5}
     \endentry
   \endsortlist
 \endrefsection

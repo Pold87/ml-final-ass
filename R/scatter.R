@@ -19,3 +19,5 @@ X.test <- read.csv("../data/test.csv", header = T,
                            'numeric', 'numeric', 'numeric',
                            'factor'),
               na.strings="NaN")
+
+sub1 <- read.csv("../Python/submissions/sub_multi_self.csv")
