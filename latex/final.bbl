@@ -1,0 +1,156 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 2.3 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \sortlist{entry}{nty}
+    \entry{azur2011multiple}{article}{}
+      \name{labelname}{4}{}{%
+        {{hash=5b92c0358cd3e2710fa21809ad7f8082}{Azur}{A\bibinitperiod}{Melissa\bibnamedelima J.}{M\bibinitperiod\bibinitdelim J\bibinitperiod}{}{}{}{}}%
+        {{hash=1d0aef5657071d2c16d32c8c877b57f9}{Stuart}{S\bibinitperiod}{Elizabeth\bibnamedelima A.}{E\bibinitperiod\bibinitdelim A\bibinitperiod}{}{}{}{}}%
+        {{hash=b72f6a6eb6a0bd2f224babb0d082f85a}{Frangakis}{F\bibinitperiod}{Constantine}{C\bibinitperiod}{}{}{}{}}%
+        {{hash=d594d6e0eaec0f16bb32aa8d7b217f13}{Leaf}{L\bibinitperiod}{Philip\bibnamedelima J.}{P\bibinitperiod\bibinitdelim J\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{4}{}{%
+        {{hash=5b92c0358cd3e2710fa21809ad7f8082}{Azur}{A\bibinitperiod}{Melissa\bibnamedelima J.}{M\bibinitperiod\bibinitdelim J\bibinitperiod}{}{}{}{}}%
+        {{hash=1d0aef5657071d2c16d32c8c877b57f9}{Stuart}{S\bibinitperiod}{Elizabeth\bibnamedelima A.}{E\bibinitperiod\bibinitdelim A\bibinitperiod}{}{}{}{}}%
+        {{hash=b72f6a6eb6a0bd2f224babb0d082f85a}{Frangakis}{F\bibinitperiod}{Constantine}{C\bibinitperiod}{}{}{}{}}%
+        {{hash=d594d6e0eaec0f16bb32aa8d7b217f13}{Leaf}{L\bibinitperiod}{Philip\bibnamedelima J.}{P\bibinitperiod\bibinitdelim J\bibinitperiod}{}{}{}{}}%
+      }
+      \list{publisher}{1}{%
+        {Wiley Online Library}%
+      }
+      \strng{namehash}{a5185f3e6828890ac87d9776ba68ffc8}
+      \strng{fullhash}{8817078d7207006cc44ea9104f0d5b43}
+      \field{sortinit}{A}
+      \field{labeltitle}{Multiple imputation by chained equations: {W}hat is it and how does it work?}
+      \field{journaltitle}{International journal of methods in psychiatric research}
+      \field{number}{1}
+      \field{title}{Multiple imputation by chained equations: {W}hat is it and how does it work?}
+      \field{volume}{20}
+      \field{year}{2011}
+      \field{pages}{40\bibrangedash 49}
+    \endentry
+    \entry{buuren2011mice}{article}{}
+      \name{labelname}{2}{}{%
+        {{hash=bf2e46bc7131f45ded746c29d0922a6e}{Buuren}{B\bibinitperiod}{Stef}{S\bibinitperiod}{}{}{}{}}%
+        {{hash=608d0e9a1fa5297e662ddcf0f605c2ab}{Groothuis-Oudshoorn}{G\bibinithyphendelim O\bibinitperiod}{Karin}{K\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{2}{}{%
+        {{hash=bf2e46bc7131f45ded746c29d0922a6e}{Buuren}{B\bibinitperiod}{Stef}{S\bibinitperiod}{}{}{}{}}%
+        {{hash=608d0e9a1fa5297e662ddcf0f605c2ab}{Groothuis-Oudshoorn}{G\bibinithyphendelim O\bibinitperiod}{Karin}{K\bibinitperiod}{}{}{}{}}%
+      }
+      \list{publisher}{1}{%
+        {American Statistical Association}%
+      }
+      \strng{namehash}{ac62236ca3e5ccb37658a12b1bdc038d}
+      \strng{fullhash}{152b5cbd5ece9efb64a26555eb09a74f}
+      \field{sortinit}{B}
+      \field{labeltitle}{mice: Multivariate imputation by chained equations in {R}}
+      \field{journaltitle}{Journal of statistical software}
+      \field{number}{3}
+      \field{title}{mice: Multivariate imputation by chained equations in {R}}
+      \field{volume}{45}
+      \field{year}{2011}
+    \endentry
+    \entry{lichman2013}{misc}{}
+      \name{labelname}{1}{}{%
+        {{hash=7202d1c034f2a555a0a037bc17d642aa}{Lichman}{L\bibinitperiod}{M.}{M\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{1}{}{%
+        {{hash=7202d1c034f2a555a0a037bc17d642aa}{Lichman}{L\bibinitperiod}{M.}{M\bibinitperiod}{}{}{}{}}%
+      }
+      \list{institution}{2}{%
+        {University of California, Irvine, School of Information}%
+        {Computer Sciences}%
+      }
+      \strng{namehash}{7202d1c034f2a555a0a037bc17d642aa}
+      \strng{fullhash}{7202d1c034f2a555a0a037bc17d642aa}
+      \field{sortinit}{L}
+      \field{labeltitle}{{UCI} Machine Learning Repository}
+      \field{title}{{UCI} Machine Learning Repository}
+      \field{year}{2013}
+      \verb{url}
+      \verb http://archive.ics.uci.edu/ml
+      \endverb
+    \endentry
+    \entry{little1988test}{article}{}
+      \name{labelname}{1}{}{%
+        {{hash=abe261e681654bef55a5d88129d4453e}{Little}{L\bibinitperiod}{Roderick\bibnamedelima JA}{R\bibinitperiod\bibinitdelim J\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{1}{}{%
+        {{hash=abe261e681654bef55a5d88129d4453e}{Little}{L\bibinitperiod}{Roderick\bibnamedelima JA}{R\bibinitperiod\bibinitdelim J\bibinitperiod}{}{}{}{}}%
+      }
+      \list{publisher}{1}{%
+        {Taylor \& Francis}%
+      }
+      \strng{namehash}{abe261e681654bef55a5d88129d4453e}
+      \strng{fullhash}{abe261e681654bef55a5d88129d4453e}
+      \field{sortinit}{L}
+      \field{labeltitle}{A test of missing completely at random for multivariate data with missing values}
+      \field{journaltitle}{Journal of the American Statistical Association}
+      \field{number}{404}
+      \field{title}{A test of missing completely at random for multivariate data with missing values}
+      \field{volume}{83}
+      \field{year}{1988}
+      \field{pages}{1198\bibrangedash 1202}
+    \endentry
+    \entry{schafer2002missing}{article}{}
+      \name{labelname}{2}{}{%
+        {{hash=b74de7e1c28542f75be42b949dd0752f}{Schafer}{S\bibinitperiod}{Joseph\bibnamedelima L}{J\bibinitperiod\bibinitdelim L\bibinitperiod}{}{}{}{}}%
+        {{hash=4f159597207cdd83cefac794c0eab749}{Graham}{G\bibinitperiod}{John\bibnamedelima W}{J\bibinitperiod\bibinitdelim W\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{2}{}{%
+        {{hash=b74de7e1c28542f75be42b949dd0752f}{Schafer}{S\bibinitperiod}{Joseph\bibnamedelima L}{J\bibinitperiod\bibinitdelim L\bibinitperiod}{}{}{}{}}%
+        {{hash=4f159597207cdd83cefac794c0eab749}{Graham}{G\bibinitperiod}{John\bibnamedelima W}{J\bibinitperiod\bibinitdelim W\bibinitperiod}{}{}{}{}}%
+      }
+      \list{publisher}{1}{%
+        {American Psychological Association}%
+      }
+      \strng{namehash}{13bfed3b0cea4a075b0ed3e529092da3}
+      \strng{fullhash}{d677587a95c0daf7016037126f5b3ee0}
+      \field{sortinit}{S}
+      \field{labeltitle}{Missing data: our view of the state of the art.}
+      \field{journaltitle}{Psychological methods}
+      \field{number}{2}
+      \field{title}{Missing data: our view of the state of the art.}
+      \field{volume}{7}
+      \field{year}{2002}
+      \field{pages}{147}
+    \endentry
+    \entry{zhu2005semi}{misc}{}
+      \name{labelname}{1}{}{%
+        {{hash=c0589c96d31566f50f3aa4f931a33357}{Zhu}{Z\bibinitperiod}{Xiaojin}{X\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{1}{}{%
+        {{hash=c0589c96d31566f50f3aa4f931a33357}{Zhu}{Z\bibinitperiod}{Xiaojin}{X\bibinitperiod}{}{}{}{}}%
+      }
+      \list{publisher}{1}{%
+        {Citeseer}%
+      }
+      \strng{namehash}{c0589c96d31566f50f3aa4f931a33357}
+      \strng{fullhash}{c0589c96d31566f50f3aa4f931a33357}
+      \field{sortinit}{Z}
+      \field{labeltitle}{Semi-supervised learning literature survey}
+      \field{title}{Semi-supervised learning literature survey}
+      \field{year}{2005}
+    \endentry
+  \endsortlist
+\endrefsection
+\endinput
+

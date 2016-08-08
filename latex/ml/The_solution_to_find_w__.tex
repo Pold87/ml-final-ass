@@ -1,0 +1,7 @@
+The solution to find $w$ and $b$, starts with the \emph{dual representation}:
+\begin{align}
+\label{eq:dual}
+\text{arg}\max_\alpha\sum_j\alpha_j - \frac{1}{2}\sum_{j,k}\alpha_j\alpha_ky_jy_k(\mathbf{x_j} \cdot \mathbf{x_k})
+\end{align} subject to the constraints: $\alpha_j \geq 0$ and $\sum_j\alpha_jy_j=0$. The variable $y_i \in \{-1, 1\}$ represents the class of $x_i$. This optimization problem can be solved using quadratic programming, for which several ``off-the-shelf" tools exist.
+
+The \emph{support vectors} are the samples for for which the weights $a_j$ are non-zero. 

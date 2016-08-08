@@ -1,0 +1,7 @@
+To extend SVMs to non-linear classification, the \emph{kernel trick}
+can be used. The kernel $K(\mathbf{x_j}, \mathbf{x_k})$ is then applied to the dot products of feature vectors in Equation~\ref{eq:dual}. Therefore, the equation becomes:
+\begin{align}
+\label{eq:dualkernel}
+\text{arg}\max_\alpha\sum_j\alpha_j - \frac{1}{2}\sum_{j,k}\alpha_j\alpha_ky_jy_kK(\mathbf{x_j}, \mathbf{x_k})
+\end{align} 
+Practically, this means that the problem of finding a linear separator is shifted to a higher dimensional feature space. Mapping back this linear separator to the original feature space results in a non-linear decision boundary. 

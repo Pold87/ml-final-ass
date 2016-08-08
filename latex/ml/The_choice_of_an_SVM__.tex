@@ -1,0 +1,8 @@
+The choice of an SVM was motivated by the following points:
+
+\begin{enumerate}
+\item SVMs work on a large number of different problems
+\item SVMs aim at minimizing the generalization loss, instead of the empirical loss, by finding a decision boundary with the maximum distance to the training samples. Since the given training set contains only 10,500 samples, while the test set contains 38,342 samples, generalization is especially important.
+\item SVMs allow for \emph{transductive learning} using transductive SVMs. Therefore, the information in the unlabeled test data can be incorporated in the training process, possibly improving the accuracy.
+\item Using the \emph{kernel trick}, data can be embed into a higher-dimensional space, which might make the dataset easily separable.
+\end{enumerate}

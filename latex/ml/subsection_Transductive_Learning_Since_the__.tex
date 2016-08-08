@@ -1,0 +1,6 @@
+\subsection{Transductive Learning}
+
+Since the test data is known at the time of the classifier training, this information can be used for using semi-supervised methods with the potential to better capture the underlying distribution. In a first step, ``naive" self-learning was used to incorporate the unlabeled data of the testset. This was done in an iterative approach: In the first iteration, the unlabeled data was labeled by predicting their labels using the training dataset. In the next iteration. The approach did not significantly improve the classification performance. 
+
+The second approach used an implementation based on \texttt{scikit-learn} and the Contrastive Pessimistic Likelihood Estimation (CPLE) (\url{https://github.com/tmadl/semisup-learn}). 
+
