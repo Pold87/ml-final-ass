@@ -48,4 +48,4 @@ require(BaylorEdPsych)
 
 little <- LittleMCAR(X.train)
 
-little.test <- LittleMCAR(X.test)
+little.test <- LittleMCAR(X.all)

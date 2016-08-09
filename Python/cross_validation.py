@@ -10,6 +10,7 @@ from sklearn import cross_validation
 from sklearn import linear_model, svm
 #from xgboost.sklearn import XGBClassifier
 from sklearn.neighbors import KNeighborsClassifier
+from sklearn.semi_supervised import LabelSpreading
 
 from sklearn.preprocessing import StandardScaler, RobustScaler
 from frameworks.SelfLearning import *
@@ -20,9 +21,11 @@ from methods.scikitWQDA import WQDA
 from methods import scikitTSVM
 from sklearn.metrics import confusion_matrix
 
+use_scaling = 1
+
 do_cross_validation = 1
 
-use_transductive = 0
+use_transductive = 1
 
 all_preds = [None] * 5
 
@@ -37,7 +40,7 @@ all_preds = [None] * 5
 #                                          learning_rate =       0.05 )
 # Create and fit an AdaBoosted decision tree
 
-cfr = AdaBoostClassifier(DecisionTreeClassifier(max_depth=1), n_estimators=100)
+#cfr = AdaBoostClassifier(DecisionTreeClassifier(max_depth=1), n_estimators=100)
 
 #cfr = RandomForestClassifier(n_estimators=100)
 
@@ -49,7 +52,7 @@ cfr = AdaBoostClassifier(DecisionTreeClassifier(max_depth=1), n_estimators=100)
 #cfr = XGBClassifier(seed=27)
 #cfr = KNeighborsClassifier(n_neighbors=30, weights='distance')
 
-#cfr = svm.SVC(probability=True) 
+cfr = svm.SVC() 
 
 if do_cross_validation:
     X = pd.read_csv('../data/five_imps/train_mice_hot_%d.csv' % 1)
@@ -67,11 +70,13 @@ for i in range(1, 6):
     # Transform to numpy
     X = X.values
 
-    #scaler = RobustScaler()
-    #X = scaler.fit_transform(X)
+    if use_scaling:
+        scaler = RobustScaler()
+        X = scaler.fit_transform(X)
 
     if use_transductive:
-        cfr = CPLELearningModel(cfr, verbose=2)
+        #cfr = CPLELearningModel(cfr, verbose=2)
+        pass
         #cfr = scikitTSVM.SKTSVM(kernel="rbf")
         #cfr = SelfLearningModel(cfr)
 
@@ -88,15 +93,23 @@ for i in range(1, 6):
             # Transform to numpy
             X_cv_test = X_cv_test.values
 
+            if use_scaling:
+                X_cv_test = scaler.transform(X_cv_test)
             k = 0
             for train_idx, test_idx in cv:
 
                 if use_transductive:
-                    X_test_np = X_test
-                    X_all = np.concatenate((X_np[train_idx, :], X_test_np), axis = 0)
-                    y_unl = -1 * np.ones(len(X_test_np))
+                    X_all = np.concatenate((X_cv_train[train_idx, :], X_cv_test[test_idx, :]), axis = 0)
+                    y_unl = -1 * np.ones(len(X_cv_test[test_idx, :]))
                     y_all = np.concatenate((y[train_idx], y_unl), axis=0)
-                    cl = cfr.fit(X_all, y_all)
+
+                    lpm = LabelSpreading()
+                    lp = lpm.fit(X_all, y_all)
+                    y_semi = lp.predict(X_all)
+
+                    # For CPLR:
+                    #cl = cfr.fit(X_all, y_all)
+                    cl = cfr.fit(X_all, y_semi)
                 else:
                     cl = cfr.fit(X_cv_train[train_idx, :], y[train_idx])
                     pred =  cl.predict(X_cv_test[test_idx, :])
@@ -106,6 +119,9 @@ for i in range(1, 6):
                         all_preds[k] = pred
                     else:
                         all_preds[k] += pred
+
+                    print pd.crosstab(y[test_idx], pred)
+                    print 1 - (np.sum(np.fabs(y[test_idx] - pred)) / len(pred))
                 k += 1
                 
     else:
@@ -113,7 +129,8 @@ for i in range(1, 6):
         for j in range(1, 6):
             X_test = pd.read_csv('../data/five_imps/test_mice_hot_%d.csv' % j)
             X_test = X_test.values
-            #X_test = scaler.transform(X_test)
+            if use_scaling:
+                X_test = scaler.transform(X_test)
             X_train_np = X
             X_test_np = X_test
             X_all = np.concatenate((X_train_np, X_test_np), axis = 0)

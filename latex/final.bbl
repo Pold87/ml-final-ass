@@ -68,6 +68,58 @@
       \field{volume}{45}
       \field{year}{2011}
     \endentry
+    \entry{libsvm2011}{article}{}
+      \name{labelname}{2}{}{%
+        {{hash=90dbdcacecdffc9ea33bf0a0d370c416}{Chang}{C\bibinitperiod}{Chih-Chung}{C\bibinithyphendelim C\bibinitperiod}{}{}{}{}}%
+        {{hash=bb8c32ec740b902c4f066796b083badc}{Lin}{L\bibinitperiod}{Chih-Jen}{C\bibinithyphendelim J\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{2}{}{%
+        {{hash=90dbdcacecdffc9ea33bf0a0d370c416}{Chang}{C\bibinitperiod}{Chih-Chung}{C\bibinithyphendelim C\bibinitperiod}{}{}{}{}}%
+        {{hash=bb8c32ec740b902c4f066796b083badc}{Lin}{L\bibinitperiod}{Chih-Jen}{C\bibinithyphendelim J\bibinitperiod}{}{}{}{}}%
+      }
+      \strng{namehash}{4d223f6141c13e021a699e331a47e18a}
+      \strng{fullhash}{1224d323be40e9eaf84c63498a939f53}
+      \field{sortinit}{C}
+      \field{labeltitle}{{libsvm}: A library for support vector machines}
+      \field{issue}{3}
+      \field{journaltitle}{ACM Transactions on Intelligent Systems and Technology}
+      \field{note}{Software available at \url{http://www.csie.ntu.edu.tw/~cjlin/libsvm}}
+      \field{title}{{libsvm}: A library for support vector machines}
+      \field{volume}{2}
+      \field{year}{2011}
+      \field{pages}{27:1\bibrangedash 27:27}
+    \endentry
+    \entry{de2013multiple}{article}{}
+      \name{labelname}{6}{}{%
+        {{hash=00d07bb09fc9e58bd6c6a17165997de8}{Goeij}{G\bibinitperiod}{Moniek\bibnamedelima C.M.}{M\bibinitperiod\bibinitdelim C\bibinitperiod}{de}{d\bibinitperiod}{}{}}%
+        {{hash=39ace17837cd2169d1d18e533915ee75}{Diepen}{D\bibinitperiod}{Merel}{M\bibinitperiod}{van}{v\bibinitperiod}{}{}}%
+        {{hash=96d7cc530cf36432139fbea2940bbad6}{Jager}{J\bibinitperiod}{Kitty\bibnamedelima J.}{K\bibinitperiod\bibinitdelim J\bibinitperiod}{}{}{}{}}%
+        {{hash=2a120484b5a8592ef716654c3e4aa6ff}{Tripepi}{T\bibinitperiod}{Giovanni}{G\bibinitperiod}{}{}{}{}}%
+        {{hash=5dd7d31c7a42ca4f18fe0bbd4f1fc9c7}{Zoccali}{Z\bibinitperiod}{Carmine}{C\bibinitperiod}{}{}{}{}}%
+        {{hash=a6740f2ff6463f6ae1effe1ff567646b}{Dekker}{D\bibinitperiod}{Friedo\bibnamedelima W.}{F\bibinitperiod\bibinitdelim W\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{6}{}{%
+        {{hash=00d07bb09fc9e58bd6c6a17165997de8}{Goeij}{G\bibinitperiod}{Moniek\bibnamedelima C.M.}{M\bibinitperiod\bibinitdelim C\bibinitperiod}{de}{d\bibinitperiod}{}{}}%
+        {{hash=39ace17837cd2169d1d18e533915ee75}{Diepen}{D\bibinitperiod}{Merel}{M\bibinitperiod}{van}{v\bibinitperiod}{}{}}%
+        {{hash=96d7cc530cf36432139fbea2940bbad6}{Jager}{J\bibinitperiod}{Kitty\bibnamedelima J.}{K\bibinitperiod\bibinitdelim J\bibinitperiod}{}{}{}{}}%
+        {{hash=2a120484b5a8592ef716654c3e4aa6ff}{Tripepi}{T\bibinitperiod}{Giovanni}{G\bibinitperiod}{}{}{}{}}%
+        {{hash=5dd7d31c7a42ca4f18fe0bbd4f1fc9c7}{Zoccali}{Z\bibinitperiod}{Carmine}{C\bibinitperiod}{}{}{}{}}%
+        {{hash=a6740f2ff6463f6ae1effe1ff567646b}{Dekker}{D\bibinitperiod}{Friedo\bibnamedelima W.}{F\bibinitperiod\bibinitdelim W\bibinitperiod}{}{}{}{}}%
+      }
+      \list{publisher}{1}{%
+        {ERA-EDTA}%
+      }
+      \strng{namehash}{f80462ffeaac49fe37206ed5169a8754}
+      \strng{fullhash}{29e14d107826cbc956aebe722a18b11a}
+      \field{sortinit}{G}
+      \field{labeltitle}{Multiple imputation: dealing with missing data}
+      \field{journaltitle}{Nephrology Dialysis Transplantation}
+      \field{number}{10}
+      \field{title}{Multiple imputation: dealing with missing data}
+      \field{volume}{28}
+      \field{year}{2013}
+      \field{pages}{2415\bibrangedash 2420}
+    \endentry
     \entry{lichman2013}{misc}{}
       \name{labelname}{1}{}{%
         {{hash=7202d1c034f2a555a0a037bc17d642aa}{Lichman}{L\bibinitperiod}{M.}{M\bibinitperiod}{}{}{}{}}%
@@ -110,6 +162,57 @@
       \field{year}{1988}
       \field{pages}{1198\bibrangedash 1202}
     \endentry
+    \entry{royston2011multiple}{article}{}
+      \true{morelabelname}
+      \name{labelname}{2}{}{%
+        {{hash=d77ac0af604c52daf07a18aced65b51b}{Royston}{R\bibinitperiod}{Patrick}{P\bibinitperiod}{}{}{}{}}%
+        {{hash=5c34dcd02ba5142624e7705ffbe28d8a}{White}{W\bibinitperiod}{Ian\bibnamedelima R}{I\bibinitperiod\bibinitdelim R\bibinitperiod}{}{}{}{}}%
+      }
+      \true{moreauthor}
+      \name{author}{2}{}{%
+        {{hash=d77ac0af604c52daf07a18aced65b51b}{Royston}{R\bibinitperiod}{Patrick}{P\bibinitperiod}{}{}{}{}}%
+        {{hash=5c34dcd02ba5142624e7705ffbe28d8a}{White}{W\bibinitperiod}{Ian\bibnamedelima R}{I\bibinitperiod\bibinitdelim R\bibinitperiod}{}{}{}{}}%
+      }
+      \list{publisher}{1}{%
+        {American Statistical Association}%
+      }
+      \strng{namehash}{2f02a363587ddeb5bb10d038708b4549}
+      \strng{fullhash}{b012a2e4cc81c090af8f6e573b3f9438}
+      \field{sortinit}{R}
+      \field{labeltitle}{Multiple imputation by chained equations (MICE): implementation in Stata}
+      \field{journaltitle}{Journal of Statistical Software}
+      \field{number}{4}
+      \field{title}{Multiple imputation by chained equations (MICE): implementation in Stata}
+      \field{volume}{45}
+      \field{year}{2011}
+      \field{pages}{1\bibrangedash 20}
+    \endentry
+    \entry{russell2003artificial}{book}{}
+      \name{labelname}{5}{}{%
+        {{hash=0784d2ea27596a7eed871af226f62299}{Russell}{R\bibinitperiod}{Stuart\bibnamedelima Jonathan}{S\bibinitperiod\bibinitdelim J\bibinitperiod}{}{}{}{}}%
+        {{hash=5de798d5fa3c0236c0478134cd23f52a}{Norvig}{N\bibinitperiod}{Peter}{P\bibinitperiod}{}{}{}{}}%
+        {{hash=7b7d52953f7c0a8973dde999cd49acdf}{Canny}{C\bibinitperiod}{John\bibnamedelima F.}{J\bibinitperiod\bibinitdelim F\bibinitperiod}{}{}{}{}}%
+        {{hash=497ebad7ed99c1193922238ff547975f}{Malik}{M\bibinitperiod}{Jitendra\bibnamedelima M.}{J\bibinitperiod\bibinitdelim M\bibinitperiod}{}{}{}{}}%
+        {{hash=120000b509e1c60ad123e57a519aaa87}{Edwards}{E\bibinitperiod}{Douglas\bibnamedelima D.}{D\bibinitperiod\bibinitdelim D\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{5}{}{%
+        {{hash=0784d2ea27596a7eed871af226f62299}{Russell}{R\bibinitperiod}{Stuart\bibnamedelima Jonathan}{S\bibinitperiod\bibinitdelim J\bibinitperiod}{}{}{}{}}%
+        {{hash=5de798d5fa3c0236c0478134cd23f52a}{Norvig}{N\bibinitperiod}{Peter}{P\bibinitperiod}{}{}{}{}}%
+        {{hash=7b7d52953f7c0a8973dde999cd49acdf}{Canny}{C\bibinitperiod}{John\bibnamedelima F.}{J\bibinitperiod\bibinitdelim F\bibinitperiod}{}{}{}{}}%
+        {{hash=497ebad7ed99c1193922238ff547975f}{Malik}{M\bibinitperiod}{Jitendra\bibnamedelima M.}{J\bibinitperiod\bibinitdelim M\bibinitperiod}{}{}{}{}}%
+        {{hash=120000b509e1c60ad123e57a519aaa87}{Edwards}{E\bibinitperiod}{Douglas\bibnamedelima D.}{D\bibinitperiod\bibinitdelim D\bibinitperiod}{}{}{}{}}%
+      }
+      \list{publisher}{1}{%
+        {Prentice hall Upper Saddle River}%
+      }
+      \strng{namehash}{2969a996a11745404c62ab9ef2cdb8a8}
+      \strng{fullhash}{c84c92626df968a841a671e522e644a6}
+      \field{sortinit}{R}
+      \field{labeltitle}{Artificial intelligence: a modern approach}
+      \field{title}{Artificial intelligence: a modern approach}
+      \field{volume}{2}
+      \field{year}{2003}
+    \endentry
     \entry{schafer2002missing}{article}{}
       \name{labelname}{2}{}{%
         {{hash=b74de7e1c28542f75be42b949dd0752f}{Schafer}{S\bibinitperiod}{Joseph\bibnamedelima L}{J\bibinitperiod\bibinitdelim L\bibinitperiod}{}{}{}{}}%
@@ -132,6 +235,89 @@
       \field{volume}{7}
       \field{year}{2002}
       \field{pages}{147}
+    \endentry
+    \entry{sterne2009multiple}{article}{}
+      \name{labelname}{8}{}{%
+        {{hash=5e2e47dc10a56d7f43c9123f6117f67b}{Sterne}{S\bibinitperiod}{Jonathan\bibnamedelima AC}{J\bibinitperiod\bibinitdelim A\bibinitperiod}{}{}{}{}}%
+        {{hash=5c34dcd02ba5142624e7705ffbe28d8a}{White}{W\bibinitperiod}{Ian\bibnamedelima R}{I\bibinitperiod\bibinitdelim R\bibinitperiod}{}{}{}{}}%
+        {{hash=f97b41dbe17904c56e1c370d9a392615}{Carlin}{C\bibinitperiod}{John\bibnamedelima B}{J\bibinitperiod\bibinitdelim B\bibinitperiod}{}{}{}{}}%
+        {{hash=72d35b55211c8016c1c668054f9c896b}{Spratt}{S\bibinitperiod}{Michael}{M\bibinitperiod}{}{}{}{}}%
+        {{hash=d77ac0af604c52daf07a18aced65b51b}{Royston}{R\bibinitperiod}{Patrick}{P\bibinitperiod}{}{}{}{}}%
+        {{hash=3736cd834a93bd48fdbfd749906df585}{Kenward}{K\bibinitperiod}{Michael\bibnamedelima G}{M\bibinitperiod\bibinitdelim G\bibinitperiod}{}{}{}{}}%
+        {{hash=c5918fdf70888d577cf5882300a56e07}{Wood}{W\bibinitperiod}{Angela\bibnamedelima M}{A\bibinitperiod\bibinitdelim M\bibinitperiod}{}{}{}{}}%
+        {{hash=119754214eca647de8e514b349f73f08}{Carpenter}{C\bibinitperiod}{James\bibnamedelima R}{J\bibinitperiod\bibinitdelim R\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{8}{}{%
+        {{hash=5e2e47dc10a56d7f43c9123f6117f67b}{Sterne}{S\bibinitperiod}{Jonathan\bibnamedelima AC}{J\bibinitperiod\bibinitdelim A\bibinitperiod}{}{}{}{}}%
+        {{hash=5c34dcd02ba5142624e7705ffbe28d8a}{White}{W\bibinitperiod}{Ian\bibnamedelima R}{I\bibinitperiod\bibinitdelim R\bibinitperiod}{}{}{}{}}%
+        {{hash=f97b41dbe17904c56e1c370d9a392615}{Carlin}{C\bibinitperiod}{John\bibnamedelima B}{J\bibinitperiod\bibinitdelim B\bibinitperiod}{}{}{}{}}%
+        {{hash=72d35b55211c8016c1c668054f9c896b}{Spratt}{S\bibinitperiod}{Michael}{M\bibinitperiod}{}{}{}{}}%
+        {{hash=d77ac0af604c52daf07a18aced65b51b}{Royston}{R\bibinitperiod}{Patrick}{P\bibinitperiod}{}{}{}{}}%
+        {{hash=3736cd834a93bd48fdbfd749906df585}{Kenward}{K\bibinitperiod}{Michael\bibnamedelima G}{M\bibinitperiod\bibinitdelim G\bibinitperiod}{}{}{}{}}%
+        {{hash=c5918fdf70888d577cf5882300a56e07}{Wood}{W\bibinitperiod}{Angela\bibnamedelima M}{A\bibinitperiod\bibinitdelim M\bibinitperiod}{}{}{}{}}%
+        {{hash=119754214eca647de8e514b349f73f08}{Carpenter}{C\bibinitperiod}{James\bibnamedelima R}{J\bibinitperiod\bibinitdelim R\bibinitperiod}{}{}{}{}}%
+      }
+      \list{publisher}{1}{%
+        {British Medical Journal Publishing Group}%
+      }
+      \strng{namehash}{704a774023d8f3fde8ec6e80cb35b498}
+      \strng{fullhash}{03648ad28e3076aa6e25da39bff80d52}
+      \field{sortinit}{S}
+      \field{labeltitle}{Multiple imputation for missing data in epidemiological and clinical research: potential and pitfalls}
+      \field{journaltitle}{Bmj}
+      \field{title}{Multiple imputation for missing data in epidemiological and clinical research: potential and pitfalls}
+      \field{volume}{338}
+      \field{year}{2009}
+      \field{pages}{b2393}
+    \endentry
+    \entry{van1999multiple}{article}{}
+      \true{morelabelname}
+      \name{labelname}{3}{}{%
+        {{hash=9fd78906a2be2ed38233127fd4117223}{Van\bibnamedelima Buuren}{V\bibinitperiod\bibinitdelim B\bibinitperiod}{Stef}{S\bibinitperiod}{}{}{}{}}%
+        {{hash=226c3573bd57f8f20c9c7b60a50328f2}{Boshuizen}{B\bibinitperiod}{Hendriek\bibnamedelima C}{H\bibinitperiod\bibinitdelim C\bibinitperiod}{}{}{}{}}%
+        {{hash=c1d3e658ca5c5d1317d32089820b22c2}{Knook}{K\bibinitperiod}{Dick\bibnamedelima L}{D\bibinitperiod\bibinitdelim L\bibinitperiod}{}{}{}{}}%
+      }
+      \true{moreauthor}
+      \name{author}{3}{}{%
+        {{hash=9fd78906a2be2ed38233127fd4117223}{Van\bibnamedelima Buuren}{V\bibinitperiod\bibinitdelim B\bibinitperiod}{Stef}{S\bibinitperiod}{}{}{}{}}%
+        {{hash=226c3573bd57f8f20c9c7b60a50328f2}{Boshuizen}{B\bibinitperiod}{Hendriek\bibnamedelima C}{H\bibinitperiod\bibinitdelim C\bibinitperiod}{}{}{}{}}%
+        {{hash=c1d3e658ca5c5d1317d32089820b22c2}{Knook}{K\bibinitperiod}{Dick\bibnamedelima L}{D\bibinitperiod\bibinitdelim L\bibinitperiod}{}{}{}{}}%
+      }
+      \strng{namehash}{adb16ca6860433e3f7064b08ffe3e3f4}
+      \strng{fullhash}{c55393f6a76277004c651525e33823a0}
+      \field{sortinit}{V}
+      \field{labeltitle}{Multiple imputation of missing blood pressure covariates in survival analysis}
+      \field{journaltitle}{Statistics in medicine}
+      \field{number}{6}
+      \field{title}{Multiple imputation of missing blood pressure covariates in survival analysis}
+      \field{volume}{18}
+      \field{year}{1999}
+      \field{pages}{681\bibrangedash 694}
+    \endentry
+    \entry{white2011multiple}{article}{}
+      \name{labelname}{3}{}{%
+        {{hash=c6abac5590a6c14cb32798e94687c96a}{White}{W\bibinitperiod}{Ian\bibnamedelima R.}{I\bibinitperiod\bibinitdelim R\bibinitperiod}{}{}{}{}}%
+        {{hash=d77ac0af604c52daf07a18aced65b51b}{Royston}{R\bibinitperiod}{Patrick}{P\bibinitperiod}{}{}{}{}}%
+        {{hash=7d446bd7c93659e7007e4ff7094941c5}{Wood}{W\bibinitperiod}{Angela\bibnamedelima M.}{A\bibinitperiod\bibinitdelim M\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{3}{}{%
+        {{hash=c6abac5590a6c14cb32798e94687c96a}{White}{W\bibinitperiod}{Ian\bibnamedelima R.}{I\bibinitperiod\bibinitdelim R\bibinitperiod}{}{}{}{}}%
+        {{hash=d77ac0af604c52daf07a18aced65b51b}{Royston}{R\bibinitperiod}{Patrick}{P\bibinitperiod}{}{}{}{}}%
+        {{hash=7d446bd7c93659e7007e4ff7094941c5}{Wood}{W\bibinitperiod}{Angela\bibnamedelima M.}{A\bibinitperiod\bibinitdelim M\bibinitperiod}{}{}{}{}}%
+      }
+      \list{publisher}{1}{%
+        {Wiley Online Library}%
+      }
+      \strng{namehash}{c68b5d730a5af702f8df084a6350ca94}
+      \strng{fullhash}{7c75f01a1f20212b6e07726a95c24f28}
+      \field{sortinit}{W}
+      \field{labeltitle}{Multiple imputation using chained equations: issues and guidance for practice}
+      \field{journaltitle}{Statistics in medicine}
+      \field{number}{4}
+      \field{title}{Multiple imputation using chained equations: issues and guidance for practice}
+      \field{volume}{30}
+      \field{year}{2011}
+      \field{pages}{377\bibrangedash 399}
     \endentry
     \entry{zhu2005semi}{misc}{}
       \name{labelname}{1}{}{%

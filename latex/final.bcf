@@ -1966,10 +1966,19 @@
   <bcf:section number="0">
     <bcf:citekey order="1">lichman2013</bcf:citekey>
     <bcf:citekey order="2">schafer2002missing</bcf:citekey>
-    <bcf:citekey order="3">little1988test</bcf:citekey>
-    <bcf:citekey order="4">buuren2011mice</bcf:citekey>
-    <bcf:citekey order="5">azur2011multiple</bcf:citekey>
-    <bcf:citekey order="6">zhu2005semi</bcf:citekey>
+    <bcf:citekey order="3">de2013multiple</bcf:citekey>
+    <bcf:citekey order="4">little1988test</bcf:citekey>
+    <bcf:citekey order="5">sterne2009multiple</bcf:citekey>
+    <bcf:citekey order="6">buuren2011mice</bcf:citekey>
+    <bcf:citekey order="7">buuren2011mice</bcf:citekey>
+    <bcf:citekey order="7">azur2011multiple</bcf:citekey>
+    <bcf:citekey order="8">royston2011multiple</bcf:citekey>
+    <bcf:citekey order="9">van1999multiple</bcf:citekey>
+    <bcf:citekey order="10">white2011multiple</bcf:citekey>
+    <bcf:citekey order="11">russell2003artificial</bcf:citekey>
+    <bcf:citekey order="12">russell2003artificial</bcf:citekey>
+    <bcf:citekey order="13">libsvm2011</bcf:citekey>
+    <bcf:citekey order="14">zhu2005semi</bcf:citekey>
   </bcf:section>
   <bcf:sortlist section="0" type="entry" label="nty">
   <bcf:sorting>

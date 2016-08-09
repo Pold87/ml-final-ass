@@ -137,3 +137,9 @@ institution = "University of California, Irvine, School of Information and Compu
   year={2013},
   publisher={ERA-EDTA}
 }
+
+@article{hsu2003practical,
+  title={A practical guide to support vector classification},
+  author={Hsu, Chih-Wei and Chang, Chih-Chung and Lin, Chih-Jen and others},
+  year={2003}
+}

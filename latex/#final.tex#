@@ -546,11 +546,12 @@ exist. I used the \texttt{libsvm} library~\cite{libsvm2011}.
 
 Each feature was linearly scaled to the range $[0, 1]$. Scaling is
 important because, otherwise, features with a greater range could
-dominate feature with smaller ranges.
+dominate feature with smaller ranges~\cite{hsu2003practical}.
 
 There are two modifiable hyperparameters for a RBF SVM: $C$ and
 $\gamma$. The best values for the parameter were chosen using
 grid-search in the cross-validation.
+
 \subsubsection{The kernel}
 \label{sec:kernel}
 
