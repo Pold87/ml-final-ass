@@ -23,29 +23,16 @@
 \newif\iflatexml\latexmlfalse
 \usepackage[utf8]{inputenc}
 \usepackage[english]{babel}
-
-\iflatexml
-\documentclass[]{article}
-\fi
-% \usepackage[style=authoryear,backend=biber]{biblatex} % Not (yet) supported by LaTeXML.
 \usepackage[]{booktabs}
 \usepackage[]{tikz}
 
-
-% First macro on next line not (yet) supported by LaTeXML: 
-% \usetikzlibrary{shapes,arrows,positioning}
+\title{Machine Learning Final Report}
+\author{Volker Strobel (4524187)}
+\date{\today}
 
 
 \begin{document}
-
-\title{Machine Learning -- Final Report}
-
-\author{Volker Strobel (4524187)}
-
-\date{\today}
-
 \maketitle
-
 \begin{abstract}
   This report presents the techniques and results of a classification
   problem involving missing data as well as a mixture of categorical
@@ -61,22 +48,23 @@
 \section{The Challenge}
 \label{sec:introduction}
 
-The Kaggle competition ``Final Assignment
-IN4320''\footnote{\url{https://inclass.kaggle.com/c/final-assignment-in43202}}
-asks participants to predict whether a person earns more than EUR 40\,k
-a year from $D = 13$ predictor variables. The provided dataset was
-created by a census bureau. The task can be divided into the following
-three challenges:
+The Kaggle competition \emph{Final Assignment
+  IN4320}\footnote{\url{https://inclass.kaggle.com/c/final-assignment-in43202}}
+asks participants to predict whether a person earns more than EUR
+40\,k a year from $D = 13$ predictor variables. The provided dataset
+was created by a census bureau. The task can be divided into the
+following three challenges:
 
 \begin{itemize}
 \item Imputation of missing data points
-\item Handling a mixture of categorical and continuous independent variables
+\item Managing a mixture of categorical and continuous independent
+  variables
 \item Classification of the output variable
 \end{itemize}
 
-In this report, the terms \emph{wealthy} or ``label 1" describe a
-sample with income EUR $>40\,$k and \emph{non-wealthy} or ``label 0"
-are used otherwise.
+In this report, the terms \emph{wealthy} or \emph{label 1} describe a
+sample with income EUR $>40\,$k and \emph{non-wealthy} or \emph{label
+  0} are used otherwise.
 
 In Section~\ref{sec:analysis}, I analyze and visualize the structure
 of the data to set the stage for the classification pipeline. In
@@ -129,30 +117,32 @@ labeled as wealthy and 8000 (77\,\%) as non-wealthy. If we assume that
 the training and test set were randomly sampled from the entire
 dataset, therefore, the predictions on the test set should reflect
 this ratio. Additionally always predicting non-wealthy should give a
-0-1 loss of 77\,\% under this assumption, which can be used as a
-baseline for the classifier performance. The assumption could be tested
-by probing the test set with a ``0-only'' submission. This ratio might
-be useful for setting the class-weights of a classifier or for
+0--1 loss of 77\,\% under this assumption, which can be used as a
+baseline for the classifier performance. The assumption could be
+tested by probing the test set with a `0-only' submission. This ratio
+might be useful for setting the class-weights of a classifier or for
 determining the threshold $\theta$ in majority voting: the final
-prediction after voting is ``label 1'' if at least $\theta$
-preliminary predictions are ``label 1''. The parameter $\theta$ can be
-modified to increase or decrease the amount of ``label 1'' predictions
-and to make the final predictions more or less conservative (see
+prediction after voting is \emph{label 1} if at least $\theta$
+preliminary predictions are \emph{label 1}. The parameter $\theta$ can
+be modified to increase or decrease \emph{label 1} predictions and to
+make the final predictions more or less conservative (see
 Section~\ref{sec:pooling}).
 
 In total, approx.\ $20\,\%$ of the data values are missing, with
-approx.\ $23\,\%$ for the variables workclass and occupation, $20\,\%$
-for country of origin, and $19\,\%$ for the remaining variables. There
-is no apparent difference in the percentage and pattern of missing
-data between the training and the test set. Only $6\,\%$ of samples in
-the training set and in the test set are complete cases (i.e., have no
-missing values), making handling missing data a crucial step. I assume
-that the higher values for the variables workclass, occupation, and
-country stem from missing values in the original dataset and the
-missing values for the remaining variables were just introduced.
+approx.\ $23\,\%$ for the variables \emph{workclass} and
+\emph{occupation}, $20\,\%$ for \emph{country of origin}, and $19\,\%$
+for the remaining variables. The percentage and pattern of missing
+data between the training and the test set showed no apparent
+difference. Only $6\,\%$ of samples in the training set and in the
+test set are complete cases (i.e., have no missing values), making
+adequate treatment of missing data a crucial step. I assume that the
+higher values for the variables \emph{workclass}, \emph{occupation},
+and \emph{country} stem from missing values in the original dataset
+and the missing values for the remaining variables were just
+introduced.
 
 Given the description of the dataset and the total number of samples
-(48842), the dataset is potentially the UCI Adult Data
+(48842), the dataset may be the UCI Adult Data
 set~\cite{lichman2013}. This would underline the pattern of missing
 data (higher values for workclass, occupation, and country of
 origin). A possible method would be to use the labeled samples of the
@@ -164,7 +154,7 @@ samples: 16281). Additionally, the categorical variables in the UCI
 dataset are encoded as strings, while in the given dataset, they are
 encoded as integers. Therefore, one would have to find a mapping from
 strings to integers. The large amount of missing data might impede
-this endeavor. Since using the UCI Adult dataset might defeat the goal
+this try. Since using the UCI Adult dataset might defeat the goal
 of this assignment, I did not take any steps in this direction. A
 comparison on
 \url{http://www.cs.toronto.edu/~delve/data/adult/adultDetail.html}
@@ -190,7 +180,7 @@ test set to yield a large dataset with missing values. Using MICE, the
 missing values are imputed and five training and test sets are
 obtained. Five classifiers are trained using the different training
 sets; for each training set all test sets are used for obtaining the
-``preliminary hypotheses''. Using majority voting with a modifiable
+`preliminary hypotheses'. Using majority voting with a modifiable
 threshold $\theta$, the single hypotheses are pooled to yield the
 final prediction vector.
 
@@ -251,7 +241,7 @@ on the type of ``missingness'':
   yield unbiased estimates.
 \end{itemize}
 
-For getting unbiased estimates with listwise deletion, the data must
+For obtaining unbiased estimates with listwise deletion, the data must
 be MCAR. Little's MCAR test~\cite{little1988test} is a statistical
 test with the null hypothesis that the data are MCAR. I used it at the
 significance level $\alpha=0.05$ to analyze the interaction structure
@@ -316,7 +306,7 @@ for building the intermediate models (Step 2 in the algorithm
 outline).
 
 In the following, the two statistical models---linear regression and
-logistic regression---used for the imputations are shortly described:
+logistic regression---used for the imputations are briefly described:
 
 \emph{Linear regression}: For the linear regression (continuous
 variables), a design matrix $\mathbf{X}$ is built from the predictor
@@ -346,12 +336,12 @@ the probability of ``label 1'':
 \begin{align}
   \text{Pr}(y_i = 1 | X_i) = \text{logit}^{-1}(X_i\beta) = \frac{1}{1 + e^{-X_i\beta}}
 \end{align}
-The training of the logistic regression can be done via stochastic
-gradient descent (SGD). For this, the following update function is
-used---with a sufficiently small learning rate $\alpha$ and
+Logistic regression can be trained via stochastic gradient descent
+(SGD). For this, the following update function is used---with a
+sufficiently small learning rate $\alpha$ and
 $p = \text{logit}^{-1}(X_i\beta_t)$:
 \begin{align}
-  \beta_{t+1} := \beta_{t} + \alpha (y - p) X_i
+  \beta_{t+1} := \beta_{t} + \alpha (y-p)X_i
 \end{align}
 The difference $y - p$ is the error made at time step $t$ by predicting
 $y$ from $X_i$ using the weight vector $\beta_{t}$.
@@ -359,7 +349,7 @@ For predicting the target value (0 or 1) of the sample $X_i$, the
 hypothesis function $h(X_i)$ is used, which transforms the class
 probabilities into target values:
 \begin{align}
-h(X_i) = 
+h (X_i) = 
 \begin{cases}
 1 & \text{if}~\text{Pr}(y_i = 1 | X_i) > 0.5\\
 0 & \text{otherwise}\\
@@ -371,7 +361,7 @@ h(X_i) =
 
 I trained models and made predictions on all possible combinations of
 imputed training and test sets. This results in 25 ``preliminary
-hypotheses" $\tilde{h}_{ij}$ for the $i$th sample:
+hypotheses'' $\tilde{h}_{ij}$ for the $i$th sample:
 $\mathbf{\tilde{h}_i} = (\tilde{h}_{i,j})_{j \in \{1, 2, \ldots, 25\}} = [\tilde{h}_{i,1}, \tilde{h}_{i,2}, \ldots, \tilde{h}_{i,25}]$. These
 predictions have to be aggregated to obtain one final submission. For
 the aggregation, I used the following majority voting function on the
@@ -415,18 +405,17 @@ $\theta = 9$.
 \label{sec:cross}
 
 To evaluate submissions and determine the ranks of participants, the
-Kaggle challenge used the 0-1 loss. While the score on the public
+Kaggle challenge used the 0--1 loss. While the score on the public
 leaderboard is the best validation of the methods employed, only one
-submission could be submitted per participant and day. In order to
-evaluate the used methods more frequently, I implemented a local
-($k = 5$)-fold cross-validation. In each fold, a model was trained on
-$\frac{4}{5}$ of the data and tested on the remaining samples from all
-five imputed datasets. Therefore,
-$k \cdot m \cdot m = 5 \cdot 5 \cdot 5 = 125$ accuracy values were
-obtained from which the mean was calculated to get a final
-cross-validation accuracy for each model. The cross-validation
-achieved similar results to the public Kaggle evaluation
-(Table~\ref{tab:localpublic}).
+submission could be submitted per participant and day. To evaluate the
+used methods more frequently, I implemented a local ($k = 5$)-fold
+cross-validation. In each fold, a model was trained on $\frac{4}{5}$
+of the data and tested on the remaining samples from all five imputed
+datasets. Therefore, $k \cdot m \cdot m = 5 \cdot 5 \cdot 5 = 125$
+accuracy values were obtained from which the mean was calculated to
+get a final cross-validation accuracy for each model. The
+cross-validation achieved similar results to the public Kaggle
+evaluation (Table~\ref{tab:localpublic}).
 
 \begin{table}[h]
   \centering
@@ -483,15 +472,15 @@ cross-validation.
 
 \subsection{The Classifier}
 
-As can be seen in Section~\ref{sec:cross}, different classifiers were
-tested for the given problem. The best performing classifier was a support
-vector machine (SVM). For running the algorithm \texttt{Python~2.7.11}
-was used with the package \texttt{scikit-learn} in Version~0.17.0.
+Section~\ref{sec:cross} shows the different classifiers that were
+compared. The best performing classifier was a support vector machine
+(SVM). For running the algorithm \texttt{Python~2.7.11} was used with
+the package \texttt{scikit-learn} in Version~0.17.0.
 
 The choice of an SVM was motivated by the following points:
 
 \begin{enumerate}
-\item SVMs work ``out-of-the-box'' on a large number of different problems
+\item SVMs work ``out-of-the-box'' on many different problems
   ~\cite{russell2003artificial}.
 \item SVMS work in high-dimensional spaces ($\tilde{D} = 104$)
 \item SVMs aim to minimize the generalization loss, instead of the
@@ -531,9 +520,9 @@ Therefore, the following optimization problem---known as the
 \begin{align}
   & \min ||\mathbf{w}||^2 + C \sum_{i = 1}^N\zeta_i\\
   & \text{subject to the constraints:}\\
- & \mathbf{w}^T\mathbf{x}_i \geq + 1 - \zeta_i, \text{for}~y_i =
+ & \mathbf{w}^T\mathbf{x}_i \geq + 1-\zeta_i, \text{for}~y_i =
   +1\\
- & \mathbf{w}^T\mathbf{x}_i < - 1 + \zeta_i, \text{for}~y_i =
+ & \mathbf{w}^T\mathbf{x}_i <-1+\zeta_i, \text{for}~y_i =
   -1\\
 & \zeta_i \geq 0, \forall i
 \end{align}
@@ -571,9 +560,9 @@ K(\mathbf{x_j}, \mathbf{x_k}) = \exp(-\gamma||\mathbf{x_j} - \mathbf{x_k} ||^2)
 The parameter $\gamma = 0.01$ was found using a local
 cross-validation.
 
-In order to find $w$ and $b$ in the presence of a kernel, it is more
-convenient to use the \emph{dual representation}, which can be derived
-from the primal form~\cite{russell2003artificial}:
+To find $w$ and $b$ when using a kernel, it is more convenient to use
+the \emph{dual representation}, which can be derived from the primal
+form~\cite{russell2003artificial}:
 \begin{align}
 \label{eq:dual}
 \text{arg}\max_\alpha\sum_j\alpha_j - \frac{1}{2}\sum_{j,k}\alpha_j\alpha_ky_jy_k(\mathbf{x_j} \cdot \mathbf{x_k})
@@ -599,33 +588,31 @@ grid-search in the cross-validation.
 
 Since the test data is known at training time, this information can be
 used for using semi-supervised methods than can better capture the
-underlying distribution. In a first step, ``naive" self-learning was
-tried, using an iterative approach: In the first iteration, the
-unlabeled data was labeled by predicting their labels using the
-training dataset. In the next iteration.
+underlying distribution. I made use of the self-learning method, by:
+at first, the unlabeled data was labeled by predicting their labels
+using a SVM trained on the training dataset. Afterward, another SVM
+was trained using the combined dataset consisting of training and test
+set. The approach did not improve the classification performance.
 
-The approach did not
-significantly improve the classification performance.
-
-The second approach used an implementation based on
-\texttt{scikit-learn} and the Contrastive Pessimistic Likelihood
-Estimation (CPLE) (\url{https://github.com/tmadl/semisup-learn}).
+%The second approach used an implementation based on
+%\texttt{scikit-learn} and the Contrastive Pessimistic Likelihood
+%Estimation (CPLE) (\url{https://github.com/tmadl/semisup-learn}).
 
 
 \section{Results \& Discussion}
 \label{sec:results}
 
-In total, I made six submissions during the competition. The best
+In total, I made eight submissions during the competition. The best
 submission resulted in an accuracy of $85.494\,\%$, which corresponds
-to the $3^{\text{rd}}$ position out of $25$ participants at the time
-of finishing this report.
+to the $3^{\text{rd}}$ position out of $27$ participants when
+finishing this report.
 
-In summary, the main challenge lay in handling the missing data
-values.  Afterward, standard classification techniques could be
+In summary, the main challenge lay in imputing the missing data
+values. Afterward, standard classification techniques could be
 used. The use of different classifiers had no substantial influence on
 the achieved accuracy: using a support vector machine, random forest
 regression, and AdaBoost classifier resulted in very similar results,
-as can be seen in Table~\ref{tab:localpublic}.
+as shown in Table~\ref{tab:localpublic}.
 
 
 The use of
@@ -638,7 +625,7 @@ would have had a greater effect, if the number of training samples
 would have been substantially smaller.
 
 Since the ground truth labels of the test set were not revealed, error
-statistics could only be computed based on the 0-1 loss on the public
+statistics could only be computed based on the 0--1 loss on the public
 leaderboard and on the local cross-validation. The restriction of one
 submission per day increased the difficulty of the validation. My
 public score of $85.494\,\%$---which is only $0.00364$ below the best
@@ -654,8 +641,8 @@ will be possibly capped clearly below 100\,\% due to mistakes during
 data acquisition, such as deliberate misinformation or transcription
 errors. Moreover, the used variables might only have limited
 explanatory power: additional variables, such as political view,
-morale, or number of children may be needed to increase the amount
-of explainable variation.
+morale, or number of children may be needed to increase the
+explainable variation.
 
 Due to the concealment of categorical variables, I did not consider
 manual feature engineering such as grouping certain levels of the
@@ -677,11 +664,8 @@ transductive learning could help to increase the classification performance.
 My code for this competition can be found at:\\
 \url{https://github.com/Pold87/ml-final-ass}
 
-\noindent \emph{Word Count}: 3164
-
+\emph{Word Count}: 3427
 \printbibliography
-
-
 \end{document}
 
 

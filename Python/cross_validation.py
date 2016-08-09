@@ -10,7 +10,7 @@ from sklearn import cross_validation
 from sklearn import linear_model, svm
 #from xgboost.sklearn import XGBClassifier
 from sklearn.neighbors import KNeighborsClassifier
-from sklearn.semi_supervised import LabelSpreading
+from sklearn.semi_supervised import LabelSpreading, LabelPropagation
 
 from sklearn.preprocessing import StandardScaler, RobustScaler
 from frameworks.SelfLearning import *
@@ -76,8 +76,7 @@ for i in range(1, 6):
 
     if use_transductive:
         #cfr = CPLELearningModel(cfr, verbose=2)
-        pass
-        #cfr = scikitTSVM.SKTSVM(kernel="rbf")
+        cfr = scikitTSVM.SKTSVM(kernel="rbf")
         #cfr = SelfLearningModel(cfr)
 
     if do_cross_validation:
@@ -103,13 +102,13 @@ for i in range(1, 6):
                     y_unl = -1 * np.ones(len(X_cv_test[test_idx, :]))
                     y_all = np.concatenate((y[train_idx], y_unl), axis=0)
 
-                    lpm = LabelSpreading()
-                    lp = lpm.fit(X_all, y_all)
-                    y_semi = lp.predict(X_all)
-                    print y_semi
+                    #lpm = LabelPropagation()
+                    #lp = lpm.fit(X_all, y_all)
+                    #y_semi = lp.predict(X_all)
+                    #print y_semi
                     # For CPLR:
-                    #cl = cfr.fit(X_all, y_all)
-                    cl = cfr.fit(X_all, y_semi)
+                    cl = cfr.fit(X_all, y_all.astype(int))
+                    #cl = cfr.fit(X_all, y_semi)
                 else:
                     cl = cfr.fit(X_cv_train[train_idx, :], y[train_idx])
                     pred =  cl.predict(X_cv_test[test_idx, :])
