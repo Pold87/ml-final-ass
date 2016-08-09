@@ -106,7 +106,7 @@ for i in range(1, 6):
                     lpm = LabelSpreading()
                     lp = lpm.fit(X_all, y_all)
                     y_semi = lp.predict(X_all)
-
+                    print y_semi
                     # For CPLR:
                     #cl = cfr.fit(X_all, y_all)
                     cl = cfr.fit(X_all, y_semi)

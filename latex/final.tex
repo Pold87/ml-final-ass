@@ -267,7 +267,7 @@ about the reason for missingness, which was not given.  Therefore,
 data points were imputed using the multiple imputation method by a
 technique called Multivariate Imputation by Chained Equations
 (MICE)~\cite{buuren2011mice} using the \texttt{R} package
-\texttt{mice} (Version~2.25). Due to the multiple imputations, the
+\texttt{mice} (Version~2.25). By using multiple imputations, the
 algorithm incorporates the statistical uncertainty in the imputed
 values. MICE is a flexible approach that can also handle continuous
 and categorical variables. The general idea is to statistically model
@@ -280,11 +280,11 @@ follows~\cite{buuren2011mice,azur2011multiple}:
   this end, all missing data points are replaced by random sampling
   with replacement from the observed datapoints.
 \item One variable is selected at random, for example
-  \emph{occupation}. An intermediate regression model is built, using
-  the remaining variables as predictors and \emph{occupation} as
-  target value. The chosen model is dependent on the target value. I
-  used a logistic regression categorical data and linear regression
-  without regularization for numerical data. The missing values in the
+  \emph{occupation}. An intermediate model is built, using the
+  remaining variables as predictors and \emph{occupation} as target
+  value. The chosen model is dependent on the target value. I used a
+  logistic regression categorical data and linear regression without
+  regularization for numerical data. The missing values in the
   variable \emph{occupation} are replaced by the predictions of the
   model.
 \item The previous step is executed for all variables with missing
@@ -298,12 +298,14 @@ follows~\cite{buuren2011mice,azur2011multiple}:
   values will be different, while the non-missing data entries will be
   the same in all datasets. I used $m = 5$ imputations.
 \end{enumerate}
-The choices $c = 5$ and $m = 5$ were made due to practical limitations,
-considering time limitations and avoiding overflow errors. A value of
-$m$ between 5 and 10 is a common value for the used
-method~\cite{royston2011multiple} and a value of $c = 5$ is considered
-``adequate''~\cite{van1999multiple}. However, recent research shows
-that a higher value of $m$ might be
+The choices $c = 5$ and $m = 5$ were made due to practical
+limitations, considering time limitations and avoiding overflow
+errors; for the imputation
+$\tilde{D} \cdot m \cdot c = 104 \cdot 5 \cdot 5 = 2600$ intermediate
+models were built. A value of $m$ between 5 and 10 is a common value
+for the used method~\cite{royston2011multiple} and a value of $c = 5$
+is considered ``adequate''~\cite{van1999multiple}. However, recent
+research shows that a higher value of $m$ might be
 beneficial~\cite{white2011multiple}, which could be tested, if a more
 powerful machine would be at hand.
 
@@ -413,18 +415,18 @@ $\theta = 9$.
 \label{sec:cross}
 
 To evaluate submissions and determine the ranks of participants, the
-Kaggle challenge used the 0-1 loss. While the score on the public leaderboard
-is the best validation of the methods employed, only one submission
-could be submitted per participant and day. In order to evaluate the
-used methods more frequently, I implemented a local 5-fold cross-validation. 
-
-TODO: The cross-validation was performed per dataset of the
-imputation result, that is, no cross-dataset cross-validation was
-performed. Therefore, in the case of five imputations, 25
-cross-validation results were obtained.
-
-The cross-validation achieved similar results to the public
-Kaggle evaluation (Table~\ref{tab:localpublic}).
+Kaggle challenge used the 0-1 loss. While the score on the public
+leaderboard is the best validation of the methods employed, only one
+submission could be submitted per participant and day. In order to
+evaluate the used methods more frequently, I implemented a local
+($k = 5$)-fold cross-validation. In each fold, a model was trained on
+$\frac{4}{5}$ of the data and tested on the remaining samples from all
+five imputed datasets. Therefore,
+$k \cdot m \cdot m = 5 \cdot 5 \cdot 5 = 125$ accuracy values were
+obtained from which the mean was calculated to get a final
+cross-validation accuracy for each model. The cross-validation
+achieved similar results to the public Kaggle evaluation
+(Table~\ref{tab:localpublic}).
 
 \begin{table}[h]
   \centering
@@ -442,7 +444,7 @@ Kaggle evaluation (Table~\ref{tab:localpublic}).
   \label{tab:localpublic}
 \end{table}
 
-Each fold in the cross-validation contained 2100 test samples and and
+Each fold in the cross-validation contained 2100 test samples and
 8400 training samples. Since the classes \emph{wealthy} and
 \emph{non-wealthy} are not equally distributed, a confusion matrix can
 give a more detailed picture of the classifier performance. The
@@ -507,52 +509,45 @@ The choice of an SVM was motivated by the following points:
 %  separable.
 \end{enumerate}
 
-If $D$ is the number of features, Support vector machines build a
-($D-1$)-dimensional hyperplane that tries to maximize the margin
-between the two classes. The support vectors are the samples on the
-margin for the positive class and the negative class. The
-maximum-margin hyperplane is the hyperplane ``right in the middle'' of
-the support vectors.
+If $D$ is the number of features, SVMs build a ($D-1$)-dimensional
+hyperplane that tries to maximize the margin between the two
+classes. The support vectors are the samples on the margin for the
+positive class and the negative class. The maximum-margin hyperplane
+is the hyperplane ``right in the middle'' of the support vectors.
 
-The learning a linear classifier
-\begin{align}
-f(\mathbf{x}) = w^T\mathbf{x} + b
-\end{align}
-The classification function is
+The classifier is of the form $f(\mathbf{x}) = w^T\mathbf{x} + b$ and
+the corresponding classification function
 $h(\mathbf{x}) = sign(w^T\mathbf{x} + b)$, with $\mathbf{x}$ being the
 feature vector, $w$ the coefficient vector and $b$ the intercept
-term. The goal is to find $w, b$ such that the resulting decision
-boundary maximizes the margin.
-
-A soft-margin is used with the hinge-loss function:
+term. The target variables $y_i$ for SVMs are $-1$ and $1$, instead of
+$0$ and $1$. For training the classifier, the goal is to find $w, b$
+such that the resulting decision boundary maximizes the margin.
+%A soft-margin is used with the hinge-loss function:
+%\begin{align}
+%  \max\left(0, 1 - y_i(\vec{w}\cdot \vec{x_i} + b)\right)
+%\end{align}.
+Therefore, the following optimization problem---known as the
+\emph{primal representation}--- is solved:
 \begin{align}
-  \max\left(0, 1 - y_i(\vec{w}\cdot \vec{x_i} + b)\right)
+  & \min ||\mathbf{w}||^2 + C \sum_{i = 1}^N\zeta_i\\
+  & \text{subject to the constraints:}\\
+ & \mathbf{w}^T\mathbf{x}_i \geq + 1 - \zeta_i, \text{for}~y_i =
+  +1\\
+ & \mathbf{w}^T\mathbf{x}_i < - 1 + \zeta_i, \text{for}~y_i =
+  -1\\
+& \zeta_i \geq 0, \forall i
 \end{align}
-
-The primal form of the The solution to find $w$ and $b$, starts with
-the \emph{dual representation}, which can be derived from the primal
-form~\cite{russell2003artificial}:
-\begin{align}
-\label{eq:dual}
-\text{arg}\max_\alpha\sum_j\alpha_j - \frac{1}{2}\sum_{j,k}\alpha_j\alpha_ky_jy_k(\mathbf{x_j} \cdot \mathbf{x_k})
-\end{align} subject to the constraints: $\alpha_j \geq 0$ and
-$\sum_j\alpha_jy_j=0$. The variable $y_i \in \{-1, 1\}$ represents the
-class of $x_i$ and $\alpha$ is the weights vector that assigns a weight
-$\alpha_j$ to each data point. The \emph{support vectors} are the
-samples for which the weights $a_j$ are non-zero. 
-This optimization problem can be solved using
-quadratic programming, for which several libraries
-exist. I used the \texttt{libsvm} library~\cite{libsvm2011}.
-
-Each feature was linearly scaled to the range $[0, 1]$. Scaling is
-important because, otherwise, features with a greater range could
-dominate feature with smaller ranges.
-
-There are two modifiable hyperparameters for a RBF SVM: $C$ and
-$\gamma$. The best values for the parameter were chosen using
-grid-search in the cross-validation.
-\subsubsection{The kernel}
-\label{sec:kernel}
+To allow for non-linearly separable datasets and make the SVM less
+sensitive to outliers, the variables $\zeta_i$ allow for introducing
+``slackness'' into the constraints, such that not every sample has to
+lie at the correct side of the margin. If $0 < \zeta_i \leq 1$, the
+sample is between the margin and the correct side of hyperplane; if
+$\zeta > 1$, the sample is misclassified. The hyperparameter $C$
+allows for trading off structural error and training error: a value
+close to 0 specifies that violating the margin constraint---that each
+sample is at the correct side of the margin---is of not much
+consequence; greater values put more emphasis on satisfying the margin
+constraint for each data point.
 
 To extend SVMs to non-linear classification, the \emph{kernel trick}
 can be used, with which data can be embedded in a higher-dimensional
@@ -573,8 +568,31 @@ used:
 \begin{align}
 K(\mathbf{x_j}, \mathbf{x_k}) = \exp(-\gamma||\mathbf{x_j} - \mathbf{x_k} ||^2)
 \end{align}
-The parameter $\gamma$ was set using $1 / \text{number of features}$,
-that is: $\gamma = 1 / 104$.
+The parameter $\gamma = 0.01$ was found using a local
+cross-validation.
+
+In order to find $w$ and $b$ in the presence of a kernel, it is more
+convenient to use the \emph{dual representation}, which can be derived
+from the primal form~\cite{russell2003artificial}:
+\begin{align}
+\label{eq:dual}
+\text{arg}\max_\alpha\sum_j\alpha_j - \frac{1}{2}\sum_{j,k}\alpha_j\alpha_ky_jy_k(\mathbf{x_j} \cdot \mathbf{x_k})
+\end{align} subject to the constraints: $\alpha_j \geq 0$ and
+$\sum_j\alpha_jy_j=0$. The variable $y_i \in \{-1, 1\}$ represents the
+class of $x_i$ and $\alpha$ is the weights vector that assigns a weight
+$\alpha_j$ to each data point. The \emph{support vectors} are the
+samples for which the weights $a_j$ are non-zero. 
+This optimization problem can be solved using
+quadratic programming, for which several libraries
+exist. I used the solution provided by the \texttt{libsvm} library~\cite{libsvm2011}.
+
+Each feature was linearly scaled to the range $[0, 1]$. Scaling is
+important because, otherwise, features with a greater range could
+dominate feature with smaller ranges~\cite{hsu2003practical}.
+
+There are two modifiable hyperparameters for a RBF SVM: $C$ and
+$\gamma$. The best values for the parameter were chosen using
+grid-search in the cross-validation.
 
 
 \subsection{Transductive Learning}

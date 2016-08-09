@@ -27,7 +27,9 @@ X.test <- read.csv("../data/test.csv", header = T,
 X.all <- rbind(X.train, X.test)
 
 # Do the IMPUTATION
-X.imp.mice <- mice(X.all, maxit = 5, MaxNWts = 20000, m = 5)
+X.imp.mice <- mice(X.all, maxit = 5, MaxNWts = 20000, m = 5,
+                   defaultMethod = c("norm.predict",
+"logreg", "polyreg", "polr"),)
 
 for (i in 1:5) {
 
@@ -43,14 +45,14 @@ for (i in 1:5) {
     X.train.imp <- cbind(X.train.imp, y)
 
     ## Write to CSV
-    fn.train <- sprintf("../data/five_imps/train_mice_%d.csv", i)
+    fn.train <- sprintf("../data/five_imps/train_mice_lin_%d.csv", i)
     write.csv(X.train.imp, fn.train, row.names = F, quote = F)
 
     ## Extract test set
     X.test.imp <- X.out[(nrow(X.train)+1):nrow(X.out), ]
 
     ## Write to CSV
-    fn.test <-  sprintf("../data/five_imps/test_mice_%d.csv", i)
+    fn.test <-  sprintf("../data/five_imps/test_mice_lin_%d.csv", i)
     write.csv(X.test.imp, fn.test, row.names = F, quote = F)
 
 }
