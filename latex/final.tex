@@ -1,4 +1,4 @@
-\documentclass[a4paper]{article}
+\documentclass[a4paper,11pt]{article}
 \usepackage{fullpage}
 \usepackage{parskip}
 \usepackage{titlesec}
@@ -11,7 +11,11 @@
 %             anchorcolor = blue]{hyperref}
 
 \usepackage[backend=biber,maxcitenames=1]{biblatex}
+\usepackage[protrusion=true,expansion=true]{microtype}	
+\usepackage[T1]{fontenc}
+\usepackage{fourier}
 \bibliography{library}
+\renewcommand{\baselinestretch}{1.05}
 
 \usepackage{graphicx}
 \usepackage[space]{grffile}
@@ -19,16 +23,48 @@
 \usepackage{textcomp}
 \usepackage{multirow,booktabs}
 \usepackage{amsfonts,amsmath,amssymb}
-% You can conditionalize code for latexml or normal latex using this.
-\newif\iflatexml\latexmlfalse
 \usepackage[utf8]{inputenc}
 \usepackage[english]{babel}
 \usepackage[]{booktabs}
 \usepackage[]{tikz}
 
-\title{Machine Learning Final Report}
-\author{Volker Strobel (4524187)}
-\date{\today}
+%%% Custom sectioning
+\usepackage{sectsty}
+\allsectionsfont{\centering \normalfont\scshape}
+
+%%% Custom headers/footers (fancyhdr package)
+\usepackage{fancyhdr}
+\pagestyle{fancyplain}
+\fancyhead{}											% No page header
+\fancyfoot[L]{}											% Empty 
+\fancyfoot[C]{}											% Empty
+\fancyfoot[R]{\thepage}									% Pagenumbering
+\renewcommand{\headrulewidth}{0pt}			% Remove header underlines
+\renewcommand{\footrulewidth}{0pt}				% Remove footer underlines
+\setlength{\headheight}{13.6pt}
+
+
+%%% Maketitle metadata
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}} 	% Horizontal rule
+
+\title{
+		\vspace{-0.6in} 	
+		\usefont{OT1}{bch}{b}{n}
+		\normalfont \normalsize \textsc{Machine Learning} \\ [10pt]
+		\horrule{0.5pt} \\[0.4cm]
+		\huge Final Report \\
+		\horrule{2pt} \\[0.5cm]
+}
+\author{
+		\normalfont 								\normalsize
+        Volker Strobel (4524187)\\[3pt]		\normalsize
+        \today
+}
+\date{}
+
+%\title{Machine Learning Final Report}
+%\author{Volker Strobel (4524187)}
+%\date{\today}
 
 
 \begin{document}
@@ -37,12 +73,12 @@
   This report presents the techniques and results of a classification
   problem involving missing data as well as a mixture of categorical
   and continuous data. The problem of missing data points is addressed
-  by Multiple Imputation Chained Equations (MICE). The classification is
-  conducted using a support vector machine (SVM). The method was
+  by Multiple Imputation Chained Equations (MICE). Support vector
+  machines (SVM) are used for the classification. The approach was
   evaluated locally using cross-validation and remotely on a hold-out
   test-set using the Kaggle platform. The best Kaggle submission
-  resulted in an accuracy of $85.494\,\%$, which corresponds to the
-  $3^{\text{rd}}$ position out of $23$ participants in the
+  resulted in an accuracy of $85.718\,\%$, which corresponds to the
+  $3^{\text{rd}}$ position out of $26$ participants in the
   competition.%
 \end{abstract}%
 \section{The Challenge}
@@ -68,19 +104,19 @@ sample with income EUR $>40\,$k and \emph{non-wealthy} or \emph{label
 
 In Section~\ref{sec:analysis}, I analyze and visualize the structure
 of the data to set the stage for the classification pipeline. In
-Section~\ref{sec:methods}, the used methods for imputation,
-classification, and transductive learning are
-detailed. Section~\ref{sec:results} presents and discusses the results
-obtained during cross-validation and on Kaggle.
+Section~\ref{sec:methods}, the used methods for data imputation, and
+classification are detailed. Section~\ref{sec:results} presents and
+discusses the results obtained during cross-validation and on Kaggle.
 
 \section{Analysis \& Ideas}
 \label{sec:analysis}
 
-To motivate the used classifier, design, and technique choices, I
-start with an analysis of the given dataset and introduce possible
-concepts and ideas. Additionally, important patterns dependence
-structures are visualized.
+To motivate the used classifier, design, and technique choices, in
+this section, the provided dataset will be analyzed and possible
+concepts and ideas introduced.
 
+%Additionally, important patterns dependence
+%structures are visualized.
 In total, 13 features are given, of which 8 are categorical and 5
 continuous (Table~\ref{tab:features}).
 %shows the discrete and continuous features.
@@ -121,11 +157,13 @@ this ratio. Additionally always predicting non-wealthy should give a
 baseline for the classifier performance. The assumption could be
 tested by probing the test set with a `0-only' submission. This ratio
 might be useful for setting the class-weights of a classifier or for
-determining the threshold $\theta$ in majority voting: the final
-prediction after voting is \emph{label 1} if at least $\theta$
-preliminary predictions are \emph{label 1}. The parameter $\theta$ can
-be modified to increase or decrease \emph{label 1} predictions and to
-make the final predictions more or less conservative (see
+determining the threshold in majority voting
+%: the final
+%prediction after voting is \emph{label 1} if at least $\theta$
+%preliminary predictions are \emph{label 1}. The parameter $\theta% can
+%be modified to increase or decrease \emph{label 1} predictions and to
+%make the final predictions more or less conservative
+(see
 Section~\ref{sec:pooling}).
 
 In total, approx.\ $20\,\%$ of the data values are missing, with
@@ -154,10 +192,9 @@ samples: 16281). Additionally, the categorical variables in the UCI
 dataset are encoded as strings, while in the given dataset, they are
 encoded as integers. Therefore, one would have to find a mapping from
 strings to integers. The large amount of missing data might impede
-this try. Since using the UCI Adult dataset might defeat the goal
-of this assignment, I did not take any steps in this direction. A
-comparison on
-\url{http://www.cs.toronto.edu/~delve/data/adult/adultDetail.html}
+this try. Since using the UCI Adult dataset might defeat the goal of
+this assignment, I did not take any steps in this direction. A
+detailed explanation of the data set\footnote{\url{http://www.cs.toronto.edu/~delve/data/adult/adultDetail.html}}
 shows that the best performing classifier is a Forward Sequential
 Selection (FSS) naive Bayes model with an accuracy of $85.95\,\%$. The
 classifiers were trained after removing unknown values (7\,\% of
@@ -176,13 +213,14 @@ training samples.
 In Figure~\ref{fig:pipeline}, the complete classification pipeline is
 visualized. In the following subsections, each step will be explained
 in more detail. The process starts with combining the training and the
-test set to yield a large dataset with missing values. Using MICE, the
-missing values are imputed and five training and test sets are
-obtained. Five classifiers are trained using the different training
-sets; for each training set all test sets are used for obtaining the
-`preliminary hypotheses'. Using majority voting with a modifiable
-threshold $\theta$, the single hypotheses are pooled to yield the
-final prediction vector.
+test set to yield a large dataset with missing values. Using
+Multivariate Imputation by Chained Equations (MICE), the missing
+values are imputed and five training and test sets are obtained. Five
+classifiers are trained using the different training sets; for each
+training set all test sets are used for obtaining the `preliminary
+hypotheses'. By means of majority voting with a modifiable threshold
+$\theta$, the single hypotheses are pooled to yield the final
+prediction vector.
 
 \begin{figure}[h!]
 \begin{center}
@@ -201,7 +239,7 @@ education, marital status, occupation, relationship, sex, native
 country)---they are measured only at the nominal level. Since
 measurements on the nominal level do not allow for a particular
 ordering, a proxy method has to be used to make them suitable for
-statistical models. To this end, I defined dummy variables that take
+some statistical models. To this end, I defined dummy variables that take
 the value 0 or 1 to indicate if a certain category is
 present. Defining $n$ dummy variables for the $n$ different possible
 values of a categorical feature allows for capturing the full
@@ -213,15 +251,14 @@ $\tilde{D} = 104$ predictor variables.
 
 \subsection{Missing Data Values}
 
-Missing data values are a common problem in statistics. The failure of
-sensors, or the concealment of data impede machine learning
-accuracy. Thus, methods have been put forth for the imputation of
-missing data points, such as case deletion or single mean
-imputation~\cite{schafer2002missing}. However, such simple methods
-often discard useful information and are are likely to give a rather
-poor result if a large part of the data is missing. The general goal
-is to find unbiased estimates of the missing values. The bias depends
-on the type of ``missingness'':
+Missing data values are a common problem in statistics due to the
+failure of sensors, or the concealment of data. Thus, methods have
+been put forth for the imputation of missing data points, such as case
+deletion or single mean imputation~\cite{schafer2002missing}. However,
+such simple methods often discard useful information and are likely to
+give a rather poor result if a large part of the data is missing. The
+general goal is to find unbiased estimates of the missing values. The
+bias depends on the type of ``missingness'':
 
 \begin{itemize}
 \item Missing Completely At Random (MCAR)\\
@@ -272,11 +309,10 @@ follows~\cite{buuren2011mice,azur2011multiple}:
 \item One variable is selected at random, for example
   \emph{occupation}. An intermediate model is built, using the
   remaining variables as predictors and \emph{occupation} as target
-  value. The chosen model is dependent on the target value. I used a
-  logistic regression categorical data and linear regression without
-  regularization for numerical data. The missing values in the
-  variable \emph{occupation} are replaced by the predictions of the
-  model.
+  value. The chosen model is dependent on the target value: I used
+  logistic regressions for categorical data and linear regressions for
+  numerical data. The missing values in the variable \emph{occupation}
+  are replaced by the predictions of the model.
 \item The previous step is executed for all variables with missing
   data. For each variable, the model is trained using both the already
   imputed values and the existing values. Once all variables have been
@@ -327,12 +363,12 @@ normal equation
 $\hat{\beta} = (\mathbf{X}'\mathbf{X})^{-1}\mathbf{X}\mathbf{y}$,
 where $\mathbf{y}$ is the vector consisting of the target
 values. Predictions for one variable $y_i$ are made with
-$\hat{y}_i = X_i\hat{\beta}$, where $X_i$ stands for the features of
-the $ith$ sample.
+$\hat{y}_i = X_i\hat{\beta}$, where $X_i$ describes the features of
+the $i$th sample.
 
 \emph{Logistic regression}: Logistic regression (binary variables)
 uses a logit link function to link the linear predictor $X_i\beta$ to
-the probability of ``label 1'':
+the probability of \emph{label 1}:
 \begin{align}
   \text{Pr}(y_i = 1 | X_i) = \text{logit}^{-1}(X_i\beta) = \frac{1}{1 + e^{-X_i\beta}}
 \end{align}
@@ -374,20 +410,21 @@ preliminary hypotheses:
 \end{cases}
 \end{align}
 The function predicts the class \emph{wealthy}, if at least
-$\theta \in \{1, 2, \ldots, 26\}$ preliminary hypotheses are
+$\theta \in \{0, 1, 2, \ldots, 26\}$ preliminary hypotheses are
 $1$. Introducing $\theta$ in the function was motivated by the local
-cross-validation (next section): the default behavior of classifier
-was conservative and only 54.0\,\% of actual ``wealthy'' samples were
-correctly classified. The modifiable threshold $\theta$ serves as
-modulator for the ``conservatism'' of the classifier: the higher
-$\theta$ is, the less likely it is that the final prediction $wealthy$
-will be made. The threshold $\theta = 13$ would represent standard
-majority function with a $50\,\%$ majority.  Figure~\ref{fig:tuning}
-shows the trade-off between specificity and sensitivity. It can be
-seen that the accuracy is not greatly affected by the conservatism
-$\theta$ of
-the approach: a higher sensitivity is directly traded-off a
-smaller specificity. The maximum accuracy was achieved at
+cross-validation (next section): the default predictions of the
+classifier were ``conservative''---meaning that it predominantly
+predicted the class \emph{non-wealthy}---and only 54.0\,\% of actual
+\emph{wealthy} samples were correctly classified. The threshold
+$\theta$ serves as modulator for the ``conservatism'' of the
+classifier: the higher $\theta$ is, the less likely it is that the
+final prediction \emph{wealthy} will be made. The threshold
+$\theta = 13$ would represent standard majority function with a
+$50\,\%$ majority.  Figure~\ref{fig:tuning} shows the trade-off
+between specificity and sensitivity for increasing values of
+$\theta$. It can be seen that the accuracy is not greatly affected by
+the threshold $\theta$: a higher sensitivity is directly traded-off
+with a smaller specificity. The maximum accuracy was achieved at
 $\theta = 9$.
 
 \begin{figure}[h]
@@ -407,8 +444,8 @@ $\theta = 9$.
 To evaluate submissions and determine the ranks of participants, the
 Kaggle challenge used the 0--1 loss. While the score on the public
 leaderboard is the best validation of the methods employed, only one
-submission could be submitted per participant and day. To evaluate the
-used methods more frequently, I implemented a local ($k = 5$)-fold
+submission could be submitted per participant and day. To evaluate my
+approach more frequently, I implemented a local ($k = 5$)-fold
 cross-validation. In each fold, a model was trained on $\frac{4}{5}$
 of the data and tested on the remaining samples from all five imputed
 datasets. Therefore, $k \cdot m \cdot m = 5 \cdot 5 \cdot 5 = 125$
@@ -421,23 +458,25 @@ evaluation (Table~\ref{tab:localpublic}).
   \centering
   \begin{tabular}{lll}
     \toprule
-    Method & Local Score & Global Score\\
+    Method & Local Score (\%) & Global Score (\%)\\
     \midrule
-    AdaBoost with 1 imputation & 0.83886 & 0.84205\\
-    Random Forest with 5 imputations & 0.82726 & 0.85056\\
-    SVM with 5 imputations & 0.84413 & 0.85494\\
+    AdaBoost with 1 imputation & 83.886 & 84.205\\
+    Random Forest with 5 imputations & 82.726 & 85.056\\
+    SVM with 5 imputations & 84.413 & 85.494\\
     AdaBoost with 5 imputations & & \\
+    SVM with 25 imputations &  & 85.718\\
     \bottomrule
   \end{tabular}
   \caption{{Comparing local and public scores}}
   \label{tab:localpublic}
 \end{table}
 
-Each fold in the cross-validation contained 2100 test samples and
-8400 training samples. Since the classes \emph{wealthy} and
+Each fold in the cross-validation contained 2100 test samples and 8400
+training samples. Since the classes \emph{wealthy} and
 \emph{non-wealthy} are not equally distributed, a confusion matrix can
-give a more detailed picture of the classifier performance. The
-following confusion matrix was obtained:
+give a more detailed picture of the classifier performance. After
+predicting the labels for all five folds, the following confusion
+matrix was obtained:
 
 \begin{table}[h]
 \centering
@@ -462,13 +501,8 @@ These statistics show that almost all non-wealthy samples are
 correctly classified, while only slightly more than half of the
 wealthy samples are correctly classified. The confusion matrix implies
 that the classifier is ``conservative'': it avoids classifying samples
-as wealthy. The high overall accuracy is mainly caused by correctly
-classifying non-wealthy samples. I tried to make the classifier less
-conservative by predicting probabilities of the target values and
-modifying the threshold $\theta$, in the ranges $0.3 - 0.5$. This
-improved the sensitivity, but, in turn, led to a reduced specificity,
-thus not improving the classification accuracy in the local
-cross-validation.
+as \emph{wealthy}. The high overall accuracy is mainly caused by
+correctly classifying non-wealthy samples.
 
 \subsection{The Classifier}
 
@@ -480,14 +514,10 @@ the package \texttt{scikit-learn} in Version~0.17.0.
 The choice of an SVM was motivated by the following points:
 
 \begin{enumerate}
-\item SVMs work ``out-of-the-box'' on many different problems
-  ~\cite{russell2003artificial}.
+\item SVMs work ``out-of-the-box'' on many different problems~\cite{russell2003artificial}.
 \item SVMS work in high-dimensional spaces ($\tilde{D} = 104$)
-\item SVMs aim to minimize the generalization loss, instead of the
-  empirical loss, by finding a decision boundary that maximizes the
-  margin. Since the given training set contains only 10,500 samples,
-  while the test set contains 38,342 samples, generalization is
-  especially important.
+\item SVMs aim to minimize the generalization error by finding a
+  decision boundary that maximizes the margin.
 \item SVMs allow for \emph{transductive learning} using transductive
   SVMs. Therefore, the information in the unlabeled test data can be
   incorporated in the training process, possibly improving the
@@ -505,12 +535,13 @@ positive class and the negative class. The maximum-margin hyperplane
 is the hyperplane ``right in the middle'' of the support vectors.
 
 The classifier is of the form $f(\mathbf{x}) = w^T\mathbf{x} + b$ and
-the corresponding classification function
+the corresponding classification function is
 $h(\mathbf{x}) = sign(w^T\mathbf{x} + b)$, with $\mathbf{x}$ being the
 feature vector, $w$ the coefficient vector and $b$ the intercept
-term. The target variables $y_i$ for SVMs are $-1$ and $1$, instead of
-$0$ and $1$. For training the classifier, the goal is to find $w, b$
-such that the resulting decision boundary maximizes the margin.
+term. The target variables $y_i$ for SVMs are $-1$ (\emph{non-wealthy})
+and $1$ (\emph{wealthy}), instead of $0$ and $1$. To train the
+classifier, the goal is to find $w, b$ such that the resulting
+decision boundary maximizes the margin.
 %A soft-margin is used with the hinge-loss function:
 %\begin{align}
 %  \max\left(0, 1 - y_i(\vec{w}\cdot \vec{x_i} + b)\right)
@@ -538,6 +569,23 @@ sample is at the correct side of the margin---is of not much
 consequence; greater values put more emphasis on satisfying the margin
 constraint for each data point.
 
+
+To find $w$ and $b$, it is often more convenient to use the \emph{dual
+  representation}, which can be derived from the primal
+form~\cite{russell2003artificial}:
+\begin{align}
+\label{eq:dual}
+\text{arg}\max_\alpha\sum_j\alpha_j - \frac{1}{2}\sum_{j,k}\alpha_j\alpha_ky_jy_k(\mathbf{x_j} \cdot \mathbf{x_k})
+\end{align} subject to the constraints: $\alpha_j \geq 0$ and
+$\sum_j\alpha_jy_j=0$. The variable $y_i \in \{-1, 1\}$ represents the
+class of $x_i$ and $\alpha$ is the weights vector that assigns a weight
+$\alpha_j$ to each data point. The \emph{support vectors} are the
+samples for which the weights $a_j$ are non-zero. 
+This optimization problem can be solved using
+quadratic programming, for which several libraries
+exist. I used the solution provided by the \texttt{libsvm}
+library~\cite{libsvm2011}.
+
 To extend SVMs to non-linear classification, the \emph{kernel trick}
 can be used, with which data can be embedded in a higher-dimensional
 space. The kernel $K(\mathbf{x_j}, \mathbf{x_k})$ is then applied to
@@ -550,86 +598,75 @@ Equation~\ref{eq:dual}. Therefore, the equation becomes:
 Practically, this means that the problem of finding a linear separator
 is shifted to a higher dimensional feature space. Mapping back this
 linear separator to the original feature space results in a non-linear
-decision boundary.
-
-For the given problem, a Gaussian radial basis function kernel was
-used:
+decision boundary.  For the given problem, a Gaussian radial basis
+function kernel was used:
 \begin{align}
 K(\mathbf{x_j}, \mathbf{x_k}) = \exp(-\gamma||\mathbf{x_j} - \mathbf{x_k} ||^2)
 \end{align}
-The parameter $\gamma = 0.01$ was found using a local
-cross-validation.
+The two hyperparameters of the SVM, $C$ and
+$\gamma$,  were chosen using grid-search in the cross-validation.
 
-To find $w$ and $b$ when using a kernel, it is more convenient to use
-the \emph{dual representation}, which can be derived from the primal
-form~\cite{russell2003artificial}:
+
+Before training, each variable in the combined dataset, consisting of
+training and test set, was scaled to zero mean and unit variance using
+the following formula:
 \begin{align}
-\label{eq:dual}
-\text{arg}\max_\alpha\sum_j\alpha_j - \frac{1}{2}\sum_{j,k}\alpha_j\alpha_ky_jy_k(\mathbf{x_j} \cdot \mathbf{x_k})
-\end{align} subject to the constraints: $\alpha_j \geq 0$ and
-$\sum_j\alpha_jy_j=0$. The variable $y_i \in \{-1, 1\}$ represents the
-class of $x_i$ and $\alpha$ is the weights vector that assigns a weight
-$\alpha_j$ to each data point. The \emph{support vectors} are the
-samples for which the weights $a_j$ are non-zero. 
-This optimization problem can be solved using
-quadratic programming, for which several libraries
-exist. I used the solution provided by the \texttt{libsvm} library~\cite{libsvm2011}.
-
-Each feature was linearly scaled to the range $[0, 1]$. Scaling is
-important because, otherwise, features with a greater range could
-dominate feature with smaller ranges~\cite{hsu2003practical}.
-
-There are two modifiable hyperparameters for a RBF SVM: $C$ and
-$\gamma$. The best values for the parameter were chosen using
-grid-search in the cross-validation.
-
+  x' = \frac{x - \bar{x}}{\sigma}
+\end{align}
+In the formula, $x$ is the original value, $x'$ the new value, and
+$\bar{x}$ and $\sigma$ mean and standard deviation of the
+variable. Scaling ensures that features with a greater range do not
+dominate features with smaller ranges~\cite{hsu2003practical}.
 
 \subsection{Transductive Learning}
 
 Since the test data is known at training time, this information can be
 used for using semi-supervised methods than can better capture the
-underlying distribution. I made use of the self-learning method, by:
-at first, the unlabeled data was labeled by predicting their labels
-using a SVM trained on the training dataset. Afterward, another SVM
-was trained using the combined dataset consisting of training and test
-set. The approach did not improve the classification performance.
+underlying distribution. I made use of the self-learning method: at
+first, the unlabeled data was labeled by predicting their labels using
+a SVM trained on the provided training set. Afterward, another SVM was
+trained using the combined dataset consisting of training and the test
+set and the final predictions for the test set were made. The approach
+did not improve the classification performance.
 
-%The second approach used an implementation based on
-%\texttt{scikit-learn} and the Contrastive Pessimistic Likelihood
-%Estimation (CPLE) (\url{https://github.com/tmadl/semisup-learn}).
-
+Two more sophisticated approaches---using the implementations of
+\texttt{semisup-learn}\footnote{\url{https://github.com/tmadl/semisup-learn}}---
+Contrastive Pessimistic Likelihood Estimation
+(CPLE)~\cite{loog2016contrastive} and Transductive
+SVMs~\cite{bennett1999semi,gieseke2014fast} were terminated
+prematurely since training was not finished after 24 hours.
 
 \section{Results \& Discussion}
 \label{sec:results}
 
-In total, I made eight submissions during the competition. The best
-submission resulted in an accuracy of $85.494\,\%$, which corresponds
-to the $3^{\text{rd}}$ position out of $27$ participants when
+In total, I made 10 submissions during the competition. The best
+submission resulted in an accuracy of $85.718\,\%$, which corresponds
+to the $3^{\text{rd}}$ position out of 26 participants when
 finishing this report.
 
 In summary, the main challenge lay in imputing the missing data
 values. Afterward, standard classification techniques could be
-used. The use of different classifiers had no substantial influence on
-the achieved accuracy: using a support vector machine, random forest
-regression, and AdaBoost classifier resulted in very similar results,
-as shown in Table~\ref{tab:localpublic}.
+used. The threshold parameter $\theta$ of the majority voting had no
+substantial influence on the classification performance. Also,
+different classifiers did not greatly affect the achieved accuracy:
+support vector machines, random forest classification, and AdaBoost
+classifiers yielded similar results, as shown in
+Table~\ref{tab:localpublic}.
 
-
-The use of
-semi-supervised methods did not have a substantial effect on the
-classification performance; this is in line with findings other
+The use of self-supervised learning did not have a positive effect on
+the classification performance; this is in line with findings other
 studies, showing that semi-supervised methods do not necessarily lead
 to improved performances and can even lead to a lower
 accuracy~\cite{zhu2005semi}. It might be that semi-supervised methods
 would have had a greater effect, if the number of training samples
-would have been substantially smaller.
+would have been substantially smaller. 
 
 Since the ground truth labels of the test set were not revealed, error
 statistics could only be computed based on the 0--1 loss on the public
 leaderboard and on the local cross-validation. The restriction of one
 submission per day increased the difficulty of the validation. My
-public score of $85.494\,\%$---which is only $0.00364$ below the best
-performing score in the competition ($85.854\,\%$) and $0.00456$ below
+public score of $85.718\,\%$---which is $0.00876$ below the best
+performing score in the competition ($86.594\,\%$) and $0.00232$ below
 the best performing method of the Delve
 project~\footnote{\url{http://www.cs.toronto.edu/~delve/data/adult/adultDetail.html}}---is
 an indicator that little improvement will be possible beyond my
@@ -637,8 +674,8 @@ approach. Compared to the UCI dataset, the given dataset had a smaller
 amount of labeled data and more missing values, which made the Kaggle
 classification task more challenging. Using standard state-of-the-art
 classifiers, the maximum possible performance of the given dataset
-will be possibly capped clearly below 100\,\% due to mistakes during
-data acquisition, such as deliberate misinformation or transcription
+will be possibly capped below 100\,\% due to mistakes during data
+acquisition, such as deliberate misinformation or transcription
 errors. Moreover, the used variables might only have limited
 explanatory power: additional variables, such as political view,
 morale, or number of children may be needed to increase the
@@ -664,7 +701,7 @@ transductive learning could help to increase the classification performance.
 My code for this competition can be found at:\\
 \url{https://github.com/Pold87/ml-final-ass}
 
-\emph{Word Count}: 3427
+\emph{Word Count}: 3403
 \printbibliography
 \end{document}
 

@@ -1979,7 +1979,10 @@
     <bcf:citekey order="12">russell2003artificial</bcf:citekey>
     <bcf:citekey order="13">libsvm2011</bcf:citekey>
     <bcf:citekey order="14">hsu2003practical</bcf:citekey>
-    <bcf:citekey order="15">zhu2005semi</bcf:citekey>
+    <bcf:citekey order="15">loog2016contrastive</bcf:citekey>
+    <bcf:citekey order="16">bennett1999semi</bcf:citekey>
+    <bcf:citekey order="16">gieseke2014fast</bcf:citekey>
+    <bcf:citekey order="17">zhu2005semi</bcf:citekey>
   </bcf:section>
   <bcf:sortlist section="0" type="entry" label="nty">
   <bcf:sorting>

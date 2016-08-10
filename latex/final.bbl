@@ -46,6 +46,29 @@
       \field{year}{2011}
       \field{pages}{40\bibrangedash 49}
     \endentry
+    \entry{bennett1999semi}{article}{}
+      \true{morelabelname}
+      \name{labelname}{2}{}{%
+        {{hash=a5199309a2b6af86b52bfdd638d0910b}{Bennett}{B\bibinitperiod}{Kristin}{K\bibinitperiod}{}{}{}{}}%
+        {{hash=377a270bbbf05c09051b601da5779d65}{Demiriz}{D\bibinitperiod}{Ayhan}{A\bibinitperiod}{}{}{}{}}%
+      }
+      \true{moreauthor}
+      \name{author}{2}{}{%
+        {{hash=a5199309a2b6af86b52bfdd638d0910b}{Bennett}{B\bibinitperiod}{Kristin}{K\bibinitperiod}{}{}{}{}}%
+        {{hash=377a270bbbf05c09051b601da5779d65}{Demiriz}{D\bibinitperiod}{Ayhan}{A\bibinitperiod}{}{}{}{}}%
+      }
+      \list{publisher}{1}{%
+        {MIT; 1998}%
+      }
+      \strng{namehash}{c5bd046f111d881884cffd3470b0b7a1}
+      \strng{fullhash}{82ba538efa651e65f4e92952ac4887d9}
+      \field{sortinit}{B}
+      \field{labeltitle}{Semi-supervised support vector machines}
+      \field{journaltitle}{Advances in Neural Information processing systems}
+      \field{title}{Semi-supervised support vector machines}
+      \field{year}{1999}
+      \field{pages}{368\bibrangedash 374}
+    \endentry
     \entry{buuren2011mice}{article}{}
       \name{labelname}{2}{}{%
         {{hash=bf2e46bc7131f45ded746c29d0922a6e}{Buuren}{B\bibinitperiod}{Stef}{S\bibinitperiod}{}{}{}{}}%
@@ -88,6 +111,32 @@
       \field{volume}{2}
       \field{year}{2011}
       \field{pages}{27:1\bibrangedash 27:27}
+    \endentry
+    \entry{gieseke2014fast}{article}{}
+      \name{labelname}{4}{}{%
+        {{hash=98684d99b853200163d33cd189b7e93e}{Gieseke}{G\bibinitperiod}{Fabian}{F\bibinitperiod}{}{}{}{}}%
+        {{hash=fe70de2401ffbbcbe1d87c14051da33f}{Airola}{A\bibinitperiod}{Antti}{A\bibinitperiod}{}{}{}{}}%
+        {{hash=02ae5fe2017c07b935730f19b86fbf37}{Pahikkala}{P\bibinitperiod}{Tapio}{T\bibinitperiod}{}{}{}{}}%
+        {{hash=e3c484f4645ee26b259ed57397784c05}{Kramer}{K\bibinitperiod}{Oliver}{O\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{4}{}{%
+        {{hash=98684d99b853200163d33cd189b7e93e}{Gieseke}{G\bibinitperiod}{Fabian}{F\bibinitperiod}{}{}{}{}}%
+        {{hash=fe70de2401ffbbcbe1d87c14051da33f}{Airola}{A\bibinitperiod}{Antti}{A\bibinitperiod}{}{}{}{}}%
+        {{hash=02ae5fe2017c07b935730f19b86fbf37}{Pahikkala}{P\bibinitperiod}{Tapio}{T\bibinitperiod}{}{}{}{}}%
+        {{hash=e3c484f4645ee26b259ed57397784c05}{Kramer}{K\bibinitperiod}{Oliver}{O\bibinitperiod}{}{}{}{}}%
+      }
+      \list{publisher}{1}{%
+        {Elsevier}%
+      }
+      \strng{namehash}{c0520843a69814a7fd1060005dd427d7}
+      \strng{fullhash}{07cc847b9445d42553f6f250c6066bd9}
+      \field{sortinit}{G}
+      \field{labeltitle}{Fast and simple gradient-based optimization for semi-supervised support vector machines}
+      \field{journaltitle}{Neurocomputing}
+      \field{title}{Fast and simple gradient-based optimization for semi-supervised support vector machines}
+      \field{volume}{123}
+      \field{year}{2014}
+      \field{pages}{23\bibrangedash 32}
     \endentry
     \entry{de2013multiple}{article}{}
       \name{labelname}{6}{}{%
@@ -182,6 +231,27 @@
       \field{year}{1988}
       \field{pages}{1198\bibrangedash 1202}
     \endentry
+    \entry{loog2016contrastive}{article}{}
+      \name{labelname}{1}{}{%
+        {{hash=bd0e43186499db4a45a8d62c91e960ae}{Loog}{L\bibinitperiod}{Marco}{M\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{1}{}{%
+        {{hash=bd0e43186499db4a45a8d62c91e960ae}{Loog}{L\bibinitperiod}{Marco}{M\bibinitperiod}{}{}{}{}}%
+      }
+      \list{publisher}{1}{%
+        {IEEE}%
+      }
+      \strng{namehash}{bd0e43186499db4a45a8d62c91e960ae}
+      \strng{fullhash}{bd0e43186499db4a45a8d62c91e960ae}
+      \field{sortinit}{L}
+      \field{labeltitle}{Contrastive pessimistic likelihood estimation for semi-supervised classification}
+      \field{journaltitle}{IEEE Transactions on Pattern Analysis and Machine Intelligence}
+      \field{number}{3}
+      \field{title}{Contrastive pessimistic likelihood estimation for semi-supervised classification}
+      \field{volume}{38}
+      \field{year}{2016}
+      \field{pages}{462\bibrangedash 475}
+    \endentry
     \entry{royston2011multiple}{article}{}
       \true{morelabelname}
       \name{labelname}{2}{}{%
@@ -223,7 +293,7 @@
         {{hash=120000b509e1c60ad123e57a519aaa87}{Edwards}{E\bibinitperiod}{Douglas\bibnamedelima D.}{D\bibinitperiod\bibinitdelim D\bibinitperiod}{}{}{}{}}%
       }
       \list{publisher}{1}{%
-        {Prentice hall Upper Saddle River}%
+        {Prentice Hall}%
       }
       \strng{namehash}{2969a996a11745404c62ab9ef2cdb8a8}
       \strng{fullhash}{c84c92626df968a841a671e522e644a6}
@@ -306,7 +376,7 @@
       \strng{fullhash}{f21438312d010f661de75362c02150cf}
       \field{sortinit}{V}
       \field{labeltitle}{Multiple imputation of missing blood pressure covariates in survival analysis}
-      \field{journaltitle}{Statistics in medicine}
+      \field{journaltitle}{Statistics in Medicine}
       \field{number}{6}
       \field{title}{Multiple imputation of missing blood pressure covariates in survival analysis}
       \field{volume}{18}
@@ -331,7 +401,7 @@
       \strng{fullhash}{7c75f01a1f20212b6e07726a95c24f28}
       \field{sortinit}{W}
       \field{labeltitle}{Multiple imputation using chained equations: issues and guidance for practice}
-      \field{journaltitle}{Statistics in medicine}
+      \field{journaltitle}{Statistics in Medicine}
       \field{number}{4}
       \field{title}{Multiple imputation using chained equations: issues and guidance for practice}
       \field{volume}{30}
