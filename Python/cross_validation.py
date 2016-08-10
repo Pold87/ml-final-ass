@@ -8,11 +8,11 @@ from sklearn.ensemble import AdaBoostClassifier
 from sklearn.tree import DecisionTreeClassifier
 from sklearn import cross_validation
 from sklearn import linear_model, svm
-#from xgboost.sklearn import XGBClassifier
+from xgboost.sklearn import XGBClassifier
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.semi_supervised import LabelSpreading, LabelPropagation
 
-from sklearn.preprocessing import StandardScaler, RobustScaler
+from sklearn.preprocessing import StandardScaler, RobustScaler, MinMaxScaler
 from frameworks.SelfLearning import *
 from frameworks.CPLELearning import CPLELearningModel
 from sklearn.linear_model.stochastic_gradient import SGDClassifier
@@ -21,13 +21,15 @@ from methods.scikitWQDA import WQDA
 from methods import scikitTSVM
 from sklearn.metrics import confusion_matrix
 
-use_scaling = 1
+use_scaling = 0
 
 do_cross_validation = 1
 
-use_transductive = 1
+use_transductive = 0
 
 all_preds = [None] * 5
+
+write_specs = 1
 
 #cfr = SGDClassifier(loss='log')
 
@@ -42,17 +44,17 @@ all_preds = [None] * 5
 
 #cfr = AdaBoostClassifier(DecisionTreeClassifier(max_depth=1), n_estimators=100)
 
-#cfr = RandomForestClassifier(n_estimators=100)
+cfr = RandomForestClassifier(n_estimators=100)
 
 #cfr = VotingClassifier(estimators=[('clf1', clf1),
 #                                    ('clf2', clf2),
 #                                    ('clf3', clf3)],
 #                                    voting='hard',
 #                                    weights=[1,1,1])
-#cfr = XGBClassifier(seed=27)
+#cfr = XGBClassifier(seed=42)
 #cfr = KNeighborsClassifier(n_neighbors=30, weights='distance')
 
-cfr = svm.SVC() 
+#cfr = svm.SVC() 
 
 if do_cross_validation:
     X = pd.read_csv('../data/five_imps/train_mice_hot_%d.csv' % 1)
@@ -71,7 +73,9 @@ for i in range(1, 6):
     X = X.values
 
     if use_scaling:
-        scaler = RobustScaler()
+        scaler = StandardScaler()
+        #scaler = RobustScaler()
+        #scaler = MinMaxScaler()
         X = scaler.fit_transform(X)
 
     if use_transductive:
@@ -151,43 +155,44 @@ for i in range(1, 6):
                 
             k = (i - 1) * 5 + j
             print k
-            submission.to_csv('submissions/sub_mult_25_svm_%d.csv' % k, index=False)
+            submission.to_csv('submissions/sub_xgb_%d.csv' % k, index=False)
 
 theta = -1
 
-with open('specs.csv', 'w') as fp:
-    fp.write("theta,sensitivity,specificity,accuracy\n")
+if write_specs:
+    with open('specs.csv', 'w') as fp:
+        fp.write("theta,sensitivity,specificity,accuracy\n")
 
-for theta in range(1, 26):
-    k = 0
-    for train_idx, test_idx in cv:
-        print all_preds[k]
-        s_sub_again = np.array(all_preds[k] >= theta)
-        s_sub_again = s_sub_again.astype(int)
+    for theta in range(1, 26):
+        k = 0
+        for train_idx, test_idx in cv:
+            print all_preds[k]
+            s_sub_again = np.array(all_preds[k] >= theta)
+            s_sub_again = s_sub_again.astype(int)
 
-        y_actual = pd.Series(y[test_idx], name='Actual')
-        y_pred = pd.Series(s_sub_again, name='Predicted')
+            y_actual = pd.Series(y[test_idx], name='Actual')
+            y_pred = pd.Series(s_sub_again, name='Predicted')
 
-        if k == 0:
-            df_confusion = pd.crosstab(y_actual, y_pred, rownames=['Actual'], colnames=['Predicted'], margins=True)
-        else:
-            df_confusion += pd.crosstab(y_actual, y_pred, rownames=['Actual'], colnames=['Predicted'], margins=True)
+            if k == 0:
+                df_confusion = pd.crosstab(y_actual, y_pred, rownames=['Actual'], colnames=['Predicted'], margins=True)
+            else:
+                df_confusion += pd.crosstab(y_actual, y_pred, rownames=['Actual'], colnames=['Predicted'], margins=True)
 
-        #print df_confusion
-        #loss = np.sum(np.fabs (y[test_idx] - s_sub_again))      
-        #print "Final accuracy", 1 - (loss / len(test_idx))
-        k += 1
-    print df_confusion
+            #print df_confusion
+            #loss = np.sum(np.fabs (y[test_idx] - s_sub_again))      
+            #print "Final accuracy", 1 - (loss / len(test_idx))
+            k += 1
+        print df_confusion
 
-    # Calculate sensitivity, specificity, and accuracy
-    sensitivity = df_confusion.iloc[1, 1] / df_confusion.iloc[1, 2]
-    specificity = df_confusion.iloc[0, 0] / df_confusion.iloc[0, 2]
-    accuracy = (df_confusion.iloc[0, 0] + df_confusion.iloc[1, 1]) / df_confusion.iloc[2, 2]
+        # Calculate sensitivity, specificity, and accuracy
+        sensitivity = df_confusion.iloc[1, 1] / df_confusion.iloc[1, 2]
+        specificity = df_confusion.iloc[0, 0] / df_confusion.iloc[0, 2]
+        accuracy = (df_confusion.iloc[0, 0] + df_confusion.iloc[1, 1]) / df_confusion.iloc[2, 2]
 
-    print theta
-    print sensitivity
-    print specificity
-    print accuracy
+        print theta
+        print sensitivity
+        print specificity
+        print accuracy
 
-    with open('specs.csv', 'a') as fp:
-        fp.write('%d,%f,%f,%f\n' % (theta, sensitivity, specificity, accuracy))
+        with open('specs.csv', 'a') as fp:
+            fp.write('%d,%f,%f,%f\n' % (theta, sensitivity, specificity, accuracy))

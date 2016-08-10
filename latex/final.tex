@@ -13,7 +13,8 @@
 \usepackage[backend=biber,maxcitenames=1]{biblatex}
 \usepackage[protrusion=true,expansion=true]{microtype}	
 \usepackage[T1]{fontenc}
-\usepackage{fourier}
+%\usepackage{fourier}
+\usepackage{lmodern}
 \bibliography{library}
 \renewcommand{\baselinestretch}{1.05}
 
@@ -30,7 +31,7 @@
 
 %%% Custom sectioning
 \usepackage{sectsty}
-\allsectionsfont{\centering \normalfont\scshape}
+\allsectionsfont{\normalfont\scshape}
 
 %%% Custom headers/footers (fancyhdr package)
 \usepackage{fancyhdr}
@@ -48,9 +49,9 @@
 \newcommand{\horrule}[1]{\rule{\linewidth}{#1}} 	% Horizontal rule
 
 \title{
-		\vspace{-0.6in} 	
+		\vspace{0in} 	
 		\usefont{OT1}{bch}{b}{n}
-		\normalfont \normalsize \textsc{Machine Learning} \\ [10pt]
+		\normalfont \normalsize \textsc{Machine Learning (IN4320)} \\ [10pt]
 		\horrule{0.5pt} \\[0.4cm]
 		\huge Final Report \\
 		\horrule{2pt} \\[0.5cm]
@@ -71,15 +72,16 @@
 \maketitle
 \begin{abstract}
   This report presents the techniques and results of a classification
-  problem involving missing data as well as a mixture of categorical
-  and continuous data. The problem of missing data points is addressed
-  by Multiple Imputation Chained Equations (MICE). Support vector
-  machines (SVM) are used for the classification. The approach was
-  evaluated locally using cross-validation and remotely on a hold-out
-  test-set using the Kaggle platform. The best Kaggle submission
-  resulted in an accuracy of $85.718\,\%$, which corresponds to the
-  $3^{\text{rd}}$ position out of $26$ participants in the
-  competition.%
+  problem---predicting whether a person earns more than EUR 40k a
+  year---that involved missing data as well as a mixture of
+  categorical and continuous data. The problem of missing data points
+  was addressed by Multiple Imputation Chained Equations
+  (MICE). Support vector machines (SVM) were used for the
+  classification. The approach was evaluated locally using
+  cross-validation and remotely on a hold-out test-set using the
+  Kaggle platform. The best Kaggle submission resulted in an accuracy
+  of $85.718\,\%$, which corresponds to the $3^{\text{rd}}$ position
+  out of $26$ participants in the competition.%
 \end{abstract}%
 \section{The Challenge}
 \label{sec:introduction}
@@ -87,7 +89,7 @@
 The Kaggle competition \emph{Final Assignment
   IN4320}\footnote{\url{https://inclass.kaggle.com/c/final-assignment-in43202}}
 asks participants to predict whether a person earns more than EUR
-40\,k a year from $D = 13$ predictor variables. The provided dataset
+40k a year from $D = 13$ predictor variables. The provided dataset
 was created by a census bureau. The task can be divided into the
 following three challenges:
 
@@ -99,12 +101,12 @@ following three challenges:
 \end{itemize}
 
 In this report, the terms \emph{wealthy} or \emph{label 1} describe a
-sample with income EUR $>40\,$k and \emph{non-wealthy} or \emph{label
+sample with income greater than EUR~40k and \emph{non-wealthy} or \emph{label
   0} are used otherwise.
 
 In Section~\ref{sec:analysis}, I analyze and visualize the structure
 of the data to set the stage for the classification pipeline. In
-Section~\ref{sec:methods}, the used methods for data imputation, and
+Section~\ref{sec:methods}, the used methods for data imputation and
 classification are detailed. Section~\ref{sec:results} presents and
 discusses the results obtained during cross-validation and on Kaggle.
 
@@ -112,12 +114,12 @@ discusses the results obtained during cross-validation and on Kaggle.
 \label{sec:analysis}
 
 To motivate the used classifier, design, and technique choices, in
-this section, the provided dataset will be analyzed and possible
-concepts and ideas introduced.
+this section, the provided dataset is analyzed and possible concepts
+and ideas are introduced.
 
 %Additionally, important patterns dependence
 %structures are visualized.
-In total, 13 features are given, of which 8 are categorical and 5
+In total, 13 features are given, of which 8 are categorical and 5 are
 continuous (Table~\ref{tab:features}).
 %shows the discrete and continuous features.
 The training set consists of 10500 samples and the test set has 38342
@@ -151,12 +153,12 @@ native country &                                \\
 10500 samples constitute the training set of which 2500 (23\,\%) were
 labeled as wealthy and 8000 (77\,\%) as non-wealthy. If we assume that
 the training and test set were randomly sampled from the entire
-dataset, therefore, the predictions on the test set should reflect
-this ratio. Additionally always predicting non-wealthy should give a
+dataset, the predictions on the test set should reflect this
+ratio. Additionally always predicting non-wealthy should then give a
 0--1 loss of 77\,\% under this assumption, which can be used as a
-baseline for the classifier performance. The assumption could be
-tested by probing the test set with a `0-only' submission. This ratio
-might be useful for setting the class-weights of a classifier or for
+baseline for the classifier performance. The assumption can be tested
+by probing the test set with a `0-only' submission. This ratio might
+be useful for setting the class-weights of a classifier or for
 determining the threshold in majority voting
 %: the final
 %prediction after voting is \emph{label 1} if at least $\theta$
@@ -166,37 +168,39 @@ determining the threshold in majority voting
 (see
 Section~\ref{sec:pooling}).
 
-In total, approx.\ $20\,\%$ of the data values are missing, with
-approx.\ $23\,\%$ for the variables \emph{workclass} and
-\emph{occupation}, $20\,\%$ for \emph{country of origin}, and $19\,\%$
-for the remaining variables. The percentage and pattern of missing
-data between the training and the test set showed no apparent
-difference. Only $6\,\%$ of samples in the training set and in the
-test set are complete cases (i.e., have no missing values), making
-adequate treatment of missing data a crucial step. I assume that the
-higher values for the variables \emph{workclass}, \emph{occupation},
-and \emph{country} stem from missing values in the original dataset
-and the missing values for the remaining variables were just
-introduced.
+In total, approx.\
+$20\,\%$ of the data values are missing, with approx.\
+$23\,\%$ for the variables \emph{workclass} and \emph{occupation},
+$20\,\%$ for \emph{country of origin}, and
+$19\,\%$ for the remaining variables. The percentage and pattern of
+missing data between the training and the test set showed no apparent
+difference. Only
+$6\,\%$ of samples in the training set and in the test set are
+complete cases (i.e., have no missing values), making adequate
+treatment of missing data a crucial step. I assume that the higher
+values for the variables \emph{workclass}, \emph{occupation}, and
+\emph{country} stem from missing values in the original dataset and
+the missing values for the remaining variables were introduced later.
 
 Given the description of the dataset and the total number of samples
-(48842), the dataset may be the UCI Adult Data
-set~\cite{lichman2013}. This would underline the pattern of missing
+(48842), the dataset may be the UCI Adult
+Dataset~\cite{lichman2013}. This would support the pattern of missing
 data (higher values for workclass, occupation, and country of
-origin). A possible method would be to use the labeled samples of the
-UCI dataset and match them with the given test set, which should give
-an accuracy of 1.0. However, this method is not as straight-forward as
-it may seem. The UCI dataset is split in a different manner into
-training and test set (amount of training samples: 32561, test
-samples: 16281). Additionally, the categorical variables in the UCI
-dataset are encoded as strings, while in the given dataset, they are
-encoded as integers. Therefore, one would have to find a mapping from
-strings to integers. The large amount of missing data might impede
-this try. Since using the UCI Adult dataset might defeat the goal of
-this assignment, I did not take any steps in this direction. A
-detailed explanation of the data set\footnote{\url{http://www.cs.toronto.edu/~delve/data/adult/adultDetail.html}}
-shows that the best performing classifier is a Forward Sequential
-Selection (FSS) naive Bayes model with an accuracy of $85.95\,\%$. The
+origin). A possible ``classification method'' would be to use the
+labeled samples of the UCI dataset and match them with the given test
+set, which should give an accuracy of 1.0. However, this method is not
+as straight-forward as it may seem. The UCI dataset is split in a
+different manner into training and test set (amount of training
+samples: 32561, test samples: 16281). Additionally, the categorical
+variables in the UCI dataset are encoded as strings, while in the
+given dataset, they are encoded as integers. Therefore, one would have
+to find a mapping from strings to integers. The large amount of
+missing data might impede this. Since using the UCI Adult dataset
+probably defeats the goal of this assignment, I did not take any steps
+in this direction. In a prior investigation of the UCI Adult
+Dataset\footnote{\url{http://www.cs.toronto.edu/~delve/data/adult/adultDetail.html}},
+the best performing classifier was a Forward Sequential Selection
+(FSS) naive Bayes model with an accuracy of $85.95\,\%$. The
 classifiers were trained after removing unknown values (7\,\% of
 values had missing values; training set size: 30162, test set size:
 15060). This accuracy can be used as an indicator of a good
@@ -217,7 +221,7 @@ test set to yield a large dataset with missing values. Using
 Multivariate Imputation by Chained Equations (MICE), the missing
 values are imputed and five training and test sets are obtained. Five
 classifiers are trained using the different training sets; for each
-training set all test sets are used for obtaining the `preliminary
+training set all test sets are used to obtain the `preliminary
 hypotheses'. By means of majority voting with a modifiable threshold
 $\theta$, the single hypotheses are pooled to yield the final
 prediction vector.
@@ -251,14 +255,14 @@ $\tilde{D} = 104$ predictor variables.
 
 \subsection{Missing Data Values}
 
-Missing data values are a common problem in statistics due to the
-failure of sensors, or the concealment of data. Thus, methods have
-been put forth for the imputation of missing data points, such as case
-deletion or single mean imputation~\cite{schafer2002missing}. However,
-such simple methods often discard useful information and are likely to
-give a rather poor result if a large part of the data is missing. The
-general goal is to find unbiased estimates of the missing values. The
-bias depends on the type of ``missingness'':
+Missing data values are a common problem due to the failure of sensors
+or the concealment of data. Thus, methods have been put forth for the
+imputation of missing data points, such as case deletion or single
+mean imputation~\cite{schafer2002missing}. However, such simple
+methods often discard useful information and are likely to give a poor
+result if a large part of the data is missing. The general goal is to
+find unbiased estimates of the missing values. The bias depends on the
+type of ``missingness'':
 
 \begin{itemize}
 \item Missing Completely At Random (MCAR)\\
@@ -332,8 +336,8 @@ models were built. A value of $m$ between 5 and 10 is a common value
 for the used method~\cite{royston2011multiple} and a value of $c = 5$
 is considered ``adequate''~\cite{van1999multiple}. However, recent
 research shows that a higher value of $m$ might be
-beneficial~\cite{white2011multiple}, which could be tested, if a more
-powerful machine would be at hand.
+beneficial~\cite{white2011multiple}. This could be tested with a more
+powerful machine.
 
 Importantly, the MICE algorithm was used on the total dataset,
 consisting of the training and the test set. This should increase the
@@ -398,8 +402,9 @@ h (X_i) =
 I trained models and made predictions on all possible combinations of
 imputed training and test sets. This results in 25 ``preliminary
 hypotheses'' $\tilde{h}_{ij}$ for the $i$th sample:
-$\mathbf{\tilde{h}_i} = (\tilde{h}_{i,j})_{j \in \{1, 2, \ldots, 25\}} = [\tilde{h}_{i,1}, \tilde{h}_{i,2}, \ldots, \tilde{h}_{i,25}]$. These
-predictions have to be aggregated to obtain one final submission. For
+$\mathbf{\tilde{h}_i} = (\tilde{h}_{i,j})_{j \in \{1, 2, \ldots, 25\}}
+= [\tilde{h}_{i,1}, \tilde{h}_{i,2}, \ldots, \tilde{h}_{i,25}]$. These
+predictions had to be aggregated to obtain one final submission. For
 the aggregation, I used the following majority voting function on the
 preliminary hypotheses:
 \begin{align}
@@ -424,13 +429,13 @@ $50\,\%$ majority.  Figure~\ref{fig:tuning} shows the trade-off
 between specificity and sensitivity for increasing values of
 $\theta$. It can be seen that the accuracy is not greatly affected by
 the threshold $\theta$: a higher sensitivity is directly traded-off
-with a smaller specificity. The maximum accuracy was achieved at
+with a smaller specificity. The best accuracy was achieved at
 $\theta = 9$.
 
 \begin{figure}[h]
   \centering
-  \includegraphics[width=0.5\textwidth]{../Python/theta}
-  \caption{Accuracy, sensitivity, and specificity in dependence of the
+  \includegraphics[width=0.45\textwidth]{../Python/theta}
+  \caption{Accuracy, sensitivity, and specificity as a function of the
     threshold $\theta$. The accuracy stays roughly the same for
     $6 \leq \theta \leq 25$. In contrast, the sensitivity falls and
     the specificity rises for increasing values of $\theta$.}
@@ -449,25 +454,33 @@ approach more frequently, I implemented a local ($k = 5$)-fold
 cross-validation. In each fold, a model was trained on $\frac{4}{5}$
 of the data and tested on the remaining samples from all five imputed
 datasets. Therefore, $k \cdot m \cdot m = 5 \cdot 5 \cdot 5 = 125$
-accuracy values were obtained from which the mean was calculated to
-get a final cross-validation accuracy for each model. The
-cross-validation achieved similar results to the public Kaggle
-evaluation (Table~\ref{tab:localpublic}).
+accuracy values were obtained. Per fold, the predictions for the
+$m \cdot m = 25$ ``preliminary hypotheses'' were aggregated using
+majority voting with the threshold parameter $\theta$. To obtain the
+final cross-validation accuracy per model, the mean accuracy of the
+five folds was calculated. The cross-validation achieved similar
+results to the public Kaggle evaluation but underestimated the public
+performance in all cases (Table~\ref{tab:localpublic}).
 
 \begin{table}[h]
   \centering
-  \begin{tabular}{lll}
+  \begin{tabular}{lrrrrr}
     \toprule
-    Method & Local Score (\%) & Global Score (\%)\\
+    Model        & train imps. & test imps. per model & $\theta^*$ & Local Score (\%) & Public Score (\%) \\
     \midrule
-    AdaBoost with 1 imputation & 83.886 & 84.205\\
-    Random Forest with 5 imputations & 82.726 & 85.056\\
-    SVM with 5 imputations & 84.413 & 85.494\\
-    AdaBoost with 5 imputations & & \\
-    SVM with 25 imputations &  & 85.718\\
+    AdaBoost      & 1              & 1                    & /        & 83.886           & 84.205            \\
+    Random Forest & 5              & 1                    & 3        & 84.038           & 85.056            \\
+    SVM           & 5              & 1                    & 3        & 84.413           & 85.494            \\
+    AdaBoost      & 5              & 5                    & 13       & 84.933           & 85.434            \\
+    SVM           & 5              & 5                    & 9       & 85.305           & 85.718            \\
     \bottomrule
   \end{tabular}
-  \caption{{Comparing local and public scores}}
+  \caption{{Comparing local cross-validation and public Kaggle
+      scores for different models. The column \emph{training imputations} specifies the
+      number of imputed datasets for building the models; the column
+      \emph{test imputations per model} specifies how many test sets
+      were used to get the ``preliminary hypotheses''. $\theta^*$
+      indicates the value of the threshold $\theta$ that resulted in the highest accuracy in the cross-validation.}}
   \label{tab:localpublic}
 \end{table}
 
@@ -508,8 +521,9 @@ correctly classifying non-wealthy samples.
 
 Section~\ref{sec:cross} shows the different classifiers that were
 compared. The best performing classifier was a support vector machine
-(SVM). For running the algorithm \texttt{Python~2.7.11} was used with
-the package \texttt{scikit-learn} in Version~0.17.0.
+(SVM)~\cite{cortes1995support}. For running the algorithm
+\texttt{Python~2.7.11} was used with the package \texttt{scikit-learn}
+in Version~0.17.0.
 
 The choice of an SVM was motivated by the following points:
 
@@ -550,22 +564,22 @@ Therefore, the following optimization problem---known as the
 \emph{primal representation}--- is solved:
 \begin{align}
   & \min ||\mathbf{w}||^2 + C \sum_{i = 1}^N\zeta_i\\
-  & \text{subject to the constraints:}\\
+  & \text{subject to the constraints:} \nonumber\\
  & \mathbf{w}^T\mathbf{x}_i \geq + 1-\zeta_i, \text{for}~y_i =
-  +1\\
+  +1 \nonumber\\
  & \mathbf{w}^T\mathbf{x}_i <-1+\zeta_i, \text{for}~y_i =
-  -1\\
-& \zeta_i \geq 0, \forall i
+  -1 \nonumber\\
+& \zeta_i \geq 0, \forall i \nonumber
 \end{align}
 To allow for non-linearly separable datasets and make the SVM less
-sensitive to outliers, the variables $\zeta_i$ allow for introducing
-``slackness'' into the constraints, such that not every sample has to
-lie at the correct side of the margin. If $0 < \zeta_i \leq 1$, the
-sample is between the margin and the correct side of hyperplane; if
-$\zeta > 1$, the sample is misclassified. The hyperparameter $C$
-allows for trading off structural error and training error: a value
-close to 0 specifies that violating the margin constraint---that each
-sample is at the correct side of the margin---is of not much
+sensitive to outliers, the variables $\zeta_i$ introduce ``slackness''
+into the constraints, such that not every sample has to lie at the
+correct side of the margin. If $0 < \zeta_i \leq 1$, the sample is
+between the margin and the correct side of hyperplane; if
+$\zeta_i > 1$, the sample is misclassified. The hyperparameter $C$
+trades off structural error and training error: a value close to 0
+specifies that violating the margin constraint---that each sample has
+to be at the correct side of the hyperplane---is of little
 consequence; greater values put more emphasis on satisfying the margin
 constraint for each data point.
 
@@ -575,9 +589,14 @@ To find $w$ and $b$, it is often more convenient to use the \emph{dual
 form~\cite{russell2003artificial}:
 \begin{align}
 \label{eq:dual}
-\text{arg}\max_\alpha\sum_j\alpha_j - \frac{1}{2}\sum_{j,k}\alpha_j\alpha_ky_jy_k(\mathbf{x_j} \cdot \mathbf{x_k})
-\end{align} subject to the constraints: $\alpha_j \geq 0$ and
-$\sum_j\alpha_jy_j=0$. The variable $y_i \in \{-1, 1\}$ represents the
+&\text{arg}\max_\alpha\sum_j\alpha_j -
+  \frac{1}{2}\sum_{j,k}\alpha_j\alpha_ky_jy_k(\mathbf{x_j} \cdot
+  \mathbf{x_k}) \\
+  & \text{subject to the constraints:} \nonumber\\
+& \alpha_j \geq 0 \nonumber\\
+& \sum_j\alpha_jy_j=0 \nonumber
+\end{align}
+The variable $y_i \in \{-1, 1\}$ represents the
 class of $x_i$ and $\alpha$ is the weights vector that assigns a weight
 $\alpha_j$ to each data point. The \emph{support vectors} are the
 samples for which the weights $a_j$ are non-zero. 
@@ -586,18 +605,19 @@ quadratic programming, for which several libraries
 exist. I used the solution provided by the \texttt{libsvm}
 library~\cite{libsvm2011}.
 
-To extend SVMs to non-linear classification, the \emph{kernel trick}
-can be used, with which data can be embedded in a higher-dimensional
-space. The kernel $K(\mathbf{x_j}, \mathbf{x_k})$ is then applied to
-the dot products of feature vectors in
-Equation~\ref{eq:dual}. Therefore, the equation becomes:
+With the \emph{kernel trick} data can be embedded in a
+higher-dimensional space to extend SVMs to non-linear
+classification. The tricks entails that a kernel
+$K(\mathbf{x_j}, \mathbf{x_k})$ is applied to the dot products of
+feature vectors in Equation~\ref{eq:dual}. Therefore, the equation
+becomes:
 \begin{align}
 \label{eq:dualkernel}
   \text{arg}\max_\alpha\sum_j\alpha_j - \frac{1}{2}\sum_{j,k}\alpha_j\alpha_ky_jy_kK(\mathbf{x_j}, \mathbf{x_k})
 \end{align} 
 Practically, this means that the problem of finding a linear separator
-is shifted to a higher dimensional feature space. Mapping back this
-linear separator to the original feature space results in a non-linear
+is shifted to a higher dimensional feature space. Mapping this linear
+separator back to the original feature space results in a non-linear
 decision boundary.  For the given problem, a Gaussian radial basis
 function kernel was used:
 \begin{align}
@@ -621,13 +641,12 @@ dominate features with smaller ranges~\cite{hsu2003practical}.
 \subsection{Transductive Learning}
 
 Since the test data is known at training time, this information can be
-used for using semi-supervised methods than can better capture the
-underlying distribution. I made use of the self-learning method: at
-first, the unlabeled data was labeled by predicting their labels using
-a SVM trained on the provided training set. Afterward, another SVM was
-trained using the combined dataset consisting of training and the test
-set and the final predictions for the test set were made. The approach
-did not improve the classification performance.
+used for semi-supervised methods to better capture the underlying
+distribution. I employed the self-learning method: first, the
+unlabeled data was labeled using a SVM trained on the provided
+training set. Afterward, another SVM was trained with the combined
+dataset to predict the final labels for the test set. The approach did
+not improve the classification performance.
 
 Two more sophisticated approaches---using the implementations of
 \texttt{semisup-learn}\footnote{\url{https://github.com/tmadl/semisup-learn}}---
@@ -641,7 +660,7 @@ prematurely since training was not finished after 24 hours.
 
 In total, I made 10 submissions during the competition. The best
 submission resulted in an accuracy of $85.718\,\%$, which corresponds
-to the $3^{\text{rd}}$ position out of 26 participants when
+to the $3^{\text{rd}}$ position out of 26 participants at the time of
 finishing this report.
 
 In summary, the main challenge lay in imputing the missing data
@@ -654,12 +673,12 @@ classifiers yielded similar results, as shown in
 Table~\ref{tab:localpublic}.
 
 The use of self-supervised learning did not have a positive effect on
-the classification performance; this is in line with findings other
-studies, showing that semi-supervised methods do not necessarily lead
-to improved performances and can even lead to a lower
+the classification performance; this is in line with other studies,
+showing that semi-supervised methods do not necessarily lead to
+improved performances and can even lead to a lower
 accuracy~\cite{zhu2005semi}. It might be that semi-supervised methods
 would have had a greater effect, if the number of training samples
-would have been substantially smaller. 
+would have been substantially smaller.
 
 Since the ground truth labels of the test set were not revealed, error
 statistics could only be computed based on the 0--1 loss on the public
@@ -667,15 +686,15 @@ leaderboard and on the local cross-validation. The restriction of one
 submission per day increased the difficulty of the validation. My
 public score of $85.718\,\%$---which is $0.00876$ below the best
 performing score in the competition ($86.594\,\%$) and $0.00232$ below
-the best performing method of the Delve
+the best performing method in the investigation of the Delve
 project~\footnote{\url{http://www.cs.toronto.edu/~delve/data/adult/adultDetail.html}}---is
 an indicator that little improvement will be possible beyond my
 approach. Compared to the UCI dataset, the given dataset had a smaller
 amount of labeled data and more missing values, which made the Kaggle
 classification task more challenging. Using standard state-of-the-art
-classifiers, the maximum possible performance of the given dataset
-will be possibly capped below 100\,\% due to mistakes during data
-acquisition, such as deliberate misinformation or transcription
+classifiers, the maximum possible performance with the provided
+dataset will possibly be capped below 100\,\% due to mistakes during
+data acquisition, such as deliberate misinformation or transcription
 errors. Moreover, the used variables might only have limited
 explanatory power: additional variables, such as political view,
 morale, or number of children may be needed to increase the
@@ -701,7 +720,8 @@ transductive learning could help to increase the classification performance.
 My code for this competition can be found at:\\
 \url{https://github.com/Pold87/ml-final-ass}
 
-\emph{Word Count}: 3403
+\emph{Word Count}: 3412
+\clearpage
 \printbibliography
 \end{document}
 

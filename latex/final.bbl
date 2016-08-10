@@ -112,6 +112,29 @@
       \field{year}{2011}
       \field{pages}{27:1\bibrangedash 27:27}
     \endentry
+    \entry{cortes1995support}{article}{}
+      \name{labelname}{2}{}{%
+        {{hash=17acda211a651e90e228f1776ee07818}{Cortes}{C\bibinitperiod}{Corinna}{C\bibinitperiod}{}{}{}{}}%
+        {{hash=c2b3e05872463585b4be6aab10d10d63}{Vapnik}{V\bibinitperiod}{Vladimir}{V\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{2}{}{%
+        {{hash=17acda211a651e90e228f1776ee07818}{Cortes}{C\bibinitperiod}{Corinna}{C\bibinitperiod}{}{}{}{}}%
+        {{hash=c2b3e05872463585b4be6aab10d10d63}{Vapnik}{V\bibinitperiod}{Vladimir}{V\bibinitperiod}{}{}{}{}}%
+      }
+      \list{publisher}{1}{%
+        {Springer}%
+      }
+      \strng{namehash}{7590e0e179f5467c9d65b2641be9c35e}
+      \strng{fullhash}{4c67d5268f413e83454c8adc14ab43c3}
+      \field{sortinit}{C}
+      \field{labeltitle}{Support-vector networks}
+      \field{journaltitle}{Machine learning}
+      \field{number}{3}
+      \field{title}{Support-vector networks}
+      \field{volume}{20}
+      \field{year}{1995}
+      \field{pages}{273\bibrangedash 297}
+    \endentry
     \entry{gieseke2014fast}{article}{}
       \name{labelname}{4}{}{%
         {{hash=98684d99b853200163d33cd189b7e93e}{Gieseke}{G\bibinitperiod}{Fabian}{F\bibinitperiod}{}{}{}{}}%
@@ -318,10 +341,10 @@
       \strng{namehash}{f5ef6158163b6b04da153d5e2dd6aefa}
       \strng{fullhash}{4cf7a4840ed9937fa7c076ec16f51b57}
       \field{sortinit}{S}
-      \field{labeltitle}{Missing data: our view of the state of the art.}
+      \field{labeltitle}{Missing data: Our view of the state of the art.}
       \field{journaltitle}{Psychological Methods}
       \field{number}{2}
-      \field{title}{Missing data: our view of the state of the art.}
+      \field{title}{Missing data: Our view of the state of the art.}
       \field{volume}{7}
       \field{year}{2002}
       \field{pages}{147}
@@ -400,10 +423,10 @@
       \strng{namehash}{c68b5d730a5af702f8df084a6350ca94}
       \strng{fullhash}{7c75f01a1f20212b6e07726a95c24f28}
       \field{sortinit}{W}
-      \field{labeltitle}{Multiple imputation using chained equations: issues and guidance for practice}
+      \field{labeltitle}{Multiple imputation using chained equations: Issues and guidance for practice}
       \field{journaltitle}{Statistics in Medicine}
       \field{number}{4}
-      \field{title}{Multiple imputation using chained equations: issues and guidance for practice}
+      \field{title}{Multiple imputation using chained equations: Issues and guidance for practice}
       \field{volume}{30}
       \field{year}{2011}
       \field{pages}{377\bibrangedash 399}
