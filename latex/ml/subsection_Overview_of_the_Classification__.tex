@@ -1,3 +1,0 @@
-\subsection{Overview of the Classification Pipeline}
-
-In Figure~\ref{fig:pipeline}, the complete classification pipeline is visualized. The process starts with combining the training and the testset to yield a large dataset with missing values. Using MICE, the missing values are imputed and five training and testsets are obtained. Five classifiers are trained using the different training sets; the corresponding testsets are used for predicting the target vector. Using majority voting, the single predictions are pooled to yield the final prediction vector.

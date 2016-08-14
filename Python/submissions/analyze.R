@@ -1,2 +1,0 @@
-sub1 <- read.csv("sub_multi_self.csv")
-sub2 <- read.csv("sub_multi_clpr.csv")
