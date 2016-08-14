@@ -18,7 +18,6 @@ X_all = pd.read_csv(all_mice)
 y = np.ravel(X[['y']])
 X.drop('y', axis=1, inplace=True)        
 
-
 # Specify categorical columns
 is_cat  = ['workclass', 'edu',  'married', 'occupation', 'relationship',
            'race', 'sex', 'country']

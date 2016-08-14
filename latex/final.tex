@@ -3,6 +3,7 @@
 \usepackage{parskip}
 \usepackage{titlesec}
 \usepackage{xcolor}
+\usepackage[font={small,it}]{caption}
 \usepackage{url}
 % \usepackage[colorlinks = true,
 %             linkcolor = blue,
@@ -16,7 +17,7 @@
 %\usepackage{fourier}
 \usepackage{lmodern}
 \bibliography{library}
-\renewcommand{\baselinestretch}{1.05}
+\renewcommand{\baselinestretch}{1.02}
 
 \usepackage{graphicx}
 \usepackage[space]{grffile}
@@ -146,20 +147,20 @@ sex            &                                \\
 native country &                                \\
       \bottomrule
   \end{tabular}
-  \caption{{Overview of the used features}}
+  \caption{{Overview of the provided features}}
   \label{tab:features}
 \end{table}
 
 10500 samples constitute the training set of which 2500 (23\,\%) were
-labeled as wealthy and 8000 (77\,\%) as non-wealthy. If we assume that
-the training and test set were randomly sampled from the entire
-dataset, the predictions on the test set should reflect this
-ratio. Additionally always predicting non-wealthy should then give a
-0--1 loss of 77\,\% under this assumption, which can be used as a
-baseline for the classifier performance. The assumption can be tested
-by probing the test set with a `0-only' submission. This ratio might
-be useful for setting the class-weights of a classifier or for
-determining the threshold in majority voting
+labeled as \emph{wealthy} and 8000 (77\,\%) as \emph{non-wealthy}. If
+we assume that the training and test set were randomly sampled from
+the entire dataset, the predictions on the test set should reflect
+this ratio. Additionally always predicting \emph{non-wealthy} should
+then give a 0--1 loss of 77\,\% under this assumption, which can be
+used as a baseline for the classifier performance. The assumption can
+be tested by probing the test set with a `0-only' submission. This
+ratio might be useful for setting the class-weights of a classifier or
+for determining the threshold in majority voting
 %: the final
 %prediction after voting is \emph{label 1} if at least $\theta$
 %preliminary predictions are \emph{label 1}. The parameter $\theta% can
@@ -185,19 +186,19 @@ the missing values for the remaining variables were introduced later.
 Given the description of the dataset and the total number of samples
 (48842), the dataset may be the UCI Adult
 Dataset~\cite{lichman2013}. This would support the pattern of missing
-data (higher values for workclass, occupation, and country of
-origin). A possible ``classification method'' would be to use the
-labeled samples of the UCI dataset and match them with the given test
-set, which should give an accuracy of 1.0. However, this method is not
-as straight-forward as it may seem. The UCI dataset is split in a
-different manner into training and test set (amount of training
-samples: 32561, test samples: 16281). Additionally, the categorical
-variables in the UCI dataset are encoded as strings, while in the
-given dataset, they are encoded as integers. Therefore, one would have
-to find a mapping from strings to integers. The large amount of
-missing data might impede this. Since using the UCI Adult dataset
-probably defeats the goal of this assignment, I did not take any steps
-in this direction. In a prior investigation of the UCI Adult
+data (higher values for \emph{workclass}, \emph{occupation}, and
+\emph{country of origin}). A possible ``classification method'' would
+be to use the labeled samples of the UCI dataset and match them with
+the given test set, which should give an accuracy of 1.0. However,
+this method is not as straight-forward as it may seem. The UCI dataset
+is split in a different manner into training and test set (amount of
+training samples: 32561, test samples: 16281). Additionally, the
+categorical variables in the UCI dataset are encoded as strings, while
+in the given dataset, they are encoded as integers. Therefore, one
+would have to find a mapping from strings to integers. The large
+amount of missing data might impede this. Since using the UCI Adult
+dataset probably defeats the goal of this assignment, I did not take
+any steps in this direction. In a prior investigation of the UCI Adult
 Dataset\footnote{\url{http://www.cs.toronto.edu/~delve/data/adult/adultDetail.html}},
 the best performing classifier was a Forward Sequential Selection
 (FSS) naive Bayes model with an accuracy of $85.95\,\%$. The
@@ -221,8 +222,8 @@ test set to yield a large dataset with missing values. Using
 Multivariate Imputation by Chained Equations (MICE), the missing
 values are imputed and five training and test sets are obtained. Five
 classifiers are trained using the different training sets; for each
-training set all test sets are used to obtain the `preliminary
-hypotheses'. By means of majority voting with a modifiable threshold
+training set all test sets are used to obtain the ``preliminary
+hypotheses''. By means of majority voting with a modifiable threshold
 $\theta$, the single hypotheses are pooled to yield the final
 prediction vector.
 
@@ -238,9 +239,9 @@ prediction vector.
 
 \subsection{Dummy Variables}
 
-Seven of the twelve measured variables are qualitative (workclass,
+Seven of the twelve measured variables are qualitative (\emph{workclass,
 education, marital status, occupation, relationship, sex, native
-country)---they are measured only at the nominal level. Since
+country})---they are measured only at the nominal level. Since
 measurements on the nominal level do not allow for a particular
 ordering, a proxy method has to be used to make them suitable for
 some statistical models. To this end, I defined dummy variables that take
@@ -438,7 +439,7 @@ $\theta = 9$.
   \caption{Accuracy, sensitivity, and specificity as a function of the
     threshold $\theta$. The accuracy stays roughly the same for
     $6 \leq \theta \leq 25$. In contrast, the sensitivity falls and
-    the specificity rises for increasing values of $\theta$.}
+    the specificity rises for increasing values of~$\theta$.}
   \label{fig:tuning}
 \end{figure}
 
@@ -452,31 +453,36 @@ leaderboard is the best validation of the methods employed, only one
 submission could be submitted per participant and day. To evaluate my
 approach more frequently, I implemented a local ($k = 5$)-fold
 cross-validation. In each fold, a model was trained on $\frac{4}{5}$
-of the data and tested on the remaining samples from all five imputed
-datasets. Therefore, $k \cdot m \cdot m = 5 \cdot 5 \cdot 5 = 125$
-accuracy values were obtained. Per fold, the predictions for the
-$m \cdot m = 25$ ``preliminary hypotheses'' were aggregated using
-majority voting with the threshold parameter $\theta$. To obtain the
-final cross-validation accuracy per model, the mean accuracy of the
-five folds was calculated. The cross-validation achieved similar
-results to the public Kaggle evaluation but underestimated the public
-performance in all cases (Table~\ref{tab:localpublic}).
+of the data of one imputation and tested on the remaining samples from
+all five imputed datasets. Therefore,
+$k \cdot m \cdot m = 5 \cdot 5 \cdot 5 = 125$ accuracy values were
+obtained. Per fold, the predictions for the $m \cdot m = 25$
+``preliminary hypotheses'' were aggregated using majority voting with
+the threshold parameter $\theta$. To obtain the final cross-validation
+accuracy per model, the mean accuracy of the five folds was
+calculated. The cross-validation achieved similar results to the
+public Kaggle evaluation but underestimated the public performance in
+all cases (Table~\ref{tab:localpublic}).
 
 \begin{table}[h]
   \centering
   \begin{tabular}{lrrrrr}
     \toprule
-    Model        & train imps. & test imps. per model & $\theta^*$ & Local Score (\%) & Public Score (\%) \\
+    Model                                                                     & train imps. & test imps. per model & $\theta^*$ & Local Score (\%) & Public Score (\%) \\
     \midrule
-    AdaBoost      & 1              & 1                    & /        & 83.886           & 84.205            \\
-    Random Forest & 5              & 1                    & 3        & 84.038           & 85.056            \\
-    SVM           & 5              & 1                    & 3        & 84.413           & 85.494            \\
-    AdaBoost      & 5              & 5                    & 13       & 84.933           & 85.434            \\
-    SVM           & 5              & 5                    & 9       & 85.305           & 85.718            \\
+    AdaBoost                                                                  & 1           & 1                    & /          & 83.886           & 84.205            \\
+    Random Forest                                                             & 5           & 1                    & 3          & 84.038           & 85.056            \\
+    SVM                                                                       & 5           & 1                    & 3          & 
+                                                                       84.413 & 85.494                                                                                 \\
+Logistic Reg.                                                                 & 5           & 5                    & 13         & 83.868           & /                 \\
+    AdaBoost                                                                  & 5           & 5                    & 13         & 84.933           & 85.434            \\
+    SVM                                                                       & 5           & 5                    & 9          & 85.305           & 85.718            \\
     \bottomrule
   \end{tabular}
   \caption{{Comparing local cross-validation and public Kaggle
-      scores for different models. The column \emph{training imputations} specifies the
+      scores for different models. In the beginning of this project, I
+      did not evaluate the local score on all possible combinations of
+      training set imputations and test set imputations. Therefore, the column \emph{training imputations} specifies the
       number of imputed datasets for building the models; the column
       \emph{test imputations per model} specifies how many test sets
       were used to get the ``preliminary hypotheses''. $\theta^*$
@@ -618,13 +624,15 @@ becomes:
 Practically, this means that the problem of finding a linear separator
 is shifted to a higher dimensional feature space. Mapping this linear
 separator back to the original feature space results in a non-linear
-decision boundary.  For the given problem, a Gaussian radial basis
-function kernel was used:
+decision boundary.  I compared a linear kernel, a polynomial kernel,
+and a Gaussian radial basis function (RBF) kernel using
+cross-validation. The Gaussian RBF kernel performed best, therefore,
+it was chosen for the provided problem. The kernel is defined as follows:
 \begin{align}
 K(\mathbf{x_j}, \mathbf{x_k}) = \exp(-\gamma||\mathbf{x_j} - \mathbf{x_k} ||^2)
 \end{align}
-The two hyperparameters of the SVM, $C$ and
-$\gamma$,  were chosen using grid-search in the cross-validation.
+The two hyperparameters of the SVM, $C$ and $\gamma$, were selected by
+grid-search in the cross-validation.
 
 
 Before training, each variable in the combined dataset, consisting of
@@ -687,7 +695,7 @@ submission per day increased the difficulty of the validation. My
 public score of $85.718\,\%$---which is $0.00876$ below the best
 performing score in the competition ($86.594\,\%$) and $0.00232$ below
 the best performing method in the investigation of the Delve
-project~\footnote{\url{http://www.cs.toronto.edu/~delve/data/adult/adultDetail.html}}---is
+project\footnote{\url{http://www.cs.toronto.edu/~delve/data/adult/adultDetail.html}}---is
 an indicator that little improvement will be possible beyond my
 approach. Compared to the UCI dataset, the given dataset had a smaller
 amount of labeled data and more missing values, which made the Kaggle
@@ -720,7 +728,7 @@ transductive learning could help to increase the classification performance.
 My code for this competition can be found at:\\
 \url{https://github.com/Pold87/ml-final-ass}
 
-\emph{Word Count}: 3412
+\emph{Word Count}: 3433
 \clearpage
 \printbibliography
 \end{document}

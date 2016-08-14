@@ -56,9 +56,3 @@ for (i in 1:5) {
     write.csv(X.test.imp, fn.test, row.names = F, quote = F)
 
 }
-
-attach(y)
-
-modelFit1 <- with.mids(X.train.imp,
-                  glm(y ~ yearsedu, family = "binomial"))
-

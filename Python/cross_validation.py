@@ -8,7 +8,6 @@ from sklearn.ensemble import AdaBoostClassifier
 from sklearn.tree import DecisionTreeClassifier
 from sklearn import cross_validation
 from sklearn import linear_model, svm
-from xgboost.sklearn import XGBClassifier
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.semi_supervised import LabelSpreading, LabelPropagation
 
@@ -21,40 +20,30 @@ from methods.scikitWQDA import WQDA
 from methods import scikitTSVM
 from sklearn.metrics import confusion_matrix
 
+### SETTINGS
+# Scale features?
 use_scaling = 0
 
+# Perform cross validation or create Kaggle submission?
 do_cross_validation = 1
 
+# Perform transductive learning?
 use_transductive = 0
 
-all_preds = [None] * 5
-
+# For comparing the effect of the threshold theta
 write_specs = 1
 
-#cfr = SGDClassifier(loss='log')
 
-#cfr = WQDA()
+# The classifier: a SVM
+cfr = svm.SVC()
 
-#cfr = linear_model.Ridge(fit_intercept=True, normalize=False, alpha=3000)
-#cfr = linear_model.LogisticRegression(penalty= 'l2', max_iter=10000)
+# Other tested classifiers
+#cfr = linear_model.LogisticRegression()
+#cfr = AdaBoostClassifier(DecisionTreeClassifier(max_depth=1), n_estimators=100) 
+#cfr = RandomForestClassifier(n_estimators=100)
 
-#cfr     =       GradientBoostingClassifier(max_depth=7, subsample=0.8, n_estimators=    500,
-#                                          learning_rate =       0.05 )
-# Create and fit an AdaBoosted decision tree
-
-#cfr = AdaBoostClassifier(DecisionTreeClassifier(max_depth=1), n_estimators=100)
-
-cfr = RandomForestClassifier(n_estimators=100)
-
-#cfr = VotingClassifier(estimators=[('clf1', clf1),
-#                                    ('clf2', clf2),
-#                                    ('clf3', clf3)],
-#                                    voting='hard',
-#                                    weights=[1,1,1])
-#cfr = XGBClassifier(seed=42)
-#cfr = KNeighborsClassifier(n_neighbors=30, weights='distance')
-
-#cfr = svm.SVC() 
+# Placeholder for the predictions on the five test sets
+all_preds = [None] * 5
 
 if do_cross_validation:
     X = pd.read_csv('../data/five_imps/train_mice_hot_%d.csv' % 1)
@@ -148,7 +137,6 @@ for i in range(1, 6):
             preds = cl.predict(X_test_np)
 
             # Make submission
-
             ids = np.arange(1, len(X_test) + 1)
 
             submission = pd.DataFrame({'Id': ids, 'Prediction': preds})
